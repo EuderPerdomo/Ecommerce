@@ -1,0 +1,118 @@
+<app-sidebar></app-sidebar>
+
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xl-8">
+
+            <!-- Header -->
+            <div class="header mt-md-5">
+              <div class="header-body">
+                <div class="row align-items-center">
+                  <div class="col">
+
+                    <!-- Pretitle -->
+                    <h6 class="header-pretitle">
+                      Módulo
+                    </h6>
+
+                    <!-- Title -->
+                    <h1 class="header-title">
+                        Mensajes
+                    </h1>
+
+                  </div>
+                </div> <!-- / .row -->
+      
+              </div>
+            </div>
+
+            <!-- Alert -->
+
+
+            <!-- Card -->
+            <div class="card">
+              <div class="card-header">
+
+                <!-- Title -->
+                <h4 class="card-header-title">
+                  Mensajes Recibidos
+                </h4>
+
+              </div>
+
+<!--inicio-->
+<div class="card-body" *ngIf="!load_data">
+    <!-- Product review -->
+    <div class="mb-4 pb-4 border-bottom" *ngFor="let item of mensajes | slice:(page-1)*pageSize : (page-1)*pageSize+pageSize">
+        <div class="row">
+          <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
+            <h3 class="mb-2 fs-lg">{{item.cliente}}</h3>
+            <span class="d-block mb-3 fs-sm text-muted">{{item.createdAt |date}}</span>
+            <span class="badge badge-primary" *ngIf="item.estado=='Abierto'">{{item.estado}}</span>
+            <span class="badge badge-danger" *ngIf="item.estado=='Cerrado'">{{item.estado}}</span>
+          </div>
+          <div class="col">
+            <p class="mb-3">
+              <span class="badge badge-pill badge-info">{{item.correo}}</span>
+              {{item.mensaje}}
+            </p>
+            <div class="d-flex justify-content-between">
+
+              <a class="btn btn-light btn-sm" data-toggle="modal" [attr.data-target]="'#estadoModal-'+item._id"  
+              style="cursor: pointer;">
+                Cerrar Mensaje
+              </a>
+
+    
+              <div class="modal fade" id="estadoModal-{{item._id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Cerrar</h4>
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="fs-sm">¿Esta seguro de Cerrar este Mensaje?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancelar</button>
+                     <button *ngIf="!load_btn" class="btn btn-primary btn-shadow btn-sm" type="button" (click)="cerrar(item._id)">Si, Cerrar</button>
+                    
+                    <!-- Button with growing spinner and text -->
+                      <button *ngIf="load_btn" type="button" class="btn btn-secondary">
+                        <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                        Cerrando...
+                      </button>
+    
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+<!--Fin-->
+
+            </div>
+                <ngb-pagination *ngIf="mensajes.length >= 1"
+                        [(page)]="page"
+                        [pageSize]="pageSize"
+                        [maxSize]="10"
+                        [rotate]="true" [boundaryLinks]="true"
+                [collectionSize]="mensajes.length"></ngb-pagination>
+  
+            <br>
+
+          </div>
+        </div> <!-- / .row -->
+      </div>
+</div>
+
+
+    

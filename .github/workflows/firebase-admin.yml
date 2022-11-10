@@ -12,8 +12,8 @@ jobs:
         with:
           node-version: '14.x'
       - run: cd admin
-      - run: npm install
-      - run: npm run build
+      - run: cd admin && npm install
+      - run: cd admin && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           args: deploy --only hosting

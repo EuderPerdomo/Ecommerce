@@ -20,4 +20,5 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ADMIN_EL_SILICIO }}'
           channelId: live
+          entrypoint: admin
           projectId: admin-el-silicio

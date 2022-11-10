@@ -23,4 +23,5 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TIENDA_EL_SILICIO }}'
           channelId: live
+          entrypoint: /back
           projectId: tienda-el-silicio

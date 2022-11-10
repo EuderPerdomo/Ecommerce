@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "nodemon  --out-dir /dist ",
     "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +13,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
+    "build": "^0.1.4",
     "connect-multiparty": "^2.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",

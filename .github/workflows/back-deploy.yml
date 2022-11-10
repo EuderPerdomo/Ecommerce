@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.x'
-      - run: cd back
+      - run: npm install -g nodemon
       - run: cd back && npm install
       - run: cd back && npm start
       - uses: FirebaseExtended/action-hosting-deploy@v0

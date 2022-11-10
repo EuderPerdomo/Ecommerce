@@ -11,12 +11,13 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.x'
+      - run: cd admin
       - run: npm install
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           args: deploy --only hosting
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BACK_EL_SILICIO }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ADMIN_EL_SILICIO }}'
           channelId: live
-          projectId: back-el-silicio
+          projectId: admin-el-silicio

@@ -87,7 +87,8 @@ export class NavComponent implements OnInit {
         
       }
     );
-
+/*
+Original
     this._guestService.get_categorias().subscribe(
       response=>{
         this.categorias = response;
@@ -95,6 +96,17 @@ export class NavComponent implements OnInit {
         
       }
     );
+*/
+/*Mi metodo  */
+this._guestService.get_categorias_publico().subscribe(
+  response=>{
+    this.categorias = response.data;
+    console.log(response);
+    
+  }
+);
+
+/**Finaliza mi metodo */
   }
 
   search(){
@@ -126,7 +138,7 @@ export class NavComponent implements OnInit {
   calcular_carrito(){
     this.subtotal = 0;
     if(this.user_lc != undefined){
-      if(this.currency == 'PEN'){
+      if(this.currency == 'COP'){
         this.carrito_arr.forEach(element => {
             let sub_precio = parseInt(element.producto.precio) * element.cantidad;
             this.subtotal = this.subtotal + sub_precio;
@@ -138,7 +150,7 @@ export class NavComponent implements OnInit {
       });
       }
     }else if(this.user_lc == undefined){
-      if(this.currency == 'PEN'){
+      if(this.currency == 'COP'){
         this.carrito_logout.forEach(element => {
           let sub_precio = parseInt(element.producto.precio) * element.cantidad;
             this.subtotal = this.subtotal + sub_precio;
@@ -177,10 +189,10 @@ export class NavComponent implements OnInit {
     if(this.carrito_logout.length >= 1){
       localStorage.setItem('cart',JSON.stringify(this.carrito_logout));
     }
-    if(this.currency == 'PEN'){
+    if(this.currency == 'COP'){
       let monto = item.producto.precio*item.cantidad;
       this.subtotal = this.subtotal -monto;
-    } else if(this.currency != 'PEN'){
+    } else if(this.currency != 'COP'){
       let monto = item.producto.precio_dolar*item.cantidad;
       this.subtotal = this.subtotal -monto;
     }

@@ -17,7 +17,9 @@ export class EditProductoComponent implements OnInit {
   public load_data = false;
   public producto: any = {
     categoria: '',
-    visibilidad: ''
+    visibilidad: '',
+    tipo:'',
+    usar_en_calculadora:''
   };
   public imgSelect : any | ArrayBuffer = 'assets/img/01.jpg';
   public categorias: Array<any> = [];
@@ -45,11 +47,18 @@ export class EditProductoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+/* Metodo original
     this._adminService.get_categorias().subscribe(
       response=>{
         this.categorias = response;
       }
     );
+*/
+this._adminService.get_categorias(this.token).subscribe(
+  response=>{
+    this.categorias = response.data;
+  }
+);
 
     this._route.params.subscribe(
       params=>{
@@ -67,7 +76,8 @@ export class EditProductoComponent implements OnInit {
              this.producto = response.data;
              this.listar_etiquetas();
              this.listar_etiquetas_producto();
-             this.imgSelect = this.url +'obtener_portada/'+this.producto.portada;
+             //this.imgSelect = this.url +'obtener_portada/'+this.producto.portada;
+             this.imgSelect = this.producto.portada;
            }
             
           },
@@ -217,10 +227,11 @@ export class EditProductoComponent implements OnInit {
       data.descripcion = this.producto.descripcion;
       data.contenido = this.producto.contenido;
       data.visibilidad = this.producto.visibilidad;
+      data.tipo = this.producto.tipo;
+      data.usar_en_calculadora = this.producto.usar_en_calculadora;
 
       this.load_btn = true;
     
-
       this._adminService.actualizar_producto_admin(data,this.id,this.token).subscribe(
         response=>{
           iziToast.show({
@@ -229,7 +240,7 @@ export class EditProductoComponent implements OnInit {
               color: '#FFF',
               class: 'text-success',
               position: 'topRight',
-              message: 'Se actualizó correctamente el nuevo producto.'
+              message: 'Se actualizó correctamente el  producto.'
           });
 
           this.load_btn = false;

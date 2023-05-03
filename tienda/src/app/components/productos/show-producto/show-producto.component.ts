@@ -58,7 +58,6 @@ export class ShowProductoComponent implements OnInit {
   ) { 
     let obj_lc :any= localStorage.getItem('user_data');
     this.user_lc = JSON.parse(obj_lc);
-
     this.token = localStorage.getItem('token');
     this.url = GLOBAL.url;
 
@@ -83,6 +82,8 @@ export class ShowProductoComponent implements OnInit {
               console.log('data undefined')
               this.producto = response.data;
               this.init_productos_recomendados();
+
+              /*Pendiente corregir
               this._guestService.get_categorias().subscribe(
                 response=>{
                   for(var item of response){
@@ -93,7 +94,19 @@ export class ShowProductoComponent implements OnInit {
                   console.log(this.categoria_producto);
                 }
               );
-             
+             */
+            /*Mi metodo */
+            this._guestService.get_categorias_publico().subscribe(
+              response=>{
+                for(var item of response.data){                  
+                  if(item._id == this.producto.categoria){
+                    this.categoria_producto = item;
+                  }
+                }
+                console.log(this.categoria_producto);
+              }
+            );
+            /**Finaliza mi metodo */
               
               setTimeout(() => {
                 productLightbox();
@@ -166,6 +179,7 @@ export class ShowProductoComponent implements OnInit {
   }
 
   agregar_producto(){
+    console.log('Agregar producto autenticado')
     if(this.obj_variedad_select.variedad){
       if(this.carrito_data.cantidad >= 1){
 
@@ -235,12 +249,11 @@ export class ShowProductoComponent implements OnInit {
         message: 'Seleccione una variedad de producto'
     });
   }
+  console.log('Agregar producto autenticado')
   }
 
   agregar_producto_guest(){
     if(this.obj_variedad_select.variedad){
-     
-
       if(this.carrito_data.cantidad >= 1){
         if(this.carrito_data.cantidad <= this.obj_variedad_select.stock){
           let data = {

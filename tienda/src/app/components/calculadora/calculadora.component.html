@@ -1,0 +1,604 @@
+<app-nav></app-nav>
+<!--Calculadora-->
+<div class="ps-home-blog" style="padding-top: 70px !important;padding-bottom: 70px !important;background: #f0f0f0;">
+    <div class="container">
+        <div class="ps-section__header">
+            <figure>
+                <figcaption>Bienvenido a nuestra Calculadora de sistemas de energía solar</figcaption>
+                <p>Aqui encontraras una util herramienta que te guiara paso a paso para que puedas calcular 
+                    cada uno de los componentes para tu sistema de energía solar, para eso solo necesitamos que nos indiques unos cuantos datos e inmediatamente podras descubrir 
+                    que necesitas para sumarte a la ola de la energía Fotovoltaica......</p>
+            </figure>
+        </div>
+        <div class="ps-section__content">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                    <div class="ps-post">
+                        <div class="ps-post__thumbnail"><img src="assets/images/calculadora/equipos.png" alt="https://pixabay.com/es/vectors/logro-antecedentes-bordo-caja-5924443/"><a
+                            class="ps-post__overlay" [routerLink]="['/new-calculo']"  ></a></div>
+                        <div class="ps-post__content"><a class="ps-post__title" [routerLink]="['/new-calculo']">Elige esta opcion de calculo si conoces los consumos de todos 
+                            los electrodomesticos que deseas alimentar con energia fotovoltaica</a>
+                            <a class="ps-link--under ps-post__morelink" [routerLink]="['/new-calculo']">Consumos 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                  <div class="ps-post">
+                      <div class="ps-post__thumbnail"><img src="assets/images/calculadora/factura.png" alt="https://pixabay.com/es/vectors/impuesto-negocio-finanzas-impuestos-7630744/"><a
+                          class="ps-post__overlay" [routerLink]="['/embajadoras']"></a></div>
+                      <div class="ps-post__content"><a class="ps-post__title" [routerLink]="['/embajadoras']">
+                          Si no conoces los consumos de todos los equipos pero tienes una factura de energía a la mano esta es la mejor opción para ti...
+                      </a>
+                          <a class="ps-link--under ps-post__morelink" [routerLink]="['/embajadoras']"> Recibo Energía</a>
+                      </div>
+                  </div>
+              </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                    <div class="ps-post">
+                        <div class="ps-post__thumbnail"><img src="assets/images/calculadora/juega.png" alt="https://pixabay.com/es/vectors/palanca-de-mando-icono-juego-firmar-2389216/"><a
+                            class="ps-post__overlay" [routerLink]="['/impacto-social']" ></a></div>
+                        <div class="ps-post__content"><a class="ps-post__title" [routerLink]="['/impacto-social']" >
+                          Aqui nosotros te proporcionaremos diferentes electrodomesticos de uso comun con sus potencias para que diseñes 
+                          un sistema fotovoltaico a partir de ellos
+                        </a>
+                            <a class="ps-link--under ps-post__morelink" [routerLink]="['/impacto-social']">  <a class="ps-link--under ps-post__morelink" [routerLink]="['/embajadoras']"> Quiero Jugar</a></a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+<div id="paso1" class="collapse">
+      <section>
+        <h1>Paso 1: Datos de la instalación</h1>
+  
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Departamento</label>
+              <!-- <select class="form-control" id="departamento" name="departamento" aria-describedby="Departamento-help"
+                onchange="ShowSelected();"> -->
+
+                <select class="form-control" id="departamento" name="departamento" aria-describedby="Departamento-help"
+                 >
+
+                <option [ngValue]="0">Seleccione un Departamento</option>
+                <option [ngValue]="1">uno</option>
+
+              </select>
+              <small id="Departamento-help" class="form-text text-muted">Departamento en donde sera instalado el sistema
+                solar</small>
+  
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label id="radiacion">Radiación</label>
+              <!-- <label name="lbl" id="lbl"></label> -->
+              <input type="number" class="form-control" id="lbl" name="lbl" aria-describedby="radiacionHelp" value=""
+                disabled="true">
+              <small id="emailHelp" class="form-text text-muted">Hace referencia a las Horas sol pico (HSP) para cada
+                lugar especifico.</small>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleInputName">Nombre del Cliente</label>
+              <input type="text" class="form-control" id="exampleInputName" name="nombre_cliente" (keyup)="cambio(nombre_cliente)" [(ngModel)]="nombre_cliente">
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email</label>
+              <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+              <small id="emailHelp" class="form-text text-muted">Email cliente</small>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <div id="paso2" class="collapse">
+      <section>
+        <h1>Paso 2: Calculo de Consumos</h1>
+        <h2>Instrucciones</h2>
+        <p>
+        LLene los campos teniendo en cuenta lo siguiente:<br>
+        <strong>Nombre: </strong>Use cualquier nombre con el cual pueda identificar el equipo<br>
+        <strong>Potencia(W): </strong> la potencia especificada en la ficha tecnica del dispositivo.<br>
+        <strong>Cantidad: </strong> hace referencia a la cantidad de equipos pertenecientes al mismo modelo o con
+        exactamente las mismas caracteristicas de Consumos<br>
+        <strong>Horas Día:</strong> Especifique aqui de las 24 horas cuantas permanece encendido el equipo.<br>
+        <strong>Boton Añadir: </strong> Le permite agregar mas campos al formulario para añadir mas equipos.<br>
+        <strong>Boton Eliminar </strong> Permite eliminar campos agregados previamente.
+        </p>
+        <div class="container">
+          <div class="abs-center">
+
+
+<!-- Fin Table -->
+<table class="table table-sm table-nowrap card-table">
+  <thead>
+    <tr>
+      <th>Equipo</th>
+      <th>Potencia</th>
+      <th>Cantidad</th>
+      <th>Consumo total</th>
+      <th>Uso Diario</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody class="font-size-base" >
+    <tr *ngFor="let item of valores">
+      <td>
+          {{item.nombre}}
+      </td>
+      <td>
+        {{item.potencia}}
+      <td>
+        {{item.cantidad}}
+      </td>
+      <td>
+        {{item.w_totales}}
+      </td>
+      <td>
+        {{item.horas_dia}}
+      </td>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonAlias" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Opciones
+          </button>
+        </div>
+      </td>
+    </tr>
+   
+  </tbody>
+  <tbody >
+    <tr>
+        <td colspan="5" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden"></span>
+            </div>
+        </td>
+    </tr>
+  </tbody>  
+</table>
+
+<!-- Inicio Table -->
+
+<!-- Inicio Formulario -->
+<form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
+  <div class="card">
+    <div class="card-header">
+
+      <!-- Title -->
+      <h4 class="card-header-title">
+        Registro de un nuevo producto
+      </h4>
+
+    </div>
+
+    <div class="card-body">
+      <div class="row">
+              <div class="row">
+                  <div class="col-lg-12 form-group">	
+                      <label for="">Precio COP(*)</label>
+                      <input type="number" class="form-control" placeholder="Precio" required name="nombre_equipo" [(ngModel)]="nombre_equipo0">
+                  </div>
+                  <div class="col-lg-12 form-group">	
+                      <label for="">Precio dolares USD(*)</label>
+                      <input type="number" class="form-control" placeholder="Precio" required name="potencia0" [(ngModel)]="potencia0">
+                  </div>
+                  <div class="col-lg-12 form-group">	
+                      <label for="">Peso(*) </label>
+                      <input type="text" class="form-control" placeholder="Peso" required name="horas_uso_dia0" [(ngModel)]="horas_uso_dia0">
+                  </div>
+              </div>                     
+      </div>
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-warning btn-shadow mr-3"  >Regresar</a>
+        <button  class="btn btn-primary btn-shadow" type="submit">Crear</button>
+
+    </div>
+  </div>
+</form>
+<!-- Fin formulario -->
+
+
+
+
+            <form id="tester" [(ngModel)]="tester">
+              <div class="row">
+                <div class="col"> <label class="form-label">Nombre</label></div>
+                <div class="col"><label class="form-label">Potencia(W)</label></div>
+                <div class="col"><label class="form-label">Cantidad</label></div>
+                <div class="col"><label class="form-label">W Totales</label></div>
+                <div class="col"><label class="form-label">Horas Día</label></div>
+                <div class="col"><label class="form-label">Total(W)</label></div>
+                <div class="col"><label class="form-label"></label></div>
+  
+              </div>
+              <div class="row">
+
+                <div class="col"><input class="form-control" type="text" placeholder="Nombre Equipo"
+                    aria-label="readonly input example" name="nombre_equipo" [(ngModel)]="nombre_equipo0"></div>
+
+                <div class="col"><input class="dato form-control" type="number" aria-label="readonly input example"
+                    id="potencia0" min="0" name="potencia0" [(ngModel)]="potencia0" 
+                    (ngModelChange)="cambio(potencia0)"></div>
+
+                <div class="col"><input class="dato form-control" type="number" aria-label="readonly input example"
+                    id="cantidad0" min="0" name="v" [(ngModel)]="cantidad0" 
+                    (ngModelChange)="cambio(cantidad0)"></div>
+
+                <div class="col"><input class="promSimultaneo form-control" type="number"
+                    aria-label="readonly input example" id="wtotal0" readonly value="{{w_totales}}"
+                    name="wtotal0" [(ngModel)]="wtotal0"></div>
+
+
+                <!--onchange="promedia(this.id);" -->
+
+                <div class="col"><input class="dato form-control" type="number" aria-label="readonly input example"
+                    id="horas_uso_dia0" max="24" min="0" name="horas_uso_dia0" [(ngModel)]="horas_uso_dia0" 
+                    (ngModelChange)="cambio(horas_uso_dia0)"></div>
+
+                <div class="col"><input class="promDia form-control" type="number" aria-label="readonly input example"
+                    id="promedio0" readonly value="{{promedio0}}"
+                    name="promedio0" [(ngModel)]="promedio0"></div>
+                <div class="col"></div>
+              </div>
+  
+            </form>
+          </div>
+        </div>
+  
+        <div class="container">
+          <div class="abs-center">
+            <div class="row">
+              <div class="col-3">
+                <button type="button" class="btn btn-success  btn-block" id="add_field" value="adicionar"
+                  (click)="addCampo();">Añadir</button>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col"><label class="form-label">Consumo Diario Total:</label></div>
+              <div class="col"><input class="SumaGeneral form-control" type="number" id="totalConsumido"
+                  aria-label="readonly input example" readonly></div>
+              <div class="col"><label class="form-label">Maximo Consumo Simultaneo</label></div>
+              <div class="col"><input class="SumaConsumoSimultaneo form-control" type="number" id="consumoSimultaneo"
+                  aria-label="readonly input example" readonly></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+<!-- --------------------------------------------------------------------------------------------- -->
+    <div class="main-content">
+      <div class="container-fluid">
+          <div class="row justify-content-center">
+
+<!-- Inicio Formulario -->
+<form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
+  <div class="card">
+    <div class="card-header">
+
+      <!-- Title -->
+      <h4 class="card-header-title">
+        Registro de Dispositivos
+      </h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+              <div class="row">
+                  <div class="col-lg-2 form-group">	
+                      <label for="">Nombre</label>
+                      <input type="text" class="form-control" placeholder="Nombre" required name="nombre_equipo" [(ngModel)]="nombre_equipo0">
+                  </div>
+                  <div class="col-lg-2 form-group">	
+                      <label for="">Potencia (W)</label>
+                      <input type="number" class="form-control" placeholder="Potencia" required name="potencia0" [(ngModel)]="potencia0"
+                      (ngModelChange)="cambio(potencia0)">
+                  </div>
+                  <div class="col-lg-2 form-group">	
+                      <label for="">Cantidad </label>
+                      <input type="number" class="form-control" placeholder="Cantidad" required name="cantidad0" [(ngModel)]="cantidad0"
+                      (ngModelChange)="cambio(cantidad0)">
+
+
+
+
+                  </div>
+
+                  <div class="col-lg-2 form-group">	
+                    <label for="">Consumo Hora (W)</label>
+                    <input type="number" class="form-control" name="wtotal0"  readonly value="{{w_totales}}"
+                    name="wtotal0" [(ngModel)]="wtotal0">
+                </div>
+
+                  <div class="col-lg-2 form-group">	
+                    <label for="">Uso diario (H)</label>
+                    <input type="number" class="form-control" placeholder="Cantidad" required name="horas_uso_dia0" [(ngModel)]="horas_uso_dia0"
+                    (ngModelChange)="cambio(horas_uso_dia0)">
+                </div>
+
+                <div class="col-lg-2 form-group">	
+                  <label for="">Consumo Total Diario (W)</label>
+                  <input type="number" class="form-control" name="wtotal0"  readonly value="{{promedio0}}"
+                  name="promedio0" [(ngModel)]="promedio0">
+              </div>
+              </div>                     
+      </div>
+    </div>
+    <div class="card-footer">
+        <button  *ngIf="!editando" class="btn btn-primary btn-shadow" type="submit" (click)="addCampo()">Agregar</button>
+        <button  *ngIf="editando" class="btn btn-primary btn-shadow" type="submit" (click)="guardarEditarCampo()">Editar</button>
+        <button  *ngIf="editando" class="btn btn-danger btn-shadow" type="submit" (click)="cancelarEditarCampo()">Cancelar</button>
+    </div>
+  </div>
+</form>
+<!-- Fin formulario -->
+
+
+<div class="card mt-30 mb-30">
+  <div class="table-responsive">
+    <!-- <table class="table table-sm table-nowrap card-table" name="tabla" [(ngModel)]="tabla"> -->
+      <table class="table table-hover table-nowrap table-sm" name="tabla" [(ngModel)]="tabla">
+      <thead>
+        <tr>
+          <th>Codigo</th>
+          <th>Equipo</th>
+          <th>Potencia</th>
+          <th>Cantidad</th>
+          <th>Consumo por horas</th>
+          <th>Horas Uso Diario</th>
+          <th>Consumo total Diario</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody class="font-size-base" >
+        <tr *ngFor="let item of valores; index as i">
+          <td>
+            {{item.codigo}}
+        </td>
+          <td>
+              {{item.nombre}}
+          </td>
+          <td>
+            {{item.potencia}}
+          <td>
+            {{item.cantidad}}
+          </td>
+          <td>
+            {{item.w_totales}}
+          </td>
+          <td>
+            {{item.horas_dia}}
+          </td>
+          <td>
+            {{item.consumo_diario}}
+          </td>
+          <td>
+            <button  class="btn btn-primary btn-shadow"  (click)="editarFila(item)" >Editar</button>
+            <button  class="btn btn-danger btn-shadow" (click)="borrar(item.codigo)">Eliminar</button>
+          </td>
+        </tr>
+       
+      </tbody>
+      <tbody >
+        <tr>
+            <td colspan="5" class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden"></span>
+                </div>
+            </td>
+        </tr>
+      </tbody>  
+    </table>
+  </div>
+  
+
+
+  <div class="card-footer">
+    <!-- Title -->
+    <h3 class="card-header-title">
+      Consumo simultaneo: {{simultaneo}} W
+    </h3>
+    <h3 class="card-header-title">
+      consumo total diario. {{total_dia}} W
+    </h3>
+
+  </div>
+
+</div>
+
+
+
+            </div>
+            </div>
+            </div>
+<!-- --------------------------------------------------------------------------------------------- -->
+
+
+
+<!--Inicia Paso 3 Tension del sistema y tipo de controlador  -->
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row justify-content-center">
+
+
+<!-- Inicio Formulario -->
+<form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-header-title">
+        Seleccion de Controlador y Tension del Sistema
+      </h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+
+
+        <div class="col-lg-6 form-group">
+          <label for="">Tension</label>
+          <select class="form-control custom-select" id="select-tension" required name="tension" [(ngModel)]="tension">
+              <option value="0" selected disabled>Seleccionar</option>
+              <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+              <option value="1" >12V</option>
+              <option value="2" >24V</option>
+              <option value="3" >48V</option>
+          </select>
+      </div>
+
+      <div class="col-lg-6 form-group">
+        <label for="">Tipo Controlador</label>
+        <select class="form-control custom-select" id="select-tipo" required name="tipo_controlador" [(ngModel)]="tipo_controlador">
+            <option value="0" selected disabled>Seleccionar</option>
+            <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+            <option value="1" >PWM</option>
+            <option value="2" >MPPT</option>
+
+        </select>
+    </div>
+
+           
+      </div>
+    </div>
+    <div class="card-footer">
+        <button  *ngIf="!editando" class="btn btn-primary btn-shadow" type="submit" (click)="addCampo()">Agregar</button>
+        <button  *ngIf="editando" class="btn btn-primary btn-shadow" type="submit" (click)="guardarEditarCampo()">Editar</button>
+        <button  *ngIf="editando" class="btn btn-danger btn-shadow" type="submit" (click)="cancelarEditarCampo()">Cancelar</button>
+    </div>
+  </div>
+</form>
+<!-- Fin formulario -->
+
+
+        </div>
+        </div>
+        </div>
+
+<!-- Finaliza paso 3 -->
+
+
+
+
+
+<!--Inicia Paso 4 Calculo de Paneles Solares  -->
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row justify-content-center">
+
+
+<!-- Inicio Formulario -->
+<form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-header-title">
+        Selección de Paneles Solares
+      </h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+
+
+        <div class="col-lg-12 form-group">
+          <label for="">Paneles</label>
+          <select class="form-control custom-select" id="select-tension" required name="panel" [(ngModel)]="panel">
+              <option value="0" selected disabled>Seleccionar</option>
+              <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+              <option value="150" >Talesum 150W</option>
+              <option value="300" >Talesum 300W</option>
+              <option value="450" >Talesum 450W</option>
+          </select>
+      </div>
+      </div>
+    </div>
+    <div class="card-footer">
+    </div>
+  </div>
+</form>
+<!-- Fin formulario -->
+        </div>
+        </div>
+        </div>
+<!-- Finaliza paso 4 -->
+
+
+<!--Inicia Paso 5 Baterias  -->
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row justify-content-center">
+<!-- Inicio Formulario -->
+<form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-header-title">
+        Selección de Baterias
+      </h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+
+
+        <div class="col-lg-4 form-group">
+          <label for="">Amperaje</label>
+          <select class="form-control custom-select" id="select-amperaje" required name="amperaje" [(ngModel)]="amperaje">
+              <option value="0" selected disabled>Seleccionar</option>
+              <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+              <option value="75" >75A</option>
+              <option value="150" >150A</option>
+              <option value="200" >200A</option>
+          </select>
+      </div>
+      <div class="col-lg-4 form-group">
+        <label for="">Profundidad de descarga</label>
+        <select class="form-control custom-select" id="select-profundidad" required name="profundidad" [(ngModel)]="profundidad">
+            <option value="0" selected disabled>Seleccionar</option>
+            <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+            <option value="1">10% Cantidad de Baterías Elevado</option>
+                <option value="2">20%</option>
+                <option value="3">30%</option>
+                <option value="4">40%</option>
+                <option value="5">50% Recomendada</option>
+                <option value="6">60%</option>
+                <option value="7">70%</option>
+                <option value="8">80%</option>
+                <option value="9">90%</option>
+                <option value="10">100% No recomendada</option>
+        </select>
+    </div>
+
+    <div class="col-lg-4 form-group">
+      <label for="">Días de Autonomia</label>
+      <select class="form-control custom-select" id="select-dias" required name="dias" [(ngModel)]="dias">
+          <option value="0" selected disabled>Seleccionar</option>
+          <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+          <option value="1" >1 Día</option>
+            <option value="2" >2 Días</option>
+            <option value="3" >3 Días</option>
+      </select>
+  </div>      
+      </div>
+    </div>
+    <div class="card-footer">
+    </div>
+  </div>
+</form>
+<!-- Fin formulario -->
+        </div>
+        </div>
+        </div>
+<!-- Finaliza paso 5 -->
+<app-footer></app-footer>
+

@@ -35,7 +35,11 @@ import { PoliticasEnvioComponent } from './components/static/politicas-envio/pol
 import { TerminosCondicionesComponent } from './components/static/terminos-condiciones/terminos-condiciones.component';
 import { ContactoComponent } from './components/static/contacto/contacto.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-
+import { TesterComponent } from './components/tester/tester.component';
+import { CalculadoraComponent } from './components/calculadora/calculadora.component';
+import { BlogComponent } from './components/blog/blog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NewCalculoComponent } from './components/calculadora/new-calculo/new-calculo.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,12 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     PoliticasEnvioComponent,
     TerminosCondicionesComponent,
     ContactoComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    TesterComponent,
+    CalculadoraComponent,
+    BlogComponent,
+    NewCalculoComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -79,7 +88,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
         },
         deps: [ HttpClient ]
       }
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

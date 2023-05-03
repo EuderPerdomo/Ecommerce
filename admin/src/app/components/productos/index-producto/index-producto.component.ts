@@ -29,6 +29,10 @@ export class IndexProductoComponent implements OnInit {
   public load_estado = false;
   public url = GLOBAL.url;
 
+  //Tipo de equipo
+  public tipo_equipo=''
+  public tipo_controlador=''
+
   constructor(
     private _adminService:AdminService
   ) { }
@@ -44,6 +48,7 @@ export class IndexProductoComponent implements OnInit {
       response=>{
         this.productos_const = response.data;
         this.productos= this.productos_const;
+        console.log(this.productos)
         this.load = false;
       }
     );

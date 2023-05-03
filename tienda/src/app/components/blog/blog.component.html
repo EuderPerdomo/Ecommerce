@@ -1,0 +1,88 @@
+
+<app-nav></app-nav>
+
+<div class="ps-page--default ps-page--contact">
+    <div class="ps-page__header bg--top" style="background: url(assets/img/bg/contact-bg.jpg);">
+      <div class="container">
+        <h3>Blog de Silicio</h3>
+<p>Aqui encontraras informacion sobre dieferentes temas relacionados con aquello que tanto nos apasiona, la energía solar.....</p>
+      </div>
+    </div>
+    
+    <div class="ps-page__content">
+      <div class="container">
+        <div class="ps-contact">
+          
+          <div class="ps-section__left">
+            <div class="ps-section__content">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                        <div class="ps-post">
+                            <div class="ps-post__thumbnail"><img src="assets/images/calculadora/equipos.png" alt="https://pixabay.com/es/vectors/logro-antecedentes-bordo-caja-5924443/"><a
+                                class="ps-post__overlay" [routerLink]="['/nosotros']"  ></a></div>
+                            <div class="ps-post__content"><a class="ps-post__title" [routerLink]="['/nosotros']">Elige esta opcion de calculo si conoces los consumos de todos 
+                                los electrodomesticos que deseas alimentar con energia fotovoltaica</a>
+                                <a class="ps-link--under ps-post__morelink" [routerLink]="['/nosotros']">Consumos 
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                      <div class="ps-post">
+                          <div class="ps-post__thumbnail"><img src="assets/images/calculadora/factura.png" alt="https://pixabay.com/es/vectors/impuesto-negocio-finanzas-impuestos-7630744/"><a
+                              class="ps-post__overlay" [routerLink]="['/embajadoras']"></a></div>
+                          <div class="ps-post__content"><a class="ps-post__title" [routerLink]="['/embajadoras']">
+                              Si no conoces los consumos de todos los equipos pero tienes una factura de energía a la mano esta es la mejor opción para ti...
+                          </a>
+                              <a class="ps-link--under ps-post__morelink" [routerLink]="['/embajadoras']"> Recibo Energía</a>
+                          </div>
+                      </div>
+                  </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                        <div class="ps-post">
+                            <div class="ps-post__thumbnail"><img src="assets/images/calculadora/juega.png" alt="https://pixabay.com/es/vectors/palanca-de-mando-icono-juego-firmar-2389216/"><a
+                                class="ps-post__overlay" [routerLink]="['/impacto-social']" ></a></div>
+                            <div class="ps-post__content"><a class="ps-post__title" [routerLink]="['/impacto-social']" >
+                              Aqui nosotros te proporcionaremos diferentes electrodomesticos de uso comun con sus potencias para que diseñes 
+                              un sistema fotovoltaico a partir de ellos
+                            </a>
+                                <a class="ps-link--under ps-post__morelink" [routerLink]="['/impacto-social']">  <a class="ps-link--under ps-post__morelink" [routerLink]="['/embajadoras']"> Quiero Jugar</a></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+          </div>
+          <div class="ps-section__right">
+          
+            <figure>
+              <figcaption>{{ 'contacto.item_tres' | translate }}tres </figcaption>
+            
+            </figure>
+            <figure>
+   
+              <aside>
+                <p><strong class="text-uppercase">Correo</strong></p>
+                <p>contacto@domain.com</p>
+                <p>domain@gmail.com</p>
+              </aside>
+              <aside>
+                <p><strong class="text-uppercase">{{ 'contacto.item_cuatro' | translate }}</strong></p>
+                <p>(+51) 943 283 912</p>
+              </aside>
+              <aside>
+                <p style="color: #000;"><strong class="text-uppercase">LA TIENDA</strong></p>
+                <p style="color: #000;"><span class="__cf_email__" >CIUDAD, PAÍS</span></p>
+              </aside>
+            </figure>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  
+  </div>
+
+
+<app-footer></app-footer>

@@ -22,6 +22,7 @@ api.get('/eliminar_direccion_cliente/:id',auth.auth,clienteController.eliminar_d
 
 
 api.get('/listar_productos_publico',clienteController.listar_productos_publico);
+api.get('/get_categorias_publico',clienteController.get_categorias_publico);//Listar categorias publico
 api.get('/obtener_variedades_productos_cliente/:id',clienteController.obtener_variedades_productos_cliente);
 api.get('/obtener_productos_slug_publico/:slug',clienteController.obtener_productos_slug_publico);
 api.get('/listar_productos_recomendados_publico/:categoria',clienteController.listar_productos_recomendados_publico);

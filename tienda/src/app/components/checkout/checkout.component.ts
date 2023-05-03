@@ -34,7 +34,7 @@ export class CheckoutComponent implements OnInit {
 
   public geo : any = {};
   public country = '';
-  public currency = 'PEN';
+  public currency = 'COP';
 
   public regiones:Array<any> = [];
   public provincias:Array<any> = [];
@@ -91,9 +91,9 @@ public data= {
           "unit_price": 700
       }
   ],   
-  "back_urls": { /* URLS DE REDIRECCIÓN CUANDO SE HAGA EL PAGO YA SEA SI ES CORRECTO, PAGO PENDIENTE O NO PROCESE EL PAGO */
+  "back_urls": { /* URLS DE REDIRECCIÓN CUANDO SE HAGA EL PAGO YA SEA SI ES CORRECTO, PAGO COPDIENTE O NO PROCESE EL PAGO */
       "failure" : "www.google.com", //CUANDO EL PAGO NO PROCESA
-      "pending" : "www.google.com", //CUANDO EL PAGO ES PENDIENTE
+      "pending" : "www.google.com", //CUANDO EL PAGO ES COPDIENTE
       "success" : "www.google.com" //CUANDO SE GENERO EL PAGO CORRECTAMENTE
   },
   "auto_return": "approved"
@@ -404,7 +404,7 @@ public data= {
       response=>{
         this.carrito_arr = response.data;
         this.carrito_arr.forEach(element => { 
-            if(this.currency != 'PEN'){
+            if(this.currency != 'COP'){
               this.dventa.push({
                 producto: element.producto._id,
                 subtotal: element.producto.precio_dolar,
@@ -412,7 +412,7 @@ public data= {
                 cantidad: element.cantidad,
                 cliente: localStorage.getItem('_id')
               });
-            }else if(this.currency == 'PEN'){
+            }else if(this.currency == 'COP'){
               this.dventa.push({
                 producto: element.producto._id,
                 subtotal: element.producto.precio,
@@ -429,7 +429,7 @@ public data= {
 
   calcular_carrito(){
     this.subtotal = 0;
-    if(this.currency == 'PEN'){
+    if(this.currency == 'COP'){
       this.carrito_arr.forEach(element => {
           let sub_precio = parseInt(element.producto.precio) * element.cantidad;
           this.subtotal = this.subtotal + sub_precio;
@@ -466,12 +466,12 @@ public data= {
       }
     }
 
-    if(this.currency == 'PEN'){
+    if(this.currency == 'COP'){
       if(this.total_pagar >= this.config.monto_min_soles){
         this.envio = 0;
         this.envio_gratis = true;
       }
-    }else if(this.currency != 'PEN'){
+    }else if(this.currency != 'COP'){
       if(this.total_pagar >= this.config.monto_min_dolares){
         this.envio = 0;
         this.envio_gratis = true;
@@ -484,7 +484,7 @@ public data= {
       this.total_pagar = this.total_pagar_const +this.envio;
     }
 
-    if(this.currency != 'PEN'){
+    if(this.currency != 'COP'){
       if(this.direccion_envio != undefined){
         if(this.carrito_arr.length >= 1){
           setTimeout(() => {
@@ -509,7 +509,7 @@ public data= {
               title: element.producto.titulo,
               description: element.producto.descripcion,
               quantity: element.cantidad,
-              currency_id: 'PEN',
+              currency_id: 'COP',
               unit_price: element.producto.precio
             });
           });
@@ -518,7 +518,7 @@ public data= {
             title: 'Envio',
               description: 'Concepto de transporte y logistica',
               quantity: 1,
-              currency_id: 'PEN',
+              currency_id: 'COP',
               unit_price: this.envio
           });
 
@@ -527,7 +527,7 @@ public data= {
               title: 'Descuento',
                 description: 'Cupón aplicado ' + this.venta.cupon,
                 quantity: 1,
-                currency_id: 'PEN',
+                currency_id: 'COP',
                 unit_price: -(this.descuento)
             });
           }
@@ -568,10 +568,10 @@ public data= {
 
   generar_pedido(tipo:any){
     this.venta.transaccion = 'Venta pedido';
-    if(this.currency != 'PEN'){
+    if(this.currency != 'COP'){
       this.venta.currency = 'USD';
     }else{
-      this.venta.currency = 'PEN';
+      this.venta.currency = 'COP';
     }
     this.venta.subtotal = this.subtotal;
     this.venta.total_pagar = this.total_pagar;
@@ -623,7 +623,7 @@ public data= {
               this.tipo_descuento =  response.data.tipo;
 
               if(response.data.disponibilidad == 'Exterior'){
-                if(this.currency != 'PEN'){
+                if(this.currency != 'COP'){
                   if(response.data.tipo == 'Valor fijo'){
                     this.descuento = response.data.valor;
                     this.valor_descuento = this.descuento;
@@ -645,7 +645,7 @@ public data= {
                   });
                 }
               }else if(response.data.disponibilidad == 'Peru'){
-                if(this.currency == 'PEN'){
+                if(this.currency == 'COP'){
                   if(response.data.tipo == 'Valor fijo'){
                     this.descuento = response.data.valor;
                     this.valor_descuento = this.descuento;
@@ -706,8 +706,11 @@ public data= {
  
 
   crearPreferencia(){
-   
+
+    console.log(this.data)
+    
     this._guestService.createPreference(this.data).subscribe(
+      
         response=>{
           console.log(response)
             //init_point PARA REALES
@@ -717,6 +720,7 @@ public data= {
             window.location.href =response.sandbox_init_point; 
         }
     );
+
 }
 
 

@@ -13,7 +13,9 @@ export class CreateProductoComponent implements OnInit {
 
   public producto: any = {
     categoria: '',
-    visibilidad: ''
+    visibilidad: '',
+    tipo:'',
+    usar_en_calculadora:'No'
   };
   public imgSelect : any | ArrayBuffer = 'assets/img/01.jpg';
   public categorias: Array<any> = [];
@@ -28,6 +30,11 @@ export class CreateProductoComponent implements OnInit {
   public load_data_etiqueta = false;
   public etiquetas : Array<any> = [];
 
+//CheckButtons
+public boton='no'
+
+
+
   constructor(
     private _adminService:AdminService,
     private _router:Router
@@ -38,13 +45,25 @@ export class CreateProductoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+/*
     this._adminService.get_categorias().subscribe(
       response=>{
         this.categorias = response;
         console.log(response);
-        
       }
     );
+*/
+
+/*Mi propio metodo listar etiquetas*/
+this._adminService.get_categorias(this.token).subscribe(
+  response=>{
+    this.categorias = response.data;
+    console.log(response);
+  }
+);
+/*Finaliza mi metodo listar eqtiquetas */
+
+
     this.listar_etiquetas();
   }
 
@@ -150,7 +169,7 @@ export class CreateProductoComponent implements OnInit {
       }else{
         this.load_btn = true;
         this.producto.etiquetas = this.arr_etiquetas;
-        
+
         this._adminService.registro_producto_admin(this.producto,this.file,this.token).subscribe(
           response=>{
   

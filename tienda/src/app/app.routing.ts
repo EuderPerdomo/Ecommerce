@@ -20,6 +20,9 @@ import { TerminosCondicionesComponent } from "./components/static/terminos-condi
 import { ContactoComponent } from "./components/static/contacto/contacto.component";
 import { NotfoundComponent } from "./components/notfound/notfound.component";
 import { AuthGuard } from "../app/guards/auth.guard";
+import { CalculadoraComponent } from "./components/calculadora/calculadora.component";
+import { BlogComponent } from "./components/blog/blog.component";
+import { NewCalculoComponent } from "./components/calculadora/new-calculo/new-calculo.component";
 
 const appRoute : Routes = [
     {path: '', component: InicioComponent},
@@ -46,7 +49,18 @@ const appRoute : Routes = [
     {path: 'nosotros', component: NosotrosComponent},
     {path: 'politicas-envio', component: PoliticasEnvioComponent},
     {path: 'terminos-condiciones', component: TerminosCondicionesComponent},
+
+    //Calculadora Solar
+    {path: 'calculadora', component: CalculadoraComponent},
+    {path: 'new-calculo', component: NewCalculoComponent},
+
+    //Blog
+    {path: 'blog', component: BlogComponent},
+
+
     {path: '**', component: NotfoundComponent}
+
+
 ]
 
 export const appRoutingPorviders : any[]=[];

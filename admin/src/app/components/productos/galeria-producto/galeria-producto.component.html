@@ -47,7 +47,8 @@
                           
                           <div class="row mb-5">
                             <div class="col-md-4" style="padding-right: 0px;">
-                              <img [src]="url +'obtener_portada/'+producto.portada" class="img-thumbnail rounded-0" alt="Square image">
+                              <!--<img [src]="url +'obtener_portada/'+producto.portada" class="img-thumbnail rounded-0" alt="Square image">-->
+                              <img [src]="producto.portada" class="img-thumbnail rounded-0" alt="Square image">
                             </div>
                             <div class="col-md-8" style="padding-left: 0px;">
                               <div class="card" style="    height: 100% !important;background: #f5eeee;">
@@ -120,8 +121,10 @@
                                         <tr>
                                           <td>
                                             <p>
-                                              <img [src]="url +'obtener_portada/'+item.imagen" alt="" style="width: 80px;">
-                                              {{item.imagen}}
+                                              <!--<img [src]="url +'obtener_portada/'+item.imagen" alt="" style="width: 80px;">-->
+                                              <img [src]="item.imagen" alt="" style="width: 80px;">
+                                              <!--{{item.imagen}}-->
+                                              
                                             </p>
                                           </td>
                                           <td><a style="cursor: pointer;" class="text-danger" data-toggle="modal" [attr.data-target]="'#delete-'+item._id">[Eliminar]</a></td>

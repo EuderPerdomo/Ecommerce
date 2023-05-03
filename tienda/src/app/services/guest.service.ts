@@ -4,6 +4,7 @@ import { GLOBAL } from "./GLOBA";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -88,8 +89,17 @@ export class GuestService {
     return this._http.get(this.url+'eliminar_direccion_cliente/'+id,{headers:headers});
   }
 
-  get_categorias():Observable<any>{
+
+  /**Original obtener categorias en la barra de navegación
+   * 
+    get_categorias():Observable<any>{
     return this._http.get('./assets/categorias.json');
+  }
+
+   */
+  get_categorias_publico():Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this.url + 'get_categorias_publico',{headers:headers});
   }
 
   listar_productos_publico():Observable<any>{
@@ -194,7 +204,7 @@ export class GuestService {
 
   obtener_reviews_cliente(id:any,token:any):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
-    return this._http.get(this.url+'obtener_reviews_cliente/'+id,{headers:headers});
+    return this._http.get(this.url+'obtener_reviews_cliente/'+ id,{headers:headers});
   }
 
   
@@ -251,5 +261,17 @@ export class GuestService {
     .set('Authorization','Bearer TEST-5855583832607988-080416-903c28c4a3ed7cd71e77d3cff2e7dc8f-216351469');
     return this._http.post('https://api.mercadopago.com/checkout/preferences',data,{headers:headers});
 }
+//Calculadora
+
+consulta_Pvgis(lat:any,lon:any,peakpower:any,atterysize:any,consumptionday:any,cutoff:any):Observable<any>{
+  let headers = new HttpHeaders().set('Content-Type','application/json');
+  console.log('paso por servicio', this.url+'consulta_Pvgis/'+lat+'/'+lon+'/'+peakpower+'/'+atterysize+'/'+consumptionday+'/'+cutoff)
+ return this._http.get(this.url+'consulta_Pvgis/'+lat+'/'+lon+'/'+peakpower+'/'+atterysize+'/'+consumptionday+'/'+cutoff,{headers:headers});
+ //return this._http.get(this.url+'listar_productos_recomendados_publico/'+categoria,{headers:headers});
+ //return this._http.get('https://re.jrc.ec.europa.eu/api/SHScalc?lat=45&lon=8&peakpower=500&batterysize=50&consumptionday=200&cutoff=40&outputformat=json',{headers:headers});
+ 
+}
+
+
 
 }

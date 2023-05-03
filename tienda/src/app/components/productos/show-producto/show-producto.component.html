@@ -22,18 +22,27 @@
               <figure>
                 <div class="ps-wrapper">
                   <div class="ps-product__gallery">
+                    <!--
                     <div class="item"><a href="{{url +'obtener_portada/'+producto.galeria[0].imagen}}"><img [src]="url +'obtener_portada/'+producto.galeria[0].imagen" alt=""></a></div>
                     <div class="item"><a href="{{url +'obtener_portada/'+producto.galeria[1].imagen}}"><img [src]="url +'obtener_portada/'+producto.galeria[1].imagen" alt=""></a></div>
                     <div class="item"><a href="{{url +'obtener_portada/'+producto.galeria[2].imagen}}"><img [src]="url +'obtener_portada/'+producto.galeria[2].imagen" alt=""></a></div>
-                    <div class="item"><a href="{{url +'obtener_portada/'+producto.galeria[3].imagen}}"><img [src]="url +'obtener_portada/'+producto.galeria[3].imagen" alt=""></a></div>
+                    <div class="item"><a href="{{url +'obtener_portada/'+producto.galeria[3].imagen}}"><img [src]="url +'obtener_portada/'+producto.galeria[3].imagen" alt=""></a></div>-->
+                    <div class="item"><a href="{{producto.galeria[0].imagen}}"><img [src]="producto.galeria[0].imagen" alt=""></a></div>
+                    <div class="item"><a href="{{producto.galeria[1].imagen}}"><img [src]="producto.galeria[1].imagen" alt=""></a></div>
+                    <div class="item"><a href="{{producto.galeria[2].imagen}}"><img [src]="producto.galeria[2].imagen" alt=""></a></div>
+                    <div class="item"><a href="{{+producto.galeria[3].imagen}}"><img [src]="producto.galeria[3].imagen" alt=""></a></div>
                   </div>
                 </div>
               </figure>
               <div class="ps-product__variants" data-item="4" data-md="3" data-sm="3" data-arrow="false">
-                <div class="item"><img [src]="url +'obtener_portada/'+producto.galeria[0].imagen" alt=""></div>
+                <!--<div class="item"><img [src]="url +'obtener_portada/'+producto.galeria[0].imagen" alt=""></div>
                 <div class="item"><img [src]="url +'obtener_portada/'+producto.galeria[1].imagen" alt=""></div>
                 <div class="item"><img [src]="url +'obtener_portada/'+producto.galeria[2].imagen" alt=""></div>
-                <div class="item"><img [src]="url +'obtener_portada/'+producto.galeria[3].imagen" alt=""></div>
+                <div class="item"><img [src]="url +'obtener_portada/'+producto.galeria[3].imagen" alt=""></div>-->
+                <div class="item"><img [src]="producto.galeria[0].imagen" alt=""></div>
+                <div class="item"><img [src]="producto.galeria[1].imagen" alt=""></div>
+                <div class="item"><img [src]="producto.galeria[2].imagen" alt=""></div>
+                <div class="item"><img [src]="producto.galeria[3].imagen" alt=""></div>
               </div>
             </div>
             <div class="ps-product__info">
@@ -69,16 +78,18 @@
                   <p><b>Peso:</b> {{producto.peso}}</p>
                 </div>
               <div class="ps-product__variations" style="padding-bottom: 0px !important;">
+                <!---->
                 <figure>
                   <figcaption>{{producto.titulo_variedad}}</figcaption>
                   <select class="form-control" style="width: 100%" name="select_variedad_lbl" [(ngModel)]="select_variedad_lbl" (change)="select_variedad()">
-                      <option value="" selected disabled>Seleccionar</option>
+                      <option value="" selected disabled>Variedad</option>
                       <ng-container *ngFor="let item of variedades">
                         <option value="{{item._id}}_{{item.valor}}_{{item.stock}}" *ngIf="item.stock>= 1">{{item.valor}}</option>
                         <option value="" *ngIf="item.stock == 0" disabled>{{item.valor}} (Sin stock)</option>
                       </ng-container>
                   </select>
                 </figure>
+                
               </div>
               <div class="ps-product__shopping">
                 <figure style="    max-width: none;">
@@ -94,7 +105,7 @@
                     </a>
                     <button *ngIf="btn_cart" type="button" class="ps-btn ps-btn--black text-white" disabled>
                       <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
-                      Agregando...
+                      Agregandoo...
                     </button>
                   </ng-container>
                   <ng-container *ngIf="user_lc == undefined">
@@ -130,7 +141,8 @@
                       
                     </div>
                     <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 col-12 ">
-                      <img [src]="url +'obtener_portada/'+producto.portada" alt="">
+                      <!--<img [src]="url +'obtener_portada/'+producto.portada" alt="">-->
+                      <img [src]="producto.portada" alt="">
                     </div>
                   </div>
                  
@@ -210,8 +222,13 @@
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 " *ngFor="let item of productos_rec">
           <div class="ps-product">
             <div class="ps-product__thumbnail">
-              <img class="ps-product__image" [src]="url +'obtener_portada/'+item.portada" alt=""/>
-              <img class="ps-product__image-alt" [src]="url +'obtener_portada/'+item.portada" alt=""/>
+
+              <!-- <img class="ps-product__image" [src]="url +'obtener_portada/'+item.portada" alt=""/>
+              <img class="ps-product__image-alt" [src]="url +'obtener_portada/'+item.portada" alt=""/> -->
+              
+              <img class="ps-product__image" [src]="item.portada" alt=""/>
+              <img class="ps-product__image-alt" [src]="item.portada" alt=""/>
+
               <a class="ps-product__overlay" [routerLink]="['/productos/'+item.slug]"></a>
               
             </div>

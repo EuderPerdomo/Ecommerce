@@ -1,6 +1,7 @@
 var Admin = require('../models/Admin');
 var Config = require('../models/Config');
 var Etiqueta = require('../models/Etiqueta');
+var Categoria = require('../models/Categoria');
 var Variedad = require('../models/Variedad');
 var Inventario = require('../models/Inventario');
 var Producto = require('../models/Producto');
@@ -19,6 +20,21 @@ var ejs = require('ejs');
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 var path = require('path');
+const bateria = require('../models/bateria');
+const controlador = require('../models/controlador');
+const panel_solar = require('../models/panel_solar');
+const inversor = require('../models/inversor');
+const { response } = require('express');
+const https = require("https")
+
+
+
+require('dotenv').config();// Para tarer rlas variables de entorno
+//Probando con cloudinari
+const cloudinary=require('cloudinary').v2
+cloudinary.config(process.env.CLOUDINARY_URL)
+
+
 
 const login_admin = async function(req,res){
     var data = req.body;
@@ -55,6 +71,19 @@ const listar_etiquetas_admin = async function(req,res){
     }
 }
 
+
+/*Mi metodo que lista categorias */
+const get_categorias = async function(req,res){
+    if(req.user){
+        var reg = await Categoria.find();
+        res.status(200).send({data:reg});
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
+/**Finaliza mi metodo que lista categorias */
+
 const eliminar_etiqueta_admin = async function(req,res){
     if(req.user){
         var id = req.params['id'];
@@ -82,15 +111,12 @@ const agregar_etiqueta_admin = async function(req,res){
         res.status(500).send({message: 'NoAccess'});
     }
 }
-
+/* Originnal
 const registro_producto_admin = async function(req,res){
     if(req.user){
         let data = req.body;
-  
         let productos = await Producto.find({titulo:data.titulo});
-        
         let arr_etiquetas = JSON.parse(data.etiquetas);
-
         if(productos.length == 0){
             var img_path = req.files.portada.path;
             var name = img_path.split('\\');
@@ -117,6 +143,43 @@ const registro_producto_admin = async function(req,res){
         res.status(500).send({message: 'NoAccess'});
     }
 }
+*/
+
+/*Con cloudinary */
+const registro_producto_admin = async function(req,res){
+    if(req.user){
+        let data = req.body;
+        let productos = await Producto.find({titulo:data.titulo});
+        let arr_etiquetas = JSON.parse(data.etiquetas);
+        if(productos.length == 0){
+            var img_path = req.files.portada.path;
+            var name = img_path.split('\\');
+            var portada_name = name[2];
+
+            data.slug = data.titulo.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
+
+            const {secure_url}= await cloudinary.uploader.upload(img_path)
+
+            data.portada = secure_url;
+            let reg = await Producto.create(data);
+            if(arr_etiquetas.length >= 1){
+                for(var item of arr_etiquetas){
+                    await Producto_etiqueta.create({
+                        etiqueta: item.etiqueta,
+                        producto: reg._id,
+                    });
+                }
+            }
+
+            res.status(200).send({data:reg});
+        }else{
+            res.status(200).send({data:undefined, message: 'El título del producto ya existe'});
+        }
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+/**Finaliza con cloudinary */
 
 listar_productos_admin = async function(req,res){
     if(req.user){
@@ -203,12 +266,21 @@ const actualizar_producto_admin = async function(req,res){
     if(req.user){
         let id = req.params['id'];
         let data = req.body;
-
         if(req.files){
             //SI HAY IMAGEN
             var img_path = req.files.portada.path;
             var name = img_path.split('\\');
             var portada_name = name[2];
+            
+            //Buscar la Imagen anterior 
+            modelo = await Producto.findById(id)//Traigo el modelo actual 
+            const nombreArr=modelo.portada.split('/')
+            const nombre=nombreArr[nombreArr.length-1]
+            const [public_id]=nombre.split('.')
+            cloudinary.uploader.destroy(public_id) //Elimina la anterior
+            //Fin buscar imagen anterior
+
+            const {secure_url}= await cloudinary.uploader.upload(img_path)//Cargo nueva imagen
 
             let reg = await Producto.findByIdAndUpdate({_id:id},{
                 titulo: data.titulo,
@@ -223,7 +295,10 @@ const actualizar_producto_admin = async function(req,res){
                 visibilidad: data.visibilidad,
                 descripcion: data.descripcion,
                 contenido:data.contenido,
-                portada: portada_name
+                //portada: portada_name
+                portada: secure_url,
+                tipo:data.tipo,
+                usar_en_calculadora:data.usar_en_calculadora
             });
 
             fs.stat('./uploads/productos/'+reg.portada, function(err){
@@ -250,6 +325,9 @@ const actualizar_producto_admin = async function(req,res){
                visibilidad: data.visibilidad,
                descripcion: data.descripcion,
                contenido:data.contenido,
+               tipo:data.tipo,
+               usar_en_calculadora:data.usar_en_calculadora
+               
            });
            res.status(200).send({data:reg});
         }
@@ -363,10 +441,13 @@ const agregar_imagen_galeria_admin = async function(req,res){
             var name = img_path.split('\\');
             var imagen_name = name[2];
 
+            const {secure_url}= await cloudinary.uploader.upload(img_path)
+            console.log('actualizar imagen galeria')
             let reg =await Producto.findByIdAndUpdate({_id:id},{ $push: {galeria:{
-                imagen: imagen_name,
+                //imagen: imagen_name,
+                imagen: secure_url,
                 _id: data._id
-            }}});
+            }}},{useFindAndModify: false});
 
             res.status(200).send({data:reg});
     }else{
@@ -379,8 +460,20 @@ const eliminar_imagen_galeria_admin = async function(req,res){
         let id = req.params['id'];
         let data = req.body;
 
+        //Buscar la Imagen anterior 
+        //NOTA: debo buscarla en la agleria
+        modelo = await Producto.findById(id)//Traigo el modelo actual 
+        const nombreArr=modelo.portada.split('/')
+        const nombre=nombreArr[nombreArr.length-1]
+        const [public_id]=nombre.split('.')
+        let reg =await cloudinary.uploader.destroy(public_id) //Elimina la anterior
+        //Fin buscar imagen anterior
+        
+    let test =await Producto.findByIdAndUpdate({_id:id},{$pull: {galeria: {_id:data._id}}});
+    console.log(reg,public_id,'test',test,data._id)
 
-        let reg =await Producto.findByIdAndUpdate({_id:id},{$pull: {galeria: {_id:data._id}}});
+
+        //let reg =await Producto.findByIdAndUpdate({_id:id},{$pull: {galeria: {_id:data._id}}});
         res.status(200).send({data:reg});
     }else{
         res.status(500).send({message: 'NoAccess'});
@@ -834,15 +927,186 @@ const cerrar_mensaje_admin = async function (req, res) {
 /*Finaliza mensajes */
 
 
+/**Inicia Calculadora Solar */
 
+const registro_producto_calculadora_admin = async function(req,res){
+    if(req.user){
+        let data = req.body;
+        var reg = await bateria.create(data);
+        res.status(200).send({data:reg});
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
+
+const registro_controlador_calculadora_admin = async function(req,res){
+    if(req.user){
+        let data = req.body;
+        var reg = await controlador.create(data);
+        res.status(200).send({data:reg});
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
+const registro_panel_calculadora_admin = async function(req,res){
+    if(req.user){
+        let data = req.body;
+        var reg = await panel_solar.create(data);
+        res.status(200).send({data:reg});
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
+const registro_inversor_calculadora_admin = async function(req,res){
+    if(req.user){
+        let data = req.body;
+        var reg = await inversor.create(data);
+        res.status(200).send({data:reg});
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
+
+
+
+
+//listar_productos_calculadora_admin
+listar_productos_calculadora_admin = async function(req,res){
+    console.log('productos a listar en calculadora')
+    if(req.user){
+        var productos = await Producto.find({"usar_en_calculadora":"Si"});
+        res.status(200).send({data:productos});
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    } 
+}
+
+/*
+//consulta_Pvgis =  function(req,res){
+const https = require('https')
+
+const options = {
+  hostname: 'encrypted.google.com',
+  port: 443,
+  path: '/',
+  method: 'GET'
+};
+
+const consulta_Pvgis = () => {
+  return new Promise((response, reject) => {
+  //let result = https.request(options, res => {
+    let result = https.request('https://re.jrc.ec.europa.eu/api/SHScalc?lat=4.58&lon=-74.220&peakpower=500&batterysize=500&consumptionday=2000&cutoff=40&outputformat=json', res => {
+    console.log('in here');
+    console.log(`statusCode: ${res.statusCode}`);
+
+            let data;
+            res.on('data', d => {
+                data += d;
+                // process.stdout.write(d)
+             })
+  
+  
+             res.on('error', error => {
+              console.error(error);
+              reject(error);
+            })
+  
+            res.on("end", d => {
+              response(data);
+            });
+   })
+   result.end();
+  })
+}
+consulta_Pvgis().then(data => { console.log('la daat',data,'despues de la data')}).catch(console.log);
+//}
+*/
+
+//Consulta pvgis
+/*
+consulta_Pvgis =  function(req,res){
+console.log('llego a aback')
+
+    console.log('datos para la consulta pvgis',req.params)
+    lat=req.params.lat
+    lon=req.params.lon
+    peakpower=req.params.peakpower
+    atterysize=req.params.atterysize
+    consumptionday=req.params.consumptionday
+    cutoff=req.params.cutoff
+
+
+         const https = require("https")
+        const ruta='https://re.jrc.ec.europa.eu/api/PVcalc?lat='+lat+'&lon='+lon+'&peakpower='+peakpower+'&loss='+40+'&outputformat=json'
+
+         //Por sencillez, retiramos el wrapper de la promesa.
+        // https.get("https://re.jrc.ec.europa.eu/api/PVcalc?lat=45&lon=8&peakpower=500&loss=40&outputformat=json", res => {
+            https.get(ruta, res => {
+           let data = ""
+        
+           res.on("data", d => {
+             data += d
+           })
+           res.on("end", () => {
+            response(data)
+             console.log(data)          
+             //Llamar a un Callback o resolver la promera aquí.
+           })
+         })
+}
+*/
+
+
+consulta_Pvgis=function(req,res){
+    lat=req.params.lat
+    lon=req.params.lon
+    peakpower=req.params.peakpower
+    atterysize=req.params.atterysize
+    consumptionday=req.params.consumptionday
+    cutoff=req.params.cutoff
+
+    //const ruta='https://re.jrc.ec.europa.eu/api/PVcalc?lat=45&lon=8&peakpower=500&loss=40&outputformat=json'
+    const ruta='https://re.jrc.ec.europa.eu/api/PVcalc?lat='+lat+'&lon='+lon+'&peakpower='+peakpower+'&loss='+40+'&outputformat=json'
+const promesa=new Promise((resolve,reject)=>{
+
+    https.get(ruta, res => {
+        let data = ""
+     
+        res.on("data", d => {
+          data += d
+        })
+        res.on("end", () => {
+         resolve(data)
+        })
+      })
+    })
+
+promesa.then(respuesta=>{
+   res.status(200).send({data:JSON.parse(respuesta)})
+   //res.status(200).send({data:respuesta})
+})
+.catch(error=>{
+    res.status(500).send({message:'Error al realizar la consulta'})
+})
+}
+
+
+
+/**Finaliza Calculadora Solar */
 
 module.exports = {
     login_admin,
     eliminar_etiqueta_admin,
     listar_etiquetas_admin,
+    get_categorias,/**Añadido para listar categorias */
     agregar_etiqueta_admin,
     registro_producto_admin,
     listar_productos_admin,
+   
     obtener_producto_admin,
     listar_etiquetas_producto_admin,
     eliminar_etiqueta_producto_admin,
@@ -872,4 +1136,12 @@ module.exports = {
     listar_variedades_productos_admin,
     obtener_mensajes_admin,
     cerrar_mensaje_admin,
+
+    /*Calculadora*/
+    registro_producto_calculadora_admin,
+    registro_controlador_calculadora_admin,
+    registro_panel_calculadora_admin,
+    registro_inversor_calculadora_admin,
+    listar_productos_calculadora_admin,
+    consulta_Pvgis,
 }

@@ -18,7 +18,7 @@ export class IndexProductoComponent implements OnInit {
   //GEO
   public geo : any = {};
   public country = '';
-  public currency = 'PEN';
+  public currency = 'COP';
   public user_lc : any = undefined;
 
   public token :any = '';
@@ -53,7 +53,7 @@ export class IndexProductoComponent implements OnInit {
     this.geo = JSON.parse(lc_geo);
     this.country = this.geo.country_name;
     this.currency = this.geo.currency;
-
+/*
     this._guestService.get_categorias().subscribe(
       response=>{
         this.categorias = response;
@@ -61,6 +61,17 @@ export class IndexProductoComponent implements OnInit {
         
       }
     );
+*/
+/**Mi metodo */
+this._guestService.get_categorias_publico().subscribe(
+  response=>{
+    this.categorias = response.data;
+    console.log('Estas son las categorias en el index producto ',this.categorias);
+    
+  }
+);
+/**Finaliza mi metodo */
+
   }
 
   ngOnInit(): void {
@@ -68,11 +79,11 @@ export class IndexProductoComponent implements OnInit {
       var slider : any = document.getElementById('ps-sliderr');
 
       noUiSlider.create(slider, {
-          start: [0, 1000],
+          start: [0, 500000],
           connect: true,
           range: {
-              'min': 0,
-              'max': 300
+              'min': 20000,//0
+              'max': 5000000 //0
           },
           tooltips: [true,true],
        
@@ -107,8 +118,11 @@ export class IndexProductoComponent implements OnInit {
               this.productos_const = this.productos;
 
               let categoria = this.categorias.filter(item=>item.slug==this.route_categoria);
+              console.log('Categoria que filtra slug',categoria)
+
 
               this.productos = this.productos_const.filter(item=>item.categoria==categoria[0]._id);
+              console.log('productos',this.productos)
               this.load_data = false;
 
             }
@@ -146,9 +160,10 @@ export class IndexProductoComponent implements OnInit {
                       item.producto.variedades = item.variedades,
                       this.productos.push(item.producto);
                     }
-                 
+                    
                     this.productos_const = this.productos;
                     this.load_data = false;
+                    console.log('Respuesta con los productos',this.productos_const,this.productos)
                   }
                 );
               }

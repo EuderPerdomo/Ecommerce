@@ -18,6 +18,8 @@ import { IndexVentasComponent } from "./components/ventas/index-ventas/index-ven
 import { CreateVentasComponent } from "./components/ventas/create-ventas/create-ventas.component";
 import { ShowVentasComponent } from "./components/ventas/show-ventas/show-ventas.component";
 import { IndexContactoComponent } from "./components/contacto/index-contacto/index-contacto.component";
+import { AgregarProductosCalculadoraComponent } from "./components/calculadora/agregar-productos-calculadora/agregar-productos-calculadora.component";
+import { DashboardCalculadoraComponent } from "./components/calculadora/dashboard-calculadora/dashboard-calculadora.component";
 
 const appRoute : Routes = [
     {path: '', redirectTo: 'login', pathMatch : 'full'},
@@ -46,6 +48,13 @@ const appRoute : Routes = [
     {path: 'contacto', component:IndexContactoComponent, canActivate:[AuthGuard]},
     {path: 'configuraciones', component: ConfigComponent, canActivate:[AuthGuard]},
     /*fINALIZA CONTACTOS*/
+
+
+    /*PRODUCTOS CALCULADORA */
+    {path: 'dashboard_calculadora', component:DashboardCalculadoraComponent, canActivate:[AuthGuard]},
+    {path: 'agregar_producto_calculadora/:id', component:AgregarProductosCalculadoraComponent, canActivate:[AuthGuard]},
+     /*Finaliza Productos Calculadora */
+
 
     /* {path: '**', component: NotFoundComponent}, */
 ]

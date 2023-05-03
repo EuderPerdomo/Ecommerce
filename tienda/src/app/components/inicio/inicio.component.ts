@@ -33,15 +33,23 @@ export class InicioComponent implements OnInit {
     this.geo = JSON.parse(lc_geo);
     this.country = this.geo.country_name;
     this.currency = this.geo.currency;
-
+/*
     this._guestService.get_categorias().subscribe(
       response=>{
         this.categorias = response;
         console.log(response);
         
       }
-    );
-
+    );*/
+/**Inicia mi metodo */
+this._guestService.get_categorias_publico().subscribe(
+  response=>{
+    this.categorias = response.data;
+    console.log(response);
+    
+  }
+);
+/*Finaliza mi metodo */
     
   }
 
@@ -53,21 +61,32 @@ export class InicioComponent implements OnInit {
     
     this.init_productos_destacados();
     this.init_productos_nuevos();
-
+   /*
     var owl = $('.owl-carousel');
     owl.owlCarousel({
         items:1,
         loop:true,
-        margin:10,
+        margin:1,
         autoplay:true,
         autoplayTimeout:1000,
         autoplayHoverPause:true,
         animateIn: 'linear',
-        animateOut: 'fade'
+        animateOut: 'fade',
+        responsive:{
+          0:{
+            items:1
+          },
+          600:{
+            items:1
+          },
+          1000:{
+            items:1
+          },
+        }
 
 
     });
-
+*/
 
   }
 

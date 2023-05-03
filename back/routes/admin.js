@@ -10,6 +10,9 @@ var path = multiparty({uploadDir: './uploads/productos'});
 
 api.post('/login_admin',AdminController.login_admin);
 api.get('/listar_etiquetas_admin',auth.auth,AdminController.listar_etiquetas_admin);
+/*listado de categorias */
+api.get('/get_categorias',auth.auth,AdminController.get_categorias);
+/**Finaliza listado de categorias */
 api.delete('/eliminar_etiqueta_admin/:id',auth.auth,AdminController.eliminar_etiqueta_admin);
 api.post('/agregar_etiqueta_admin',auth.auth,AdminController.agregar_etiqueta_admin);
 api.post('/registro_producto_admin',[auth.auth,path],AdminController.registro_producto_admin);
@@ -51,5 +54,19 @@ api.post('/registro_compra_manual_cliente',auth.auth,AdminController.registro_co
 */
 api.get('/obtener_mensajes_admin',auth.auth,AdminController.obtener_mensajes_admin)
 api.put('/cerrar_mensaje_admin/:id',auth.auth,AdminController.cerrar_mensaje_admin)
+
+
+/* Calculadora Solar  
+*/
+api.post('/registro_producto_calculadora_admin',auth.auth,AdminController.registro_producto_calculadora_admin)
+api.post('/registro_controlador_calculadora_admin',auth.auth,AdminController.registro_controlador_calculadora_admin)
+api.post('/registro_inversor_calculadora_admin',auth.auth,AdminController.registro_inversor_calculadora_admin)
+api.post('/registro_panel_calculadora_admin',auth.auth,AdminController.registro_panel_calculadora_admin)
+
+api.get('/listar_productos_calculadora_admin',auth.auth,AdminController.listar_productos_calculadora_admin);
+
+api.get('/consulta_Pvgis/:lat/:lon/:peakpower/:atterysize/:consumptionday/:cutoff',AdminController.consulta_Pvgis)
+//lat:any,lon:any,peakpower:any,atterysize:any,consumptionday:any,cutoff:any
+//api.get('/listar_productos_recomendados_publico/:categoria',clienteController.listar_productos_recomendados_publico);
 
 module.exports = api;

@@ -32,11 +32,21 @@ export class FooterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+/*
     this._guestService.get_categorias().subscribe(
       response=>{
         this.categorias = response;
       }
     );
+*/
+
+/*Inicia mi metodo */
+this._guestService.get_categorias_publico().subscribe(
+  response=>{
+    this.categorias = response.data;
+  }
+);
+/**Finaliza mi metodo */
   }
 
   public cambiarLenguaje() {

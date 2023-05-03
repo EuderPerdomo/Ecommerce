@@ -11,6 +11,9 @@ var bcrypt = require('bcrypt-nodejs');
 var Producto = require('../models/Producto');
 var jwt = require('../helpers/jwt');
 
+var Categoria=require('../models/Categoria')//Agrego la categoria
+
+
 var fs = require('fs');
 var handlebars = require('handlebars');
 var ejs = require('ejs');
@@ -259,9 +262,30 @@ const listar_productos_publico = async function(req,res){
             variedades: variedades
         });
     }
-
+//console.log('productos desde el controlador de productos cliente',arr_data)
     res.status(200).send({data: arr_data});
 }
+
+/*Metodo para listar categorias publico */
+/*
+const get_categorias = async function(req,res){
+    if(req.user){
+        var reg = await Categoria.find();
+        res.status(200).send({data:reg});
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
+
+*/
+
+const get_categorias_publico = async function(req,res){
+    var reg = await Categoria.find();
+    res.status(200).send({data:reg});
+}
+/*Finaliza mi Metodo para listar categorias publico */
+
 
 const obtener_variedades_productos_cliente = async function(req,res){
     let id = req.params['id'];
@@ -533,11 +557,9 @@ const obtener_reviews_cliente  = async function(req,res){
 
 const enviar_mensaje_contacto  = async function(req,res){
     let data = req.body;
-
     data.estado = 'Abierto';
     let reg = await Contacto.create(data);
     res.status(200).send({data:reg});
-
 }
 
 const enviar_orden_compra = async function(venta){
@@ -624,5 +646,6 @@ module.exports = {
     consultarIDPago,
     registro_compra_cliente,
     obtener_reviews_cliente,
-    enviar_mensaje_contacto
+    enviar_mensaje_contacto,
+    get_categorias_publico //Listar categorias publico
 }

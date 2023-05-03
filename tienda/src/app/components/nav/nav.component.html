@@ -6,8 +6,8 @@ background: #51f1ae;
 color:#191919" *ngIf="config.envio_activacion != 'Desactivado'">
     <div class="col-12 text-center">
         ENVIO GRATIS POR COMPRAS MAYORES A
-        <span *ngIf="currency == 'PEN'">S/{{config.monto_min_soles}}</span>
-        <span *ngIf="currency != 'PEN'">${{config.monto_min_dolares}}</span>
+        <span *ngIf="currency == 'COP'">{{config.monto_min_soles | currency:'COP ':"$"}}</span>
+        <span *ngIf="currency != 'COP'">{{config.monto_min_dolares | currency:'USD ':"$"}}</span>
     </div>
 </div>
 <header class="header header--standard" data-sticky="true" style="    background: #000000 !important;"><!-- <header class="header header--standard" data-sticky="true" style="    background: #127c5f !important;">-->
@@ -41,11 +41,14 @@ color:#191919" *ngIf="config.envio_activacion != 'Desactivado'">
                       <li>
                           <a [routerLink]="['/nosotros']">{{ 'menu.item_siete' | translate }}</a>
                           <a [routerLink]="['/impacto-social']">{{ 'menu.item_ocho' | translate }}</a>
-                          <a [routerLink]="['/embajadoras']" >{{ 'menu.item_nueve' | translate }}</a>
+                          <!-- <a [routerLink]="['/embajadoras']" >{{ 'menu.item_nueve' | translate }}</a> -->
+                          <a [routerLink]="['/embajadoras']" >Silicio</a>
                       </li>
                   </ul>
               </li>
-                <li><a class="text-white" [routerLink]="['/contacto']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ 'menu.item_cuatro' | translate }}</a></li>
+                <li><a class="text-white" [routerLink]="['/contacto']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ 'menu.item_cuatro' | translate }} </a></li>
+                <li><a class="text-white" [routerLink]="['/blog']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Blog</a></li>
+                <li><a class="text-white" [routerLink]="['/calculadora']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Calculadora Solar</a></li>
             </ul>
         </div>
         <div class="header__container">
@@ -124,7 +127,8 @@ color:#191919" *ngIf="config.envio_activacion != 'Desactivado'">
                           <div class="ps-product--mini-cart" *ngFor="let item of carrito_logout; let idx = index">
                               <div class="ps-product__thumbnail">
                                   <a [routerLink]="['/productos/',item.producto.slug]">
-                                      <img [src]="url +'obtener_portada/'+item.producto.portada" alt="">
+                                      <!-- <img [src]="url +'obtener_portada/'+item.producto.portada" alt=""> -->
+                                      <img [src]="item.producto.portada" alt="">
                                   </a>
                               </div>
                               <div class="ps-product__content">
@@ -132,19 +136,19 @@ color:#191919" *ngIf="config.envio_activacion != 'Desactivado'">
                                   </span>
                                   <a class="ps-product__title" [routerLink]="['/productos/',item.producto.slug]">{{item.producto.titulo}}</a>
                                   <p> Cantidad: {{item.cantidad}}</p>
-                                  <p> Talla: {{item.variedad.variedad}}</p>
+                                  <p> Variedad: {{item.variedad.variedad}}</p>
                                   <span class="ps-product__price">
-                                      <ng-container *ngIf="currency != 'PEN'">         
-                                        <span class=" mr-3"><b style="    color: #999ea9;">${{item.producto.precio_dolar}}</b></span>
+                                      <ng-container *ngIf="currency != 'COP'">         
+                                        <span class=" mr-3"><b style="    color: #999ea9;">{{item.producto.precio_dolar | currency:'USD ':"$"}}</b></span>
                                         <span class="text-danger" *ngIf="item.producto.precio_antes_dolares >= 1">
-                                          <del>${{item.producto.precio_antes_dolares}}</del>
+                                          <del>{{item.producto.precio_antes_dolares | currency:'USD ':"$"}}</del>
                                         </span>
                                       </ng-container>
-                                      <ng-container *ngIf="currency == 'PEN'">
+                                      <ng-container *ngIf="currency == 'COP'">
                                         
-                                        <span class=" mr-3"><b style="    color: #999ea9;">S/{{item.producto.precio}}</b></span>
+                                        <span class=" mr-3"><b style="    color: #999ea9;">{{item.producto.precio | currency:'COP ':"$"}}</b></span>
                                         <span class="text-danger" *ngIf="item.producto.precio_antes_soles >= 1">
-                                          <del>S/{{item.producto.precio_antes_soles}}</del>
+                                          <del>S/{{item.producto.precio_antes_soles | currency:'COP ':"$"}}</del>
                                         </span>
                                       </ng-container>
                                   </span>
@@ -167,8 +171,8 @@ color:#191919" *ngIf="config.envio_activacion != 'Desactivado'">
                   
                   <div class="ps-cart__footer">
                       <h3>Sub Total:<strong>
-                          <span *ngIf="currency != 'PEN'">${{subtotal}}</span>
-                          <span *ngIf="currency == 'PEN'">S/{{subtotal}}</span>
+                          <span *ngIf="currency != 'COP'">{{subtotal | currency:'USD ':"$"}}</span>
+                          <span *ngIf="currency == 'COP'">{{subtotal | currency:'COP ':"$"}}</span>
                       </strong></h3>
                         <figure  *ngIf="carrito_logout.length != 0">
                             <a class="ps-btn ps-btn--outline"  [routerLink]="['/carrito']">Carrito</a>
@@ -197,25 +201,26 @@ color:#191919" *ngIf="config.envio_activacion != 'Desactivado'">
                           <div class="ps-product--mini-cart" *ngFor="let item of carrito_arr; let idx = index">
                               <div class="ps-product__thumbnail">
                                   <a [routerLink]="['/productos/',item.producto.slug]">
-                                      <img [src]="url +'obtener_portada/'+item.producto.portada" alt="">
+                                      <!-- <img [src]="url +'obtener_portada/'+item.producto.portada" alt=""> -->
+                                      <img [src]="item.producto.portada" alt="">
                                   </a>
                               </div>
                               <div class="ps-product__content"><span  style="cursor: pointer;" (click)="eliminar_item(item._id)" class="ps-product__remove"><i class="icon-cross"></i></span>
                                   <a class="ps-product__title" [routerLink]="['/productos/',item.producto.slug]">{{item.producto.titulo}}</a>
                                   <p> Cantidad: {{item.cantidad}}</p>
-                                  <p> Talla: {{item.variedad.valor}}</p>
+                                  <p> Variedad: {{item.variedad.valor}}</p>
                                   <span class="ps-product__price">
-                                    <ng-container *ngIf="currency != 'PEN'">         
-                                        <span class=" mr-3"><b style="    color: #999ea9;">${{item.producto.precio_dolar}}</b></span>
+                                    <ng-container *ngIf="currency != 'COP'">         
+                                        <span class=" mr-3"><b style="    color: #999ea9;">{{item.producto.precio_dolar | currency:'USD ':"$"}}</b></span>
                                         <span class="text-danger" *ngIf="item.producto.precio_antes_dolares >= 1">
-                                          <del>${{item.producto.precio_antes_dolares}}</del>
+                                          <del>{{item.producto.precio_antes_dolares | currency:'USD ':"$"}}</del>
                                         </span>
                                       </ng-container>
-                                      <ng-container *ngIf="currency == 'PEN'">
+                                      <ng-container *ngIf="currency == 'COP'">
                                         
-                                        <span class=" mr-3"><b style="    color: #999ea9;">S/{{item.producto.precio}}</b></span>
+                                        <span class=" mr-3"><b style="    color: #999ea9;">{{item.producto.precio | currency:'COP ':"$"}}</b></span>
                                         <span class="text-danger" *ngIf="item.producto.precio_antes_soles >= 1">
-                                          <del>S/{{item.producto.precio_antes_soles}}</del>
+                                          <del>{{item.producto.precio_antes_soles | currency:'COP ':"$"}}</del>
                                         </span>
                                       </ng-container>
                                   </span>
@@ -237,8 +242,8 @@ color:#191919" *ngIf="config.envio_activacion != 'Desactivado'">
                   
                   <div class="ps-cart__footer">
                       <h3>Sub Total:<strong>
-                          <span *ngIf="currency != 'PEN'">${{subtotal}}</span>
-                          <span *ngIf="currency == 'PEN'">S/{{subtotal}}</span>
+                          <span *ngIf="currency != 'COP'">{{subtotal | currency:'USD ':"$"}}</span>
+                          <span *ngIf="currency == 'COP'">{{subtotal | currency:'COP ':"$"}}</span>
                       </strong></h3>
                     
                       <figure *ngIf="carrito_arr.length != 0">
@@ -264,8 +269,8 @@ color:#191919" *ngIf="config.envio_activacion != 'Desactivado'">
                       </div>
                       <div class="col-6">
                           <ul class="ps-list">
-                              <li *ngIf="currency != 'PEN'" class="active"><a>USD</a></li>
-                              <li *ngIf="currency == 'PEN'" class="active"><a>PEN</a></li>
+                              <li *ngIf="currency != 'COP'" class="active"><a>USD</a></li>
+                              <li *ngIf="currency == 'COP'" class="active"><a>COP</a></li>
                           </ul>
                       </div>
                   </div>

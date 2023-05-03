@@ -26,9 +26,16 @@ export class AdminService {
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.get(this.url + 'listar_clientes_tienda',{headers:headers});
   }
-
+/*
+Original get categorias
   get_categorias():Observable<any>{
     return this._http.get('./assets/categorias.json');
+  }
+*/
+
+  get_categorias(token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.get(this.url + 'get_categorias',{headers:headers});
   }
 
   listar_etiquetas_admin(token:any):Observable<any>{
@@ -61,6 +68,8 @@ export class AdminService {
     fd.append('visibilidad',data.visibilidad);
     fd.append('tallas_str','');
     fd.append('portada',file);
+    fd.append('tipo',data.tipo);
+    fd.append('usar_en_calculadora',data.usar_en_calculadora);
     return this._http.post(this.url+'registro_producto_admin',fd,{headers:headers});
   }
 
@@ -106,7 +115,9 @@ export class AdminService {
       fd.append('contenido',data.contenido);
       fd.append('categoria',data.categoria);
       fd.append('portada',data.portada);
-
+      fd.append('tipo',data.tipo);
+      fd.append('usar_en_calculadora',data.usar_en_calculadora);
+console.log('Los datos que estamos enviando',fd)
       return this._http.put(this.url+'actualizar_producto_admin/'+id,fd,{headers:headers});
     }else{
       let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
@@ -299,6 +310,35 @@ cerrar_mensaje_admin(id: any, data: any, token: any): Observable<any> {
 }
 /* Finaliza Mensajes*/
 
+
+/*Inicia  Calculadora */
+registro_producto_calculadora_admin(data:any,token:any):Observable<any>{
+  let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+  return this._http.post(this.url+'registro_producto_calculadora_admin',data,{headers:headers});
+}
+
+registro_controlador_calculadora_admin(data:any,token:any):Observable<any>{
+  let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+  return this._http.post(this.url+'registro_controlador_calculadora_admin',data,{headers:headers});
+}
+
+registro_panel_calculadora_admin(data:any,token:any):Observable<any>{
+  let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+  return this._http.post(this.url+'registro_panel_calculadora_admin',data,{headers:headers});
+}
+
+registro_inversor_calculadora_admin(data:any,token:any):Observable<any>{
+  let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+  return this._http.post(this.url+'registro_inversor_calculadora_admin',data,{headers:headers});
+}
+
+listar_productos_calculadora_admin(token:any):Observable<any>{
+  console.log('paso por servicio')
+  let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+  return this._http.get(this.url + 'listar_productos_calculadora_admin',{headers:headers});
+}
+
+/**Finaliza  Calculadora */
 
 
 

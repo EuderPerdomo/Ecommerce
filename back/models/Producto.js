@@ -23,6 +23,10 @@ var ProductoSchema = Schema({
     peso: {type: String, required: false},
 
     estado: {type: String, default: 'Edicion', required: true},
+    tipo:{type: String, default: 'Generico', required: true},
+    usar_en_calculadora:{type: String, default: 'No', required: true},
+
+
     createdAt: {type:Date, default: Date.now, require: true}
 });
 

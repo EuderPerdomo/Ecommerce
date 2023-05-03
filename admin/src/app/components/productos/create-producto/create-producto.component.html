@@ -52,6 +52,37 @@
                                       <input type="text" class="form-control" required placeholder="Titulo del producto" name="titulo" [(ngModel)]="producto.titulo">
                                   </div>
                               </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                    <label>¿Desea Usar este producto en la calculadora Solar?</label>
+                                    <div class="row">
+                                        <div class="col-6">       
+                                            
+                                            <div class="form-check form-inline">
+                                            <input type="radio" class="form-check-input" id="radio1" value="Si" [(ngModel)]="producto.usar_en_calculadora" name="opcion" >
+                                            <label for="radio1" class="form-check-label">Si</label>
+                                            </div>
+
+                                            <div class="form-check form-inline">
+                                                <input type="radio" class="form-check-input" id="radio2" value="No" [(ngModel)]="producto.usar_en_calculadora" name="opcion" checked>
+                                                <label for="radio2" class="form-check-label" >No</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6" *ngIf="producto.usar_en_calculadora=='Si'">
+                                            <label for="tipos">Tipo(*)</label>
+                                            <select class="form-control custom-select" id="select-input" required name="tipo" [(ngModel)]="producto.tipo">
+                                                <option value="" selected disabled>Seleccionar</option>
+                                                <option value="panel_solar">Panel Solar</option>
+                                                <option value="controlador">Controlador</option>
+                                                <option value="inversor">Inversor</option>
+                                                <option value="bateria">Batería</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+
+                                </div>
+                            </div>
                               <div class="col-6">
                                   <div class="form-group">
                                       <label for="exampleInputEmail1">SKU (*)</label>
@@ -103,11 +134,11 @@
                       <div class="col-lg-4">
                           <div class="row">
                               <div class="col-lg-12 form-group">	
-                                  <label for="">Precio soles(*)</label>
+                                  <label for="">Precio COP(*)</label>
                                   <input type="number" class="form-control" placeholder="Precio" required name="precio" [(ngModel)]="producto.precio">
                               </div>
                               <div class="col-lg-12 form-group">	
-                                  <label for="">Precio dolares(*)</label>
+                                  <label for="">Precio dolares USD(*)</label>
                                   <input type="number" class="form-control" placeholder="Precio" required name="precio_dolar" [(ngModel)]="producto.precio_dolar">
                               </div>
                               <div class="col-lg-12 form-group">	

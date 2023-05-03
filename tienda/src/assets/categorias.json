@@ -1,47 +1,47 @@
 [
     {
-        "titulo":"Polospolo",
-        "slug":"polospolo",
+        "titulo":"Kits Solares",
+        "slug":"Kits_Solares",
         "_id": "1000"
     },
     {
-        "titulo":"Poleras",
-        "slug":"poleras",
+        "titulo":"Para calles",
+        "slug":"para_calles",
         "_id": "1001"
     },
     {
-        "titulo":"Joggers",
-        "slug":"joggers",
+        "titulo":"Para jardines",
+        "slug":"para_jardines",
         "_id": "1004"
     },
     {
-        "titulo":"Shorts",
-        "slug":"shorts",
+        "titulo":"Iluminación Publica",
+        "slug":"iluminacion_publica",
         "_id": "1005"
     },
     {
-        "titulo":"Camisas",
-        "slug":"camisas",
+        "titulo":"Accesorios",
+        "slug":"accesorios",
         "_id": "1002"
     },
     {
-        "titulo":"Casacas",
-        "slug":"casacas",
+        "titulo":"Bateías",
+        "slug":"baterias",
         "_id": "1006"
     },
     {
-        "titulo":"Tops",
-        "slug":"tops",
+        "titulo":"Inversores",
+        "slug":"inversores",
         "_id": "1007"
     },
     {
-        "titulo":"Accesorios",
-        "slug":"camisas",
+        "titulo":"paneles Solares",
+        "slug":"paneles_solares",
         "_id": "1003"
     },
     {
-        "titulo":"Packs",
-        "slug":"packs",
+        "titulo":"Controladores",
+        "slug":"controladores",
         "_id": "1008"
     }
     

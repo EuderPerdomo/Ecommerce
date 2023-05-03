@@ -1,0 +1,139 @@
+<app-sidebar></app-sidebar>
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xl-8">
+
+            <!-- Header -->
+            <div class="header mt-md-5">
+              <div class="header-body">
+                <div class="row align-items-center">
+                  <div class="col">
+
+                    <!-- Pretitle -->
+                    <h6 class="header-pretitle">
+                      Módulo
+                    </h6>
+
+                    <!-- Title -->
+                    <h1 class="header-title">
+                        Productos Usados en la Calculadora Solar
+                    </h1>
+
+                  </div>
+                </div> <!-- / .row -->
+      
+              </div>
+            </div>
+
+            <!-- Alert -->
+
+
+            <!-- Card -->
+            <div class="card">
+              <div class="card-header">
+
+                <!-- Title -->
+                <h4 class="card-header-title">
+                  Mostrando todos los productos configurados para ser usados en la calculadora solar
+                </h4>
+
+              </div>
+              <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group input-group-merge ">
+                                <input type="text" class="form-control form-control-appended" placeholder="Buscar producto" name="filtro" [(ngModel)]="filtro">
+                                <div class="input-group-append">
+                                  <button class="btn btn-primary" (click)="filtrar_producto()">
+                                      Buscar
+                                  </button>
+                                </div>
+                              </div>
+                        </div>
+   
+                    </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm table-nowrap card-table">
+                  <thead>
+                    <tr>
+                      <th>Producto</th>
+                      <th>Tipo</th>
+                      <th>Stock</th>
+                      <th>Opciones</th>
+                    </tr>
+                  </thead>
+                  <tbody class="font-size-base" *ngIf="!load">
+                    <tr *ngFor="let item of productos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                      <td>
+                        <div class="d-flex align-items-center">
+
+                          <!-- Image -->
+                          <div class="avatar mr-3">
+                            <img class="avatar-img rounded me-3 mr-3" [src]="item.portada" alt="...">
+                          </div>
+
+                          <div class="ms-3">
+
+                            <!-- Heading -->
+                            <h4 class="fw-normal mb-1">{{item.titulo}}</h4>
+
+                            <!-- Text -->
+                            <span class="badge badge-success" *ngIf="item.estado == 'Publicado'">{{item.estado}}</span>
+                            <span class="badge badge-warning" *ngIf="item.estado == 'Edicion'">{{item.estado}}</span>
+
+                          </div>
+
+                        </div>
+                      </td>
+                      <td>
+                        {{item.tipo}}
+                      </td>
+                      <td>
+                        {{item.stock}}
+                      </td>
+                      <td>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonAlias" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Opciones
+                          </button>
+                        
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAlias">
+                            <li>
+                              <a class="dropdown-item" [routerLink]="['/agregar_producto_calculadora',item._id]">Editar Parametros</a>
+                            </li>                        
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                   
+                  </tbody>
+                  <tbody *ngIf="load">
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden"></span>
+                            </div>
+                        </td>
+                    </tr>
+                  </tbody>  
+                </table>
+                
+              </div>
+
+            </div>
+                <ngb-pagination *ngIf="productos.length >= 1"
+                        [(page)]="page"
+                        [pageSize]="pageSize"
+                        [maxSize]="10"
+                        [rotate]="true" [boundaryLinks]="true"
+                [collectionSize]="productos.length"></ngb-pagination>
+  
+            <br>
+
+          </div>
+        </div> <!-- / .row -->
+      </div>
+</div>

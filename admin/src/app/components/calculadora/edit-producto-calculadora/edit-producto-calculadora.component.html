@@ -1,0 +1,243 @@
+<app-sidebar></app-sidebar>
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+
+                <!-- Header -->
+                <div class="header mt-md-5">
+                    <div class="header-body">
+                        <div class="row align-items-center">
+                            <div class="col">
+
+                                <!-- Pretitle -->
+                                <h6 class="header-pretitle">
+                                    Módulo
+                                </h6>
+
+                                <!-- Title -->
+                                <h1 class="header-title">
+                                    Productos para Calculadora Solar
+                                </h1>
+
+                            </div>
+                        </div> <!-- / .row -->
+
+                    </div>
+                </div>
+
+                <ng-container *ngIf="!load_data">
+                    <!-- Card -->
+                    <form *ngIf="producto!=undefined">
+                        <div class="card">
+                            <div class="card-header">
+
+                                <!-- Title -->
+                                <h4 class="card-header-title">
+                                    Edición de Caracteristicas: {{producto.titulo}}
+                                </h4>
+
+                            </div>
+
+                            <div *ngIf="!load_data" class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="row">
+                                            <div class="col-12 form-group">
+
+
+
+
+                                                <!--  Inicia Si selecciona un CONTROLADOR -->
+                                                <div class="form" *ngIf="tipo=='controlador'">
+                                                    <div class="row">
+                                                        <!-- Inicio Formulario -->
+                                                        <form #actualizarControladorForm="ngForm"
+                                                            (ngSubmit)="actualizar_controlador(actualizarControladorForm)">
+
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <h4 class="card-header-title text-primary">
+                                                                        Controlador: {{controlador[0].producto.titulo}}
+                                                                    </h4>
+                                                                </div>
+
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 form-group">
+                                                                            <label for="">Tipo De Controlador</label>
+                                                                            <select select
+                                                                                class="form-control custom-select"
+                                                                                id="tipo_controlador"
+                                                                                name="tipo_controlador"
+                                                                                [(ngModel)]="controlador[0].tipo">
+                                                                                <option value="" selected disabled>¿Tipo
+                                                                                    de Controlador?
+                                                                                </option>
+                                                                                <option value="pwm">PWM</option>
+                                                                                <option value="MPPT">MPPT</option>
+                                                                            </select>
+                                                                        </div>
+
+                                                                        <div class="col-lg-12 form-group">
+                                                                            <label for="">Amperaje</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="Amperaje" required
+                                                                                name="amperaje"
+                                                                                [(ngModel)]="controlador[0].amperaje">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <label for="">Arreglo Fotovoltaico Tension (V) /
+                                                                            Potencia (W)</label>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-4 form-group">
+
+                                                                            <label for="">Voltajes</label>
+                                                                            <select class="form-control custom-select"
+                                                                                id="voltaje" name="voltaje"
+                                                                                [(ngModel)]="voltaje">
+                                                                                <option value="" selected disabled>
+                                                                                    -------</option>
+                                                                                <option value="12">12 V</option>
+                                                                                <option value="24">24 V</option>
+                                                                                <option value="48">48 V</option>
+                                                                            </select>
+                                                                        </div>
+
+                                                                        <div class="col-lg-4 form-group">
+                                                                            <label for="">Potencia (W)</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="Potencia" name="potencia"
+                                                                                [(ngModel)]="potencia">
+                                                                        </div>
+
+                                                                        <div class="col-lg-4 form-group">
+
+                                                                            <a type="button"
+                                                                                class="btn btn-success btn-sm"
+                                                                                (click)="addCampo()">Agregar</a>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 form-group"
+                                                                            *ngIf="controlador[0].max_potencia_paneles.length>=1 ">
+                                                                            <div
+                                                                                *ngFor="let item of controlador[0].max_potencia_paneles; let i=index">
+                                                                                <div class="mb-1">
+                                                                                    <span>{{item.voltaje}} V ---
+                                                                                        {{item.potencia}} W </span>
+                                                                                    <a type="button"
+                                                                                        class="btn btn-danger btn-sm"
+                                                                                        (click)="borrar(i)">Eliminar</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <div class="card-footer">
+                                                                    <button class="btn btn-primary btn-shadow"
+                                                                        type="submit">Guardar</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+
+
+
+                                                </div>
+                                                <!-- Finaliza si selecciona Controlador -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="col-lg-12 form-group">
+                                            <img [src]="portada" class="img-thumbnail" alt="Rounded image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ng-container *ngIf="load_data">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <div class="spinner-border" style="width: 3rem; height: 3rem;"
+                                                role="status">
+                                                <span class="visually-hidden"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                        </div>
+                    </form>
+                    <ng-container *ngIf="producto == undefined">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-md-5 col-xl-4 my-5">
+
+                                        <div class="text-center">
+
+                                            <!-- Preheading -->
+                                            <h6 class="text-uppercase text-muted mb-4">
+                                                404 error
+                                            </h6>
+
+                                            <!-- Heading -->
+                                            <h1 class="display-4 mb-3">
+                                                There’s no page here 😭
+                                            </h1>
+
+                                            <!-- Subheading -->
+                                            <p class="text-muted mb-4">
+                                                Looks like you ended up here by accident?
+                                            </p>
+
+                                            <!-- Button -->
+                                            <a [routerLink]="['/productos']" class="btn btn-lg btn-primary">
+                                                Regresar a productos
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container *ngIf="load_data">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+
+
+            </div>
+        </div> <!-- / .row -->
+    </div>
+</div>

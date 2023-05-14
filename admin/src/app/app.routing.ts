@@ -20,6 +20,7 @@ import { ShowVentasComponent } from "./components/ventas/show-ventas/show-ventas
 import { IndexContactoComponent } from "./components/contacto/index-contacto/index-contacto.component";
 import { AgregarProductosCalculadoraComponent } from "./components/calculadora/agregar-productos-calculadora/agregar-productos-calculadora.component";
 import { DashboardCalculadoraComponent } from "./components/calculadora/dashboard-calculadora/dashboard-calculadora.component";
+import { EditProductoCalculadoraComponent } from "./components/calculadora/edit-producto-calculadora/edit-producto-calculadora.component";
 
 const appRoute : Routes = [
     {path: '', redirectTo: 'login', pathMatch : 'full'},
@@ -53,6 +54,7 @@ const appRoute : Routes = [
     /*PRODUCTOS CALCULADORA */
     {path: 'dashboard_calculadora', component:DashboardCalculadoraComponent, canActivate:[AuthGuard]},
     {path: 'agregar_producto_calculadora/:id', component:AgregarProductosCalculadoraComponent, canActivate:[AuthGuard]},
+    {path: 'editar_producto_calculadora/:id/:tipo', component:EditProductoCalculadoraComponent, canActivate:[AuthGuard]},
      /*Finaliza Productos Calculadora */
 
 

@@ -30,6 +30,7 @@ import { CreateVentasComponent } from './components/ventas/create-ventas/create-
 import { IndexContactoComponent } from './components/contacto/index-contacto/index-contacto.component';
 import { AgregarProductosCalculadoraComponent } from './components/calculadora/agregar-productos-calculadora/agregar-productos-calculadora.component';
 import { DashboardCalculadoraComponent } from './components/calculadora/dashboard-calculadora/dashboard-calculadora.component';
+import { EditProductoCalculadoraComponent } from './components/calculadora/edit-producto-calculadora/edit-producto-calculadora.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { DashboardCalculadoraComponent } from './components/calculadora/dashboar
     CreateVentasComponent,
     IndexContactoComponent,
     AgregarProductosCalculadoraComponent,
-    DashboardCalculadoraComponent
+    DashboardCalculadoraComponent,
+    EditProductoCalculadoraComponent
   ],
   imports: [
     BrowserModule,

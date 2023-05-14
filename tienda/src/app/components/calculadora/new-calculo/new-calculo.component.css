@@ -63,3 +63,40 @@
       font-size:20px;
       font-family: 'Courier New', Courier, monospace;
   }
+
+/*Inicia arreglo calculadora*/
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: #fff;
+    color: black;
+    font-family: roboto, sans-serif;
+}
+
+
+.contenedor{
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    display: grid;
+    grid-gap:20px;
+    grid-template-columns: repeat(1,1fr);
+    grid-template-rows: repeat(2,auto);
+    grid-template-areas:"contenido"
+                        "indicador_paso";
+}
+
+.contenedor .contenido{
+    /*background: #12203E;*/
+    color: #fff;
+    grid-area: contenido;
+}
+
+.contenedor .indicador_paso{
+    /*background: #12203E;*/
+    color: #fff;
+    grid-area: indicador_paso;
+}

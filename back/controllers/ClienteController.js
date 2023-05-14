@@ -12,7 +12,10 @@ var Producto = require('../models/Producto');
 var jwt = require('../helpers/jwt');
 
 var Categoria=require('../models/Categoria')//Agrego la categoria
-
+//Calculadora solar
+var Paneles_Solares=require('../models/panel_solar')
+var Controladores_Solares=require('../models/controlador')
+var Baterias_Solares=require('../models/bateria')
 
 var fs = require('fs');
 var handlebars = require('handlebars');
@@ -616,7 +619,25 @@ const enviar_orden_compra = async function(venta){
     }
 } 
 
+//Consultas desde la calculadora
+const consultar_paneles=async function(req,res){
 
+    //let arr_data = [];
+    let reg = await Paneles_Solares.find().sort().populate('producto');
+    res.status(200).send({data: reg});
+}
+
+const listar_controladores = async function(req,res){
+    //let arr_data = [];
+    let reg = await Controladores_Solares.find().sort().populate('producto');
+    res.status(200).send({data: reg});
+}
+
+const listar_baterias= async function(req,res){
+    //let arr_data = [];
+    let reg = await Baterias_Solares.find().sort().populate('producto');
+    res.status(200).send({data: reg});
+}
 module.exports = {
     registro_cliente_tienda,
     listar_clientes_tienda,
@@ -647,5 +668,10 @@ module.exports = {
     registro_compra_cliente,
     obtener_reviews_cliente,
     enviar_mensaje_contacto,
-    get_categorias_publico //Listar categorias publico
+    get_categorias_publico, //Listar categorias publico
+
+    //Para calculadora soalr
+    consultar_paneles,
+    listar_controladores,
+    listar_baterias,
 }

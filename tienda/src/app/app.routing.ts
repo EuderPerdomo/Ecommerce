@@ -56,8 +56,6 @@ const appRoute : Routes = [
 
     //Blog
     {path: 'blog', component: BlogComponent},
-
-
     {path: '**', component: NotfoundComponent}
 
 

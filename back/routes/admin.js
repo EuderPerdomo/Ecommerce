@@ -64,9 +64,11 @@ api.post('/registro_inversor_calculadora_admin',auth.auth,AdminController.regist
 api.post('/registro_panel_calculadora_admin',auth.auth,AdminController.registro_panel_calculadora_admin)
 
 api.get('/listar_productos_calculadora_admin',auth.auth,AdminController.listar_productos_calculadora_admin);
+api.get('/obtener_producto_calculadora_admin/:id/:tipo',auth.auth,AdminController.obtener_producto_calculadora_admin);
+api.put('/actualizar_controlador_calculadora_admin/:id',[auth.auth,path],AdminController.actualizar_controlador_calculadora_admin);
+
 
 api.get('/consulta_Pvgis/:lat/:lon/:peakpower/:atterysize/:consumptionday/:cutoff',AdminController.consulta_Pvgis)
-//lat:any,lon:any,peakpower:any,atterysize:any,consumptionday:any,cutoff:any
-//api.get('/listar_productos_recomendados_publico/:categoria',clienteController.listar_productos_recomendados_publico);
+api.get('/consulta_hsp/:lat/:lon/:angle',AdminController.consulta_hsp)
 
 module.exports = api;

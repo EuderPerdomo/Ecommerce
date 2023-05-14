@@ -10,6 +10,9 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { NavComponent } from './components/nav/nav.component';
 import { NgbModule,NgbPaginationModule  } from "@ng-bootstrap/ng-bootstrap";
 
+//NgxChartsModule
+import{NgxChartsModule} from "@swimlane/ngx-charts"
+
 //Translation
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -80,6 +83,7 @@ import { NewCalculoComponent } from './components/calculadora/new-calculo/new-ca
     HttpClientModule,
     NgbPaginationModule,
     RatingModule,
+    NgxChartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

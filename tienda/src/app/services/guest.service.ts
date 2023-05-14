@@ -261,17 +261,35 @@ export class GuestService {
     .set('Authorization','Bearer TEST-5855583832607988-080416-903c28c4a3ed7cd71e77d3cff2e7dc8f-216351469');
     return this._http.post('https://api.mercadopago.com/checkout/preferences',data,{headers:headers});
 }
-//Calculadora
-
+//Inicia Calculadora
+//Consulta datos PVGIS
 consulta_Pvgis(lat:any,lon:any,peakpower:any,atterysize:any,consumptionday:any,cutoff:any):Observable<any>{
   let headers = new HttpHeaders().set('Content-Type','application/json');
   console.log('paso por servicio', this.url+'consulta_Pvgis/'+lat+'/'+lon+'/'+peakpower+'/'+atterysize+'/'+consumptionday+'/'+cutoff)
  return this._http.get(this.url+'consulta_Pvgis/'+lat+'/'+lon+'/'+peakpower+'/'+atterysize+'/'+consumptionday+'/'+cutoff,{headers:headers});
- //return this._http.get(this.url+'listar_productos_recomendados_publico/'+categoria,{headers:headers});
- //return this._http.get('https://re.jrc.ec.europa.eu/api/SHScalc?lat=45&lon=8&peakpower=500&batterysize=50&consumptionday=200&cutoff=40&outputformat=json',{headers:headers});
  
 }
+// Consulta de horas sol pico a pvgis
+consulta_hsp(lat:any,lon:any,angle:any):Observable<any>{
+  let headers = new HttpHeaders().set('Content-Type','application/json');
+ return this._http.get(this.url+'consulta_hsp/'+lat+'/'+lon+'/'+angle,{headers:headers})
+}
 
+//Traer Paneles solares usados apra calculadora
+consultar_paneles():Observable<any>{
+  let headers = new HttpHeaders().set('Content-Type','application/json');
+ return this._http.get(this.url+'consultar_paneles',{headers:headers})
+}
 
+listar_controladores():Observable<any>{
+  let headers = new HttpHeaders().set('Content-Type','application/json');
+ return this._http.get(this.url+'listar_controladores',{headers:headers})
+}
+
+listar_baterias():Observable<any>{
+  let headers = new HttpHeaders().set('Content-Type','application/json');
+ return this._http.get(this.url+'listar_baterias',{headers:headers})
+}
+//Finaliza Calculadora
 
 }

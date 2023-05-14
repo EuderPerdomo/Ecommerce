@@ -985,92 +985,59 @@ listar_productos_calculadora_admin = async function(req,res){
     } 
 }
 
-/*
-//consulta_Pvgis =  function(req,res){
-const https = require('https')
 
-const options = {
-  hostname: 'encrypted.google.com',
-  port: 443,
-  path: '/',
-  method: 'GET'
-};
+obtener_producto_calculadora_admin = async function(req,res){
+    var id = req.params['id'];
+    if(req.user){
+        if(req.params.tipo=='controlador'){
+            console.log(id)
+            try {
+                var reg = await controlador.find({producto:id}).populate('producto');
+                res.status(200).send({data:reg});
+            } catch (error) {
+                res.status(200).send({data:undefined});
+            }
 
-const consulta_Pvgis = () => {
-  return new Promise((response, reject) => {
-  //let result = https.request(options, res => {
-    let result = https.request('https://re.jrc.ec.europa.eu/api/SHScalc?lat=4.58&lon=-74.220&peakpower=500&batterysize=500&consumptionday=2000&cutoff=40&outputformat=json', res => {
-    console.log('in here');
-    console.log(`statusCode: ${res.statusCode}`);
-
-            let data;
-            res.on('data', d => {
-                data += d;
-                // process.stdout.write(d)
-             })
-  
-  
-             res.on('error', error => {
-              console.error(error);
-              reject(error);
-            })
-  
-            res.on("end", d => {
-              response(data);
-            });
-   })
-   result.end();
-  })
-}
-consulta_Pvgis().then(data => { console.log('la daat',data,'despues de la data')}).catch(console.log);
-//}
-*/
-
-//Consulta pvgis
-/*
-consulta_Pvgis =  function(req,res){
-console.log('llego a aback')
-
-    console.log('datos para la consulta pvgis',req.params)
-    lat=req.params.lat
-    lon=req.params.lon
-    peakpower=req.params.peakpower
-    atterysize=req.params.atterysize
-    consumptionday=req.params.consumptionday
-    cutoff=req.params.cutoff
-
-
-         const https = require("https")
-        const ruta='https://re.jrc.ec.europa.eu/api/PVcalc?lat='+lat+'&lon='+lon+'&peakpower='+peakpower+'&loss='+40+'&outputformat=json'
-
-         //Por sencillez, retiramos el wrapper de la promesa.
-        // https.get("https://re.jrc.ec.europa.eu/api/PVcalc?lat=45&lon=8&peakpower=500&loss=40&outputformat=json", res => {
-            https.get(ruta, res => {
-           let data = ""
+        }
         
-           res.on("data", d => {
-             data += d
-           })
-           res.on("end", () => {
-            response(data)
-             console.log(data)          
-             //Llamar a un Callback o resolver la promera aquí.
-           })
-         })
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    } 
 }
-*/
+
+const actualizar_controlador_calculadora_admin = async function(req,res){
+    if(req.user){
+        let id = req.params['id'];
+        let data = req.body;
+        if(req.files){            
+        }else{
+            //NO HAY IMAGEN
+           let reg = await controlador.findByIdAndUpdate({_id:id},{
+               producto: data.producto,
+               tipo: data.tipo,
+               amperaje: data.amperaje,
+               max_potencia_paneles:data.max_potencia_paneles
+
+           });
+           res.status(200).send({data:reg});
+        }
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
 
 
+
+//Peticiones API
 consulta_Pvgis=function(req,res){
     lat=req.params.lat
     lon=req.params.lon
     peakpower=req.params.peakpower
-    atterysize=req.params.atterysize
+    batterysize=req.params.atterysize
     consumptionday=req.params.consumptionday
     cutoff=req.params.cutoff
 
-    //const ruta='https://re.jrc.ec.europa.eu/api/PVcalc?lat=45&lon=8&peakpower=500&loss=40&outputformat=json'
-    const ruta='https://re.jrc.ec.europa.eu/api/PVcalc?lat='+lat+'&lon='+lon+'&peakpower='+peakpower+'&loss='+40+'&outputformat=json'
+    const ruta='https://re.jrc.ec.europa.eu/api/SHScalc?lat='+lat+'&lon='+lon+'&peakpower='+peakpower+'&batterysize='+batterysize+'&consumptionday='+consumptionday+'&cutoff='+cutoff+'&outputformat=json'
 const promesa=new Promise((resolve,reject)=>{
 
     https.get(ruta, res => {
@@ -1080,6 +1047,7 @@ const promesa=new Promise((resolve,reject)=>{
           data += d
         })
         res.on("end", () => {
+            console.log(data)
          resolve(data)
         })
       })
@@ -1090,11 +1058,37 @@ promesa.then(respuesta=>{
    //res.status(200).send({data:respuesta})
 })
 .catch(error=>{
-    res.status(500).send({message:'Error al realizar la consulta'})
+    res.status(500).send({message:'Error al realizar la consulta de eficiencias'})
 })
 }
 
-
+//Inicia consulta de HSP
+consulta_hsp=function(req,res){
+    lat=req.params.lat
+    lon=req.params.lon
+    angle=req.params.angle
+//https://re.jrc.ec.europa.eu/api/MRcalc?lat=45&lon=8&horirrad=1&outputformat=json&startyear=2016
+    const ruta='https://re.jrc.ec.europa.eu/api/MRcalc?lat='+lat+'&lon='+lon+'&selectrad=1'+'&angle='+angle+'&outputformat=json&startyear=2015'
+    const promesa=new Promise((resolve,reject)=>{
+        https.get(ruta, res => {
+            let data = ""
+            res.on("data", d => {
+              data += d
+            })
+            res.on("end", () => {
+                console.log(data)
+             resolve(data)
+            })
+          })
+        })
+    
+    promesa.then(respuesta=>{
+       res.status(200).send({data:JSON.parse(respuesta)})
+    })
+    .catch(error=>{
+        res.status(500).send({message:'Error al realizar la consulta de HSP'})
+    })
+}
 
 /**Finaliza Calculadora Solar */
 
@@ -1142,6 +1136,11 @@ module.exports = {
     registro_controlador_calculadora_admin,
     registro_panel_calculadora_admin,
     registro_inversor_calculadora_admin,
+
     listar_productos_calculadora_admin,
+    obtener_producto_calculadora_admin,
+    actualizar_controlador_calculadora_admin,
+
     consulta_Pvgis,
+    consulta_hsp,
 }

@@ -333,9 +333,20 @@ registro_inversor_calculadora_admin(data:any,token:any):Observable<any>{
 }
 
 listar_productos_calculadora_admin(token:any):Observable<any>{
-  console.log('paso por servicio')
   let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
   return this._http.get(this.url + 'listar_productos_calculadora_admin',{headers:headers});
+}
+
+
+obtener_producto_calculadora_admin(id:any,token:any,tipo:any):Observable<any>{
+  console.log('servicio')
+  let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+  return this._http.get(this.url + 'obtener_producto_calculadora_admin/'+id+'/'+tipo,{headers:headers});
+}
+
+actualizar_controlador_calculadora_admin(id: any, data: any, token: any): Observable<any> {
+  let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token })
+  return this._http.put(this.url + 'actualizar_controlador_calculadora_admin/' + id, data, { headers: headers })
 }
 
 /**Finaliza  Calculadora */

@@ -46,6 +46,7 @@ init_data(){
       response=>{
         this.productos_const = response.data;
         this.productos= this.productos_const;
+        console.log('Productos',this.productos)
         this.load = false;
       }
     );

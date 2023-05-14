@@ -215,19 +215,6 @@ consulta_pvgis(){
     cutoff:40,
   };
 
-
-
-  const date=[{lat:45},12,18,29,30,35]
-      
-
-  
-      // lat=45
-      // lon=8
-      // peakpower=500
-      // batterysize=50
-      // consumptionday=200
-      // cutoff=40
-      // outputformat=json
 const lat=45
 const lon=22
 const peakpower=500

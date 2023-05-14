@@ -41,4 +41,8 @@ api.post('/registro_compra_cliente',auth.auth,clienteController.registro_compra_
 api.get('/obtener_reviews_cliente/:id',auth.auth,clienteController.obtener_reviews_cliente);
 api.post('/enviar_mensaje_contacto',clienteController.enviar_mensaje_contacto);
 
+//Consultas desde nuevo calculo, calculadora
+api.get('/consultar_paneles',clienteController.consultar_paneles);
+api.get('/listar_controladores',clienteController.listar_controladores)
+api.get('/listar_baterias',clienteController.listar_baterias)
 module.exports = api;

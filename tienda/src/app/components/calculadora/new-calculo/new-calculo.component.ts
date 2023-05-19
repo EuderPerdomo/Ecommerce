@@ -20,14 +20,15 @@ export class NewCalculoComponent implements OnInit {
   showXAxis = true;
   showYAxis = true;
   gradient = false;
-  showLegend = true;
+  showLegend = false;
   showXAxisLabel = true;
   xAxisLabel = 'Mes';
   showYAxisLabel = true;
   yAxisLabel = 'Producción Wh/d';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'], 
+    // domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'], 
+    domain: ['#5AA454'],
     group: ScaleType.Ordinal,
     selectable: true, 
     name: 'Customer Usage',
@@ -50,7 +51,7 @@ public htmlStr:String
 
 
 //Iniciamos añadir los nuevos
-public nombre_cliente='juan'
+public nombre_cliente='Iluminación arias comunes Iglesia Pandi Cundinamarca'
 public watts_totales=''
 
 //Datos en edicion
@@ -80,12 +81,15 @@ public controladores_bd:Array<any>=[]
 //Paso 4, paneles solares
 public panel=0
 public portada_panel=''
+public descripcion_panel=''
 
 //Paso 5, Baterias
 public amperaje=0
 public profundidad=0
 public dias=0
 public baterias_bd:Array<any>=[]
+public portada_bateria=''
+public descripcion_bateria=''
 //Finaliza añadir los nuevos
 
 ///Obtencion de datos desde PVGIS
@@ -105,6 +109,8 @@ public paneles_bd:Array<any>=[]
 public amperios_necesarios=0
 public baterias=0
 public batterysize=500
+public baterias_paralelo=0
+public baterias_serie=0
 
 //Ubicacion
 public longitud=-74.220
@@ -116,8 +122,13 @@ public inversores_bd:Array<any>=[]
 //Poyecto
 public proyecto_nombre='Default Name'
 
+
 //Cuando ya se consultaron datos de PVGIS
 calc_pvgis_onload=false
+
+public posicion=0
+
+
 
   constructor(
     private _guestService:GuestService,
@@ -149,6 +160,11 @@ calc_pvgis_onload=false
 
 
 
+
+
+
+
+
  
 showTab(n:any) {
     // This function will display the specified tab of the form...
@@ -157,10 +173,8 @@ showTab(n:any) {
 
     const el = document.getElementById(n);
     if (el != null){
-      console.log('Asignando')
-      el.style.display = 'block';
+    el.style.display = 'block';
     }
-    console.log(el)
    if (n == 0) {
     this.displayPrevBtn = "none";
    } else {
@@ -176,6 +190,20 @@ showTab(n:any) {
   }
 
 nextPrev(n:any) {
+
+if(this.posicion + n <= 0){
+this.posicion=0
+console.log(this.posicion)
+}else if(this.posicion + n >= 5){
+  this.posicion=5
+}else{
+  this.posicion=this.posicion+n
+  console.log(this.posicion)
+}
+  
+
+
+  /*
     // This function will figure out which tab to display
     var x = document.getElementsByClassName("tab");
     const el = document.getElementById(this.currentTab.toString());
@@ -196,6 +224,8 @@ nextPrev(n:any) {
     }
     this.showTab(this.currentTab);
     return false
+*/
+
   }
 
 validateForm() {
@@ -399,7 +429,7 @@ const data:any=[]//Array<any>= []
 
 console.log('el minimo de radiacion es',peor_escenario)
 //this.calcularPaneles(peor_escenario)
-this.horas_sol_pico=peor_escenario
+this.horas_sol_pico=Math.round(peor_escenario) 
 
       },
       error=>{
@@ -421,7 +451,9 @@ console.log('Potencia arreglo de panels',this.peakpower,this.numero_paneles)
 //Finaliza calcular paneles
 
 //Inicia calcular Baterias
-calcularBaterias(){
+calcularBaterias(voltaje:any,amperaje:any){
+
+  console.log('Parametro srecibidos en baterias',voltaje,amperaje)
 /**
  * Primero:
  * Amperios_necesarios
@@ -452,10 +484,10 @@ console.log('Los amperios necesarios son:',this.amperios_necesarios)
 let capacidad_bateria=100
 let voltaje_bateria=12
 
-let baterias_paralelo=this.amperios_necesarios/capacidad_bateria
-let baterias_serie=voltaje_controlador/voltaje_bateria
+this.baterias_paralelo=Math.round(this.amperios_necesarios/capacidad_bateria)
+this.baterias_serie=Math.round(voltaje_controlador/voltaje_bateria)
 
-this.baterias=Math.round(baterias_paralelo*baterias_serie)
+this.baterias=Math.round(this.baterias_paralelo*this.baterias_serie)
 
 this.batterysize=(capacidad_bateria*voltaje_bateria)*this.baterias
 
@@ -543,11 +575,12 @@ listar_controladores(){
 listar_baterias(){
   this._guestService.listar_baterias().subscribe(
     response=>{
-      console.log('Controladores consultados',response.data);
+      console.log('Baterias consultados',response.data);
       this.baterias_bd=response.data
+      console.log(this.baterias_bd)
     },
     error=>{
-      console.log('Error en la consulta de Controladores')
+      console.log('Error en la consulta de Baterias')
     }
   );
 }
@@ -560,10 +593,23 @@ for (let clave of this.paneles_bd){
   if(_id==clave['_id']){
     console.log('clave valor',clave['producto'].portada,clave['potencia']);
     this.portada_panel=clave['producto'].portada
+    this.descripcion_panel=clave['producto'].contenido
     this.calcularPaneles(clave['potencia'])
   }
   }
 }
+
+buscar_imagen_bateria(_id:any){
+  console.log('Buscar imagen bateria',_id)
+  for (let clave of this.baterias_bd){
+    if(_id==clave['_id']){
+      console.log('clave valor',clave['producto'].portada,clave['potencia']);
+      this.portada_bateria=clave['producto'].portada
+      this.descripcion_bateria=clave['producto'].contenido
+      this.calcularBaterias(clave['voltaje'],clave['amperaje'])
+    }
+    }
+  }
 
 //Finaliza traer paneles para la calculadora
 

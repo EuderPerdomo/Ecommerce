@@ -255,7 +255,6 @@
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <div class="row">
-
                                                                         <div class="col-lg-6 form-group">
                                                                             <label for="">Potencia</label>
                                                                             <input type="number" class="form-control"
@@ -263,7 +262,6 @@
                                                                                 name="potencia"
                                                                                 [(ngModel)]="inversor.potencia">
                                                                         </div>
-
                                                                         <div class="col-lg-6 form-group">
                                                                             <label for="">Voltaje de Entrada DC</label>
                                                                             <input type="number" class="form-control"
@@ -272,10 +270,8 @@
                                                                                 [(ngModel)]="inversor.entrada_dc">
                                                                         </div>
                                                                     </div>
-
                                                                     <!--  -->
                                                                     <div class="row">
-
                                                                         <div class="col-lg-4 form-group">
                                                                             <label for="">Voltajes de Salida</label>
                                                                             <input type="number" class="form-control"
@@ -283,14 +279,11 @@
                                                                                 name="voltaje_salida_inversor_ac"
                                                                                 [(ngModel)]="voltaje_salida_inversor_ac">
                                                                         </div>
-
                                                                         <div class="col-lg-4 form-group">
                                                                             <a type="button"
                                                                                 class="btn btn-success btn-shadow"
                                                                                 (click)="addVoltaje_Salida_Inversor()">Agregar</a>
-
                                                                         </div>
-
                                                                         <div class="col-lg-4 form-group"
                                                                             *ngIf="inversor.salida_ac.length>=1 ">
                                                                             <div
@@ -300,18 +293,11 @@
                                                                                     <a type="button"
                                                                                         class="btn btn-danger btn-sm"
                                                                                         (click)="borrar_salida_inversor(i)">Eliminar</a>
-
                                                                                 </div>
-
                                                                             </div>
-
                                                                         </div>
-
-
                                                                     </div>
                                                                     <!--  -->
-
-
                                                                 </div>
 
                                                                 <div class="card-footer">
@@ -324,7 +310,6 @@
                                                         <!-- Fin formulario -->
                                                     </div>
                                                 </div>
-
                                                 <!-- Finaliza si selecciona un Inversor -->
 
                                                 <!-- Inicia Si selecciona Bateria -->

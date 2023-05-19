@@ -349,6 +349,20 @@ actualizar_controlador_calculadora_admin(id: any, data: any, token: any): Observ
   return this._http.put(this.url + 'actualizar_controlador_calculadora_admin/' + id, data, { headers: headers })
 }
 
+actualizar_panel_calculadora_admin(id: any, data: any, token: any): Observable<any> {
+  let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token })
+  return this._http.put(this.url + 'actualizar_panel_calculadora_admin/' + id, data, { headers: headers })
+}
+
+actualizar_inversor_calculadora_admin(id: any, data: any, token: any): Observable<any> {
+  let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token })
+  return this._http.put(this.url + 'actualizar_inversor_calculadora_admin/' + id, data, { headers: headers })
+}
+
+actualizar_bateria_calculadora_admin(id: any, data: any, token: any): Observable<any> {
+  let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token })
+  return this._http.put(this.url + 'actualizar_bateria_calculadora_admin/' + id, data, { headers: headers })
+}
 /**Finaliza  Calculadora */
 
 

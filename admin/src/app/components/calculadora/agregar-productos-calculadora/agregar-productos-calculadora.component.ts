@@ -134,7 +134,15 @@ export class AgregarProductosCalculadoraComponent implements OnInit {
         this._router.navigate(['/dashboard_calculadora']);
       },
       error=>{
-        // this.load_btn = false;
+        iziToast.show({
+          title: 'ERROR',
+          titleColor: '#FF0000',
+          color: '#FFF',
+          class: 'text-danger',
+          position: 'topRight',
+          message: error.error.message
+      });
+
       }
     )
   }

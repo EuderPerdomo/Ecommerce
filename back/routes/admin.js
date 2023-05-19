@@ -65,7 +65,11 @@ api.post('/registro_panel_calculadora_admin',auth.auth,AdminController.registro_
 
 api.get('/listar_productos_calculadora_admin',auth.auth,AdminController.listar_productos_calculadora_admin);
 api.get('/obtener_producto_calculadora_admin/:id/:tipo',auth.auth,AdminController.obtener_producto_calculadora_admin);
+
 api.put('/actualizar_controlador_calculadora_admin/:id',[auth.auth,path],AdminController.actualizar_controlador_calculadora_admin);
+api.put('/actualizar_panel_calculadora_admin/:id',[auth.auth,path],AdminController.actualizar_panel_calculadora_admin);
+api.put('/actualizar_inversor_calculadora_admin/:id',[auth.auth,path],AdminController.actualizar_inversor_calculadora_admin);
+api.put('/actualizar_bateria_calculadora_admin/:id',[auth.auth,path],AdminController.actualizar_bateria_calculadora_admin);
 
 
 api.get('/consulta_Pvgis/:lat/:lon/:peakpower/:atterysize/:consumptionday/:cutoff',AdminController.consulta_Pvgis)

@@ -18,7 +18,7 @@
 
                                 <!-- Title -->
                                 <h1 class="header-title">
-                                    Productos para Calculadora Solar
+                                    Editar Producto Calculadora Solar
                                 </h1>
 
                             </div>
@@ -156,6 +156,236 @@
 
                                                 </div>
                                                 <!-- Finaliza si selecciona Controlador -->
+
+
+                                                <!--  Inicia Si selecciona un Panel solar -->
+                                                <div class="form" *ngIf="tipo=='panel_solar'">
+                                                    <div class="row">
+                                                        <!-- Inicio Formulario -->
+                                                        <form #actualizarPanelForm="ngForm"
+                                                            (ngSubmit)="actualizar_panel(actualizarPanelForm)">
+
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <h4 class="card-header-title text-primary">
+                                                                        Modelo: {{panel_solar[0].producto.titulo}}
+                                                                    </h4>
+                                                                </div>
+
+                                                                <div class="card-body">
+                                                                    <div class="row">
+
+                                                                        <div class="col-lg-6 form-group">
+                                                                            <label for="">Voltaje en Circuito Abierto
+                                                                                VOC</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="VOC" required name="voc"
+                                                                                [(ngModel)]="panel_solar[0].voc">
+                                                                        </div>
+
+                                                                        <div class="col-lg-6 form-group">
+                                                                            <label for="">Intensidad a Maxima Potencia
+                                                                                IMP</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="imp" required name="imp"
+                                                                                [(ngModel)]="panel_solar[0].imp">
+                                                                        </div>
+
+                                                                        <div class="col-lg-6 form-group">
+                                                                            <label for="">Voltaje a maxima Potencia
+                                                                                (VMP)</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="vmp" required name="vmp"
+                                                                                [(ngModel)]="panel_solar[0].vmp">
+                                                                        </div>
+
+                                                                        <div class="col-lg-6 form-group">
+                                                                            <label for="">Intensidad en Corto Circuito
+                                                                                (ISC)</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="isc" required name="isc"
+                                                                                [(ngModel)]="panel_solar[0].isc">
+                                                                        </div>
+
+                                                                        <div class="col-lg-6 form-group">
+                                                                            <label for="">Eficiencia (%)</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="eficiencia" required
+                                                                                name="eficiencia"
+                                                                                [(ngModel)]="panel_solar[0].eficiencia">
+                                                                        </div>
+
+                                                                        <div class="col-lg-6 form-group">
+                                                                            <label for="">Tensión de Trabajo</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="tension" required
+                                                                                name="tension"
+                                                                                [(ngModel)]="panel_solar[0].tension">
+                                                                        </div>
+
+                                                                        <div class="col-lg-6 form-group">
+                                                                            <label for="">potencia (W)</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="potencia" required
+                                                                                name="potencia"
+                                                                                [(ngModel)]="panel_solar[0].potencia">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <div class="card-footer">
+                                                                    <button class="btn btn-primary btn-shadow"
+                                                                        type="submit">Guardar</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+
+
+
+                                                </div>
+                                                <!-- Finaliza si selecciona Panel Solar -->
+
+                                                <!-- Inicia Si selecciona un Inversor -->
+                                                <div class="form" *ngIf="tipo=='inversor'">
+                                                    <div class="row">
+
+                                                        <!-- Inicio Formulario -->
+                                                        <form #actualizarInversorForm="ngForm"
+                                                            (ngSubmit)="actualizarInversor(actualizarInversorForm)">
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <h4 class="card-header-title">
+                                                                        Inversor
+                                                                    </h4>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6 form-group">
+                                                                            <label for="">Potencia</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="potencia" required
+                                                                                name="potencia"
+                                                                                [(ngModel)]="inversor[0].potencia">
+                                                                        </div>
+                                                                        <div class="col-lg-6 form-group">
+                                                                            <label for="">Voltaje de Entrada DC</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="Voltaje de entrada en DC"
+                                                                                required name="entrada_dc"
+                                                                                [(ngModel)]="inversor[0].entrada_dc">
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--  -->
+                                                                    <div class="row">
+                                                                        <div class="col-lg-4 form-group">
+                                                                            <label for="">Voltajes de Salida</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="Voltaje Salida AC"
+                                                                                name="voltaje_salida_inversor_ac"
+                                                                                [(ngModel)]="voltaje_salida_inversor_ac">
+                                                                        </div>
+                                                                        <div class="col-lg-4 form-group">
+                                                                            <a type="button"
+                                                                                class="btn btn-success btn-shadow"
+                                                                                (click)="addVoltaje_Salida_Inversor()">Agregar</a>
+                                                                        </div>
+                                                                        <div class="col-lg-4 form-group"
+                                                                            *ngIf="inversor[0].salida_ac.length>=1 ">
+                                                                            <div
+                                                                                *ngFor="let item of inversor[0].salida_ac; let i=index">
+                                                                                <div class="mb-1">
+                                                                                    <span>{{item}} V </span>
+                                                                                    <a type="button"
+                                                                                        class="btn btn-danger btn-sm"
+                                                                                        (click)="borrar_salida_inversor(i)">Eliminar</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--  -->
+                                                                </div>
+
+                                                                <div class="card-footer">
+                                                                    <button class="btn btn-primary btn-shadow"
+                                                                        type="submit">Guardar</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+                                                        <!-- Fin formulario -->
+                                                    </div>
+                                                </div>
+                                                <!-- Finaliza si selecciona un Inversor -->
+
+                                                <!-- Inicia Si selecciona Bateria -->
+                                                <div class="form" *ngIf="tipo=='bateria'">
+                                                    <div class="row">
+
+                                                        <!-- Inicio Formulario -->
+                                                        <form #actualizarBateriaForm="ngForm"
+                                                            (ngSubmit)="actualizarBateria(actualizarBateriaForm)">
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <h4 class="card-header-title">
+                                                                        Baterías
+                                                                    </h4>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="row">
+
+                                                                        <div class="col-lg-6 form-group">
+                                                                            <label for="">Voltaje</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="Voltaje" required
+                                                                                name="voltaje"
+                                                                                [(ngModel)]="bateria.voltaje">
+                                                                        </div>
+
+                                                                        <div class="col-lg-6 form-group">
+                                                                            <label for="">Amperaje</label>
+                                                                            <input type="number" class="form-control"
+                                                                                placeholder="Amperaje" required
+                                                                                name="amperaje"
+                                                                                [(ngModel)]="bateria.amperaje">
+                                                                        </div>
+
+                                                                        <div class="col-lg-6 form-group">
+                                                                            <label for="">Tecnología de la
+                                                                                Bateria</label>
+                                                                            <select class="form-control custom-select"
+                                                                                id="tecnologia_bateria" required
+                                                                                name="tecnologia_bateria"
+                                                                                [(ngModel)]="bateria.tecnologia">
+                                                                                <option value="" selected disabled>
+                                                                                    ------------</option>
+                                                                                <option value="agm">AGM</option>
+                                                                                <option value="gel">GEL</option>
+                                                                                <option value="lifepo4">LiFePO4</option>
+                                                                                <option value="otra">Otra</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="card-footer">
+                                                                    <button class="btn btn-primary btn-shadow"
+                                                                        type="submit">Guardar</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+                                                        <!-- Fin formulario -->
+                                                    </div>
+                                                </div>
+
+                                                <!-- Finaliza si selecciona Bateria -->
+
+
 
                                             </div>
                                         </div>

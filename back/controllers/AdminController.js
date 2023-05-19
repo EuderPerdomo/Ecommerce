@@ -953,8 +953,17 @@ const registro_controlador_calculadora_admin = async function(req,res){
 const registro_panel_calculadora_admin = async function(req,res){
     if(req.user){
         let data = req.body;
-        var reg = await panel_solar.create(data);
-        res.status(200).send({data:reg});
+        console.log('panel que se creara',data)
+        var buscar = await panel_solar.find({producto:data.producto})
+        if(buscar==undefined){
+            var reg = await panel_solar.create(data);
+            res.status(200).send({data:reg});
+        }else{
+            console.log('ya existe el registro')
+            res.status(500).send({message: 'Ya se registraron parametros para este panel solar'});
+        }
+
+       
     }else{
         res.status(500).send({message: 'NoAccess'});
     }
@@ -999,6 +1008,37 @@ obtener_producto_calculadora_admin = async function(req,res){
             }
 
         }
+
+        if(req.params.tipo=='panel_solar'){
+            console.log(id)
+            try {
+                var reg = await panel_solar.find({producto:id}).populate('producto');
+                res.status(200).send({data:reg});
+            } catch (error) {
+                res.status(200).send({data:undefined});
+            }
+
+        }
+
+        if(req.params.tipo=='inversor'){
+            console.log(id)
+            try {
+                var reg = await inversor.find({producto:id}).populate('producto');
+                res.status(200).send({data:reg});
+            } catch (error) {
+                res.status(200).send({data:undefined});
+            }
+        }
+
+        if(req.params.tipo=='bateria'){
+            console.log(id)
+            try {
+                var reg = await bateria.find({producto:id}).populate('producto');
+                res.status(200).send({data:reg});
+            } catch (error) {
+                res.status(200).send({data:undefined});
+            }
+        }
         
     }else{
         res.status(500).send({message: 'NoAccess'});
@@ -1026,7 +1066,72 @@ const actualizar_controlador_calculadora_admin = async function(req,res){
     }
 }
 
+const actualizar_panel_calculadora_admin = async function(req,res){
+    if(req.user){
+        let id = req.params['id'];
+        let data = req.body;
 
+        console.log('actualizar panel',id)
+
+           let reg = await panel_solar.findByIdAndUpdate({_id:id},{
+            //producto: data.producto,
+            vmp:data.vmp,
+            imp:data.imp,
+            voc:data.voc,
+            isc:data.isc,
+            eficiencia:data.eficiencia,
+            tension:data.tension,
+            potencia:data.potencia
+           
+           });
+           res.status(200).send({data:reg});
+        
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
+const actualizar_inversor_calculadora_admin = async function(req,res){
+    if(req.user){
+        let id = req.params['id'];
+        let data = req.body;
+
+        console.log('actualizar Inversor',id)
+
+           let reg = await inversor.findByIdAndUpdate({_id:id},{
+            //producto: data.producto,
+
+     salida_ac:data.salida_ac,
+      entrada_dc:data.entrada_dc,
+      potencia:data.potencia
+           });
+           res.status(200).send({data:reg});
+        
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
+const actualizar_bateria_calculadora_admin = async function(req,res){
+    if(req.user){
+        let id = req.params['id'];
+        let data = req.body;
+
+        console.log('actualizar Bateria',id)
+
+           let reg = await bateria.findByIdAndUpdate({_id:id},{
+            //producto: data.producto,
+
+     voltaje:data.voltaje,
+      amperaje:data.amperaje,
+      tecnologia:data.tecnologia
+           });
+           res.status(200).send({data:reg});
+        
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
 
 //Peticiones API
 consulta_Pvgis=function(req,res){
@@ -1139,7 +1244,11 @@ module.exports = {
 
     listar_productos_calculadora_admin,
     obtener_producto_calculadora_admin,
+
     actualizar_controlador_calculadora_admin,
+    actualizar_panel_calculadora_admin,
+    actualizar_inversor_calculadora_admin,
+    actualizar_bateria_calculadora_admin,
 
     consulta_Pvgis,
     consulta_hsp,

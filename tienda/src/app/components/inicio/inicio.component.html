@@ -12,7 +12,6 @@
                     <div class="item_slider"><img src="assets/images/home/blog_1.jpg" alt=""></div>
                     <div class="item_slider"><img src="assets/images/home/blog_2.jpg" alt=""></div>
                     <div class="item_slider"><img src="assets/images/home/blog_3.jpg" alt=""></div>
-                    <div class="item_slider"><img src="assets/images/home/banner_0.jpg" alt=""></div>
                     <div class="item_slider"><img src="assets/images/home/blog_3.jpg" alt=""></div>
                     <div class="item_slider"><img src="assets/images/home/blog_3.jpg" alt=""></div>
                 </div>
@@ -26,8 +25,8 @@
                 <div class="ps-block__thumbnail bg--top-right"
                      data-background="assets/images/home/1.jpg"></div>
                 <div class="ps-block__content">
-                    <h4>{{ 'inicio.item_dos' | translate }}</h4>
-                    <a class="ps-link--under"  [routerLink]="['/productos']">{{ 'inicio.item_seis' | translate }}</a>
+                    <h4>Bases</h4>
+                    <a class="ps-link--under"  [routerLink]="['/productos']">Ver Más</a>
                 </div>
             </div>
         </figure>
@@ -36,8 +35,8 @@
                 <div class="ps-block__thumbnail bg--cover"
                      data-background="assets/images/home/2.jpg"></div>
                 <div class="ps-block__content">
-                    <h4>{{ 'inicio.item_tres' | translate }}</h4>
-                    <a class="ps-link--under"  [routerLink]="['/productos/categoria/accesorios']" >{{ 'inicio.item_seis' | translate }}</a>
+                    <h4>Accesorios</h4>
+                    <a class="ps-link--under"  [routerLink]="['/productos/categoria/accesorios']" >Ver Más</a>
                 </div>
             </div>
         </figure>
@@ -47,7 +46,7 @@
                      data-background="assets/images/home/3.jpg"></div>
                 <div class="ps-block__content">
                     <h4>Proyectos</h4>
-                    <a class="ps-link--under" [routerLink]="['/productos/categoria/packs']">{{ 'inicio.item_seis' | translate }}</a>
+                    <a class="ps-link--under" [routerLink]="['/productos/categoria/packs']">Ver Más</a>
                 </div>
             </div>
         </figure>
@@ -60,12 +59,12 @@
         <div class="container">
             <div class="ps-section__header">
                 <figure>
-                    <figcaption>{{ 'inicio.item_ocho' | translate }}</figcaption>
-                    <p>{{ 'inicio.item_nueve' | translate }}</p>
+                    <figcaption>Lo Último</figcaption>
+                    <p>Nuevos productos de SSEM</p>
                 </figure>
                 <ul>
-                    <li class="active"><a>{{ 'inicio.item_ocho' | translate }}</a></li>
-                    <li><a style="cursor: pointer;" [routerLink]="['/productos']">{{ 'inicio.item_diez' | translate }}</a></li>
+                    <li class="active"><a>Lo Último</a></li>
+                    <li><a style="cursor: pointer;" [routerLink]="['/productos']">¡¡Quiero ir a ver todos los productos de la tienda!!</a></li>
                 </ul>
             </div>
             <div class="ps-section__content">
@@ -73,9 +72,6 @@
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 " *ngFor="let item of new_productos">
                         <div class="ps-product">
                             <div class="ps-product__thumbnail">
-                              <!--<img class="ps-product__image"  [src]="url +'obtener_portada/'+item.portada" alt=""/>
-                              <img class="ps-product__image-alt" [src]="url +'obtener_portada/'+item.galeria[0].imagen" alt=""/>-->
-
                               <img class="ps-product__image"  [src]="item.portada" alt=""/>
                               <img class="ps-product__image-alt" [src]="item.galeria[0].imagen" alt=""/>
 
@@ -115,7 +111,7 @@
                     </div>
                 </div>
             </div>
-            <div class="ps-section__footer"><a class="ps-link--under" [routerLink]="['/productos']">{{ 'inicio.item_seis' | translate }}</a></div>
+            <div class="ps-section__footer"><a class="ps-link--under" [routerLink]="['/productos']">Ver Más</a></div>
         </div>
     </div>
 <!--Blog-->
@@ -123,8 +119,8 @@
       <div class="container">
           <div class="ps-section__header">
               <figure>
-                  <figcaption>{{ 'inicio.item_doce' | translate }}</figcaption>
-                  <p>{{ 'inicio.item_trece' | translate }}</p>
+                  <figcaption>De SSEM</figcaption>
+                  <p>Conoce un poco más de SSEM</p>
               </figure>
           </div>
           <div class="ps-section__content">
@@ -133,19 +129,19 @@
                       <div class="ps-post">
                           <div class="ps-post__thumbnail"><img src="assets/images/home/blog_1.jpg" alt=""><a
                               class="ps-post__overlay" [routerLink]="['/nosotros']"  ></a></div>
-                          <div class="ps-post__content"><a class="ps-post__title" [routerLink]="['/nosotros']">{{ 'inicio.item_catorce' | translate }}</a>
-                              <a class="ps-link--under ps-post__morelink" [routerLink]="['/nosotros']"> {{ 'menu.item_siete' | translate }}</a>
+                          <div class="ps-post__content"><a class="ps-post__title" [routerLink]="['/nosotros']">SSEM, una amplia variedad de productos</a>
+                              <a class="ps-link--under ps-post__morelink" [routerLink]="['/nosotros']"> La marca</a>
                           </div>
                       </div>
                   </div>
                   <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                     <div class="ps-post">
                         <div class="ps-post__thumbnail"><img src="assets/images/home/blog_3.jpg" alt=""><a
-                            class="ps-post__overlay" [routerLink]="['/embajadoras']"></a></div>
-                        <div class="ps-post__content"><a class="ps-post__title" [routerLink]="['/embajadoras']">
-                            {{ 'inicio.item_quince' | translate }}
+                            class="ps-post__overlay" [routerLink]="['/empresa']"></a></div>
+                        <div class="ps-post__content"><a class="ps-post__title" [routerLink]="['/empresa']">
+                            Empresa
                         </a>
-                            <a class="ps-link--under ps-post__morelink" [routerLink]="['/embajadoras']"> {{ 'menu.item_nueve' | translate }}</a>
+                            <a class="ps-link--under ps-post__morelink" [routerLink]="['/empresa']"> Empresa</a>
                         </div>
                     </div>
                 </div>
@@ -154,9 +150,9 @@
                           <div class="ps-post__thumbnail"><img src="assets/images/home/blog_2.jpg" alt=""><a
                               class="ps-post__overlay" [routerLink]="['/impacto-social']" ></a></div>
                           <div class="ps-post__content"><a class="ps-post__title" [routerLink]="['/impacto-social']" >
-                            {{ 'inicio.item_dieciseis' | translate }}
+                            Productos para diferentes necesidaes
                           </a>
-                              <a class="ps-link--under ps-post__morelink" [routerLink]="['/impacto-social']">  <a class="ps-link--under ps-post__morelink" [routerLink]="['/embajadoras']"> {{ 'menu.item_ocho' | translate }}</a></a>
+                              <a class="ps-link--under ps-post__morelink" [routerLink]="['/impacto-social']">  <a class="ps-link--under ps-post__morelink" [routerLink]="['/impacto-social']"> Impacto Social</a></a>
                           </div>
                       </div>
                   </div>
@@ -168,21 +164,15 @@
 
    <div class="ps-section--instagram">
     <div class="owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="10000" data-owl-gap="0"
-         data-owl-nav="false" data-owl-dots="false" data-owl-item="5" data-owl-item-xs="3" data-owl-item-sm="4"
-         data-owl-item-md="5" data-owl-item-lg="6" data-owl-duration="1000" data-owl-mousedrag="off">
+         data-owl-nav="false" data-owl-dots="false" data-owl-item="4" data-owl-item-xs="3" data-owl-item-sm="4"
+         data-owl-item-md="4" data-owl-item-lg="4" data-owl-duration="1000" data-owl-mousedrag="off">
         <div class="ps-block--instagram"><img src="assets/images/home/blog_2.jpg" alt=""><a href="#"><i
             class="fa fa-instagram"></i></a></div>
-        <div class="ps-block--instagram"><img src="assets/images/home/blog_2.jpg" alt=""><a href="#"><i
-            class="fa fa-instagram"></i></a></div>
-        <div class="ps-block--instagram"><img src="assets/images/home/blog_2.jpg" alt=""><a href="#"><i
-            class="fa fa-instagram"></i></a></div>
-        <div class="ps-block--instagram"><img src="assets/images/home/blog_2.jpg" alt=""><a href="#"><i
+        <div class="ps-block--instagram"><img src="assets/images/home/blog_1.jpg" alt=""><a href="#"><i
             class="fa fa-instagram"></i></a></div>
         <div class="ps-block--instagram"><img src="assets/images/home/blog_2.jpg" alt=""><a href="#"><i
             class="fa fa-instagram"></i></a></div>
-        <div class="ps-block--instagram"><img src="assets/images/home/blog_3.jpg" alt=""><a href="#"><i
-            class="fa fa-instagram"></i></a></div>
-        <div class="ps-block--instagram"><img src="assets/images/home/blog_3.jpg" alt=""><a href="#"><i
+        <div class="ps-block--instagram"><img src="assets/images/home/blog_1.jpg" alt=""><a href="#"><i
             class="fa fa-instagram"></i></a></div>
     </div>
     </div>

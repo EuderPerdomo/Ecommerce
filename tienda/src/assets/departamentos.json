@@ -1,0 +1,167 @@
+[
+  {
+    "id_region": 1,
+    "id": 50,
+    "name": "Meta"
+  },
+  {
+    "id_region": 1,
+    "id": 81,
+    "name": "Arauca"
+  },
+  {
+    "id_region": 1,
+    "id": 85,
+    "name": "Casanare"
+  },
+  {
+    "id_region": 1,
+    "id": 94,
+    "name": "Guainía"
+  },
+  {
+    "id_region": 1,
+    "id": 99,
+    "name": "Vichada"
+  },
+  {
+    "id_region": 1,
+    "id": 95,
+    "name": "Guaviare"
+  },
+  {
+    "id_region": 2,
+    "id": 23,
+    "name": "Córdoba"
+  },
+  {
+    "id_region": 2,
+    "id": 8,
+    "name": "Atlántico"
+  },
+  {
+    "id_region": 2,
+    "id": 13,
+    "name": "Bolívar"
+  },
+  {
+    "id_region": 2,
+    "id": 20,
+    "name": "Cesar"
+  },
+  {
+    "id_region": 2,
+    "id": 44,
+    "name": "La Guajira"
+  },
+  {
+    "id_region": 2,
+    "id": 47,
+    "name": "Magdalena"
+  },
+  {
+    "id_region": 2,
+    "id": 70,
+    "name": "Sucre"
+  },
+  {
+    "id_region": 2,
+    "id": 88,
+    "name": "Archipiélago de San Andrés, Providencia y Santa Catalina"
+  },
+  {
+    "id_region": 3,
+    "id": 15,
+    "name": "Boyacá"
+  },
+  {
+    "id_region": 3,
+    "id": 68,
+    "name": "Santander"
+  },
+  {
+    "id_region": 3,
+    "id": 25,
+    "name": "Cundinamarca"
+  },
+  {
+    "id_region": 3,
+    "id": 11,
+    "name": "Bogotá D.C."
+  },
+  {
+    "id_region": 3,
+    "id": 54,
+    "name": "Norte de Santander"
+  },
+  {
+    "id_region": 4,
+    "id": 18,
+    "name": "Caquetá"
+  },
+  {
+    "id_region": 4,
+    "id": 41,
+    "name": "Huila"
+  },
+  {
+    "id_region": 4,
+    "id": 73,
+    "name": "Tolima"
+  },
+  {
+    "id_region": 4,
+    "id": 86,
+    "name": "Putumayo"
+  },
+  {
+    "id_region": 4,
+    "id": 91,
+    "name": "Amazonas"
+  },
+  {
+    "id_region": 4,
+    "id": 97,
+    "name": "Vaupés"
+  },
+  {
+    "id_region": 5,
+    "id": 5,
+    "name": "Antioquia"
+  },
+  {
+    "id_region": 5,
+    "id": 17,
+    "name": "Caldas"
+  },
+  {
+    "id_region": 5,
+    "id": 63,
+    "name": "Quindío"
+  },
+  {
+    "id_region": 5,
+    "id": 66,
+    "name": "Risaralda"
+  },
+  {
+    "id_region": 6,
+    "id": 27,
+    "name": "Chocó"
+  },
+  {
+    "id_region": 6,
+    "id": 52,
+    "name": "Nariño"
+  },
+  {
+    "id_region": 6,
+    "id": 19,
+    "name": "Cauca"
+  },
+  {
+    "id_region": 6,
+    "id": 76,
+    "name": "Valle del Cauca"
+  }
+]

@@ -1,128 +1,9 @@
- /* Style the form */
- #regForm {
-    /*background-color: #f30d0d;*/
-    margin: 10px auto;
-    padding: 40px;
-    width: 100%;
-    min-width: 300px;
-    }
-    
-    /* Style the input fields */
-    input {
-    padding: 10px;
-    width: 100%;
-    font-size: 17px;
-    font-family: Raleway;
-    border: 1px solid #666768;
-    border-radius: 5px;
-    }
-    
-    /* Mark input boxes that gets an error on validation: */
-    input.invalid {
-    background-color: #ffdddd;
-    }
-    
-    /* Hide all steps by default: */
-    .tab {
-        display: none;
-        }
-    
-    /* Make circles that indicate the steps of the form: */
-    .step {
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbbbbb;
-    border: none;
-    border-radius: 50%;
-    display: inline-block;
-    opacity: 0.5;
-    }
-    
-    /* Mark the active step: */
-    .step.active {
-    opacity: 1;
-    }
-    
-    /* Mark the steps that are finished and valid: */
-    .step.finish {
-    background-color: #04AA6D;
-    }
 
-    .clase1 {
-      color:red;
-      background-color:blue;
-  }
-  
-  .clase2 {
-      font-size:20px;
-      font-family: 'Courier New', Courier, monospace;
-  }
+/*cOnfiguracion para leaflet*/
 
-
-
-/*Inicia arreglo calculadora*/
-/*Estilo General*/
-*{
-    margin: 0;
-    padding: 0;
+#map { height: 100%; 
 }
 
-body{
-    background: #ffff;
-    color: black;
-    font-family: roboto, sans-serif;
-}
-
-
-/*Contenedor*/
-.contenedor{
-   /* width: 90%;
-    max-width: 1000px;*/
-    max-width: 100vw;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    height: 100vh;
-    display: grid;
-    grid-gap:5px;
-    grid-template-columns: repeat(3,1fr);
-    grid-template-rows: repeat(2,auto);
-    grid-template-areas: "principal principal lateral"
-                        "pie pie pie";
-}
-
-
-.contenedor  .principal{
-    grid-area: principal;
-    /* border: solid 1px; */
-    height: 80vh;
-    position: relative;
-}
-
-.contenedor  .lateral{
-    grid-area: lateral;
-    /* border: solid 1px rgb(181, 181, 184); */
-    height: 80vh;
-    position:relative;
-}
-
-.contenedor .pie{
-    grid-area: pie;
-    /* border: solid 1px; */
-    height: 20vh;
-}
-
-.imagen{
-    display: flex;
-    /*flex-direction: column-reverse;*/
-}
-
-.imagen .img{
-width: 100%;
-object-fit: cover;
-}
 
 
 /*Boton Siguiente*/
@@ -135,7 +16,8 @@ object-fit: cover;
 	letter-spacing: 2px; /* Espacio entre letras */
 	background-color: #E91E63; /* Color de fondo */
 	padding: 18px 30px; /* Relleno del boton */
-	position: absolute;
+	position: unset; /*absolute*/
+    margin-top: 20px;
 	bottom: 40px;
 	right: 5px;
 	transition: all 300ms ease 0ms;
@@ -165,7 +47,8 @@ object-fit: cover;
 	letter-spacing: 2px; /* Espacio entre letras */
 	background-color: #E91E63; /* Color de fondo */
 	padding: 18px 30px; /* Relleno del boton */
-	position: absolute;
+	position: unset; /*absolute*/
+    margin-top: 20px;
 	bottom: 40px;
 	left: 5px;
 	transition: all 300ms ease 0ms;
@@ -203,36 +86,6 @@ object-fit: cover;
 	z-index: 99;
 }
 
-/*Inicia la portada del panel*/
-
-
-.caracteristicas_panel{
-display: grid;
-grid-template-columns: 50% 50% ;
-}
-
-.portada_panel{
-    display: flex;
-    /*flex-direction: column-reverse;*/
-}
-
-
-.portada_panel .img{
-width: 100%;
-object-fit: cover;
-max-height: 70vh;;
-}
-/*Finaliza la portada del panel*/
-
-.custom-select{
-width: 90%;
-border-radius: 5px;
-}
-
-.texto_resultado{
-
-}
-.resultado{
-color: #04AA6D;
-font-weight: 900;
+.ficha_tecnica {
+    word-wrap: break-word !important;
 }

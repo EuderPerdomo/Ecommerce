@@ -24,8 +24,6 @@ import { DireccionesComponent } from './components/perfil/direcciones/direccione
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 import { EditProductoComponent } from './components/productos/edit-producto/edit-producto.component';
 import { ShowProductoComponent } from './components/productos/show-producto/show-producto.component';
-import { CarritoComponent } from './components/carrito/carrito.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
 import { PedidosComponent } from './components/perfil/pedidos/pedidos.component';
 import { DpedidosComponent } from './components/perfil/dpedidos/dpedidos.component';
 import { RatingModule } from 'ng-starrating';
@@ -43,6 +41,8 @@ import { CalculadoraComponent } from './components/calculadora/calculadora.compo
 import { BlogComponent } from './components/blog/blog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewCalculoComponent } from './components/calculadora/new-calculo/new-calculo.component';
+import { EmpresaComponent } from './components/static/empresa/empresa.component';
+
 
 @NgModule({
   declarations: [
@@ -56,8 +56,6 @@ import { NewCalculoComponent } from './components/calculadora/new-calculo/new-ca
     IndexProductoComponent,
     EditProductoComponent,
     ShowProductoComponent,
-    CarritoComponent,
-    CheckoutComponent,
     PedidosComponent,
     DpedidosComponent,
     VerifyPagoComponent,
@@ -73,6 +71,7 @@ import { NewCalculoComponent } from './components/calculadora/new-calculo/new-ca
     CalculadoraComponent,
     BlogComponent,
     NewCalculoComponent,
+    EmpresaComponent,
     
   ],
   imports: [

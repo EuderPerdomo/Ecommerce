@@ -183,14 +183,14 @@
                                     <td class="border-top-0">
                                       <div class="media pl-2 py-2">
                                         <a [routerLink]="['/productos/'+item.producto.slug]" style="min-width: 80px;cursor: pointer;">
-                                          <img [src]="url +'obtener_portada/'+item.producto.portada" width="80" alt="Product thumb">
+                                          <img [src]="item.producto.portada" width="80" alt="Product thumb">
                                         </a>
                                         <div class="media-body pl-3">
                                           <h3 class="font-size-sm mb-3">
                                             <a [routerLink]="['/productos/'+item.producto.slug]" style="cursor: pointer;" class="nav-link font-weight-bold">{{item.producto.titulo}}</a>
                                           </h3>
                                           <ul class="list-unstyled font-size-xs mt-n2 mb-2" style="margin-left: 1rem;">
-                                            <li class="mb-0"><span class="text-muted">TALLA:</span> {{item.variedad.valor}}</li>
+                                            <li class="mb-0"><span class="text-muted">Variedad:</span> {{item.variedad.valor}}</li>
                                           </ul>
                                           <a *ngIf="!item.estado" (click)="openModal(item)" style="cursor: pointer;color: #000;margin-left: 1rem;" data-toggle="modal" [attr.data-target]="'#review-'+item._id">[Emitir reseña]</a>
                                           <span *ngIf="item.estado"  class="badge badge-warning" style="background-color: #f1ee51;margin-left: 1rem;">Comentario emitido</span>
@@ -232,8 +232,8 @@
                                       <div class="py-2">
                                         <div class="font-size-xs text-muted mb-1">Precio:</div>
                                         <div class="font-size-sm text-dark">
-                                          <span *ngIf="orden.currency == 'PEN'">S/{{item.subtotal}}</span>
-                                          <span  *ngIf="orden.currency == 'USD'">${{item.subtotal}}</span>
+                                          <span *ngIf="orden.currency == 'COP'">{{item.subtotal | currency:'COP ':"$"}}</span>
+                                          <span  *ngIf="orden.currency == 'USD'">{{item.subtotal | currency:'USD':"$"}}</span>
                                           
                                         </div>
                                       </div>
@@ -248,8 +248,8 @@
                                       <div class="py-2 pr-3 text-right">
                                         <div class="font-size-xs text-muted mb-1">Subtotal:</div>
                                         <div class="font-size-sm font-weight-bold text-dark">
-                                          <span *ngIf="orden.currency == 'PEN'">S/{{item.subtotal*item.cantidad}}</span>
-                                          <span  *ngIf="orden.currency == 'USD'">${{item.subtotal*item.cantidad}}</span>
+                                          <span *ngIf="orden.currency == 'COP'">{{item.subtotal*item.cantidad | currency:'COP ':"$"}}</span>
+                                          <span  *ngIf="orden.currency == 'USD'">{{item.subtotal*item.cantidad | currency:'USD ':"$"}}</span>
                                           </div>
                                       </div>
                                     </td>
@@ -260,8 +260,8 @@
                                     </td>
                                     <td class="" colspan="1">
                                       <div class="py-2 pr-3 text-right">
-                                        <span *ngIf="orden.currency == 'PEN'">S/{{orden.subtotal}}</span>
-                                        <span  *ngIf="orden.currency == 'USD'">${{orden.subtotal}}</span>
+                                        <span *ngIf="orden.currency == 'COP'">{{orden.subtotal | currency:'COP ':"$"}}</span>
+                                        <span  *ngIf="orden.currency == 'USD'">{{orden.subtotal | currency:'USD ':"$"}}</span>
                                       </div>  
                                     </td>
                                   </tr>
@@ -271,8 +271,8 @@
                                     </td>
                                     <td class="" colspan="1">
                                       <div class="py-2 pr-3 text-right">
-                                        <span *ngIf="orden.currency == 'PEN'">- S/{{orden.valor_descuento}}</span>
-                                        <span  *ngIf="orden.currency == 'USD'">- ${{orden.valor_descuento}}</span>
+                                        <span *ngIf="orden.currency == 'COP'">- {{orden.valor_descuento | currency:'COP ':"$"}}</span>
+                                        <span  *ngIf="orden.currency == 'USD'">- {{orden.valor_descuento | currency:'USD ':"$"}}</span>
                                       </div>  
                                     </td>
                                   </tr>
@@ -282,8 +282,8 @@
                                     </td>
                                     <td class="" colspan="1">
                                       <div class="py-2 pr-3 text-right">
-                                        <span *ngIf="orden.currency == 'PEN'">S/{{orden.envio_precio}}</span>
-                                        <span  *ngIf="orden.currency == 'USD'">${{orden.envio_precio}}</span>
+                                        <span *ngIf="orden.currency == 'COP'">{{orden.envio_precio | currency:'COP ':"$"}}</span>
+                                        <span  *ngIf="orden.currency == 'USD'">{{orden.envio_precio | currency:'USD ':"$"}}</span>
                                       </div>  
                                     </td>
                                   </tr>
@@ -293,8 +293,8 @@
                                     </td>
                                     <td class="" colspan="1">
                                       <div  class="py-2 pr-3 text-right">
-                                        <span *ngIf="orden.currency == 'PEN'">S/{{orden.total_pagar}}</span>
-                                        <span  *ngIf="orden.currency == 'USD'">${{orden.total_pagar}}</span>
+                                        <span *ngIf="orden.currency == 'COP'">{{orden.total_pagar | currency:'COP ':"$"}}</span>
+                                        <span  *ngIf="orden.currency == 'USD'">{{orden.total_pagar | currency:'USD ':"$"}}</span>
                                       </div>
                                     </td>
                                   </tr>

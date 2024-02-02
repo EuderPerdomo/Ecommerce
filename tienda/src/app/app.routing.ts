@@ -6,13 +6,12 @@ import { CuentaComponent } from "./components/perfil/cuenta/cuenta.component";
 import { DireccionesComponent } from "./components/perfil/direcciones/direcciones.component";
 import { IndexProductoComponent } from "./components/productos/index-producto/index-producto.component";
 import { ShowProductoComponent } from "./components/productos/show-producto/show-producto.component";
-import { CarritoComponent } from "./components/carrito/carrito.component";
-import { CheckoutComponent } from "./components/checkout/checkout.component";
 import { PedidosComponent } from "./components/perfil/pedidos/pedidos.component";
 import { DpedidosComponent } from "./components/perfil/dpedidos/dpedidos.component";
 import { VerifyPagoComponent } from "./components/verify-pago/verify-pago.component";
 import { ReviewsComponent } from "./components/perfil/reviews/reviews.component";
-import { EmbajadorasComponent } from "./components/static/embajadoras/embajadoras.component";
+//import { EmbajadorasComponent } from "./components/static/embajadoras/embajadoras.component";
+import { EmpresaComponent } from "./components/static/empresa/empresa.component";
 import { ImpactoComponent } from "./components/static/impacto/impacto.component";
 import { NosotrosComponent } from "./components/static/nosotros/nosotros.component";
 import { PoliticasEnvioComponent } from "./components/static/politicas-envio/politicas-envio.component";
@@ -36,15 +35,13 @@ const appRoute : Routes = [
 
     {path: 'verificar-pago/:tipo/:direccion/:cupon/:envio/:tipo_descuento/:valor_descuento/:total_pagar/:subtotal', component: VerifyPagoComponent},
 
-    {path: 'carrito', component: CarritoComponent},
-    {path: 'checkout', component: CheckoutComponent, canActivate:[AuthGuard]},
-
     {path: 'productos', component: IndexProductoComponent},
     {path: 'productos/categoria/:categoria', component: IndexProductoComponent},
     {path: 'productos/:slug', component: ShowProductoComponent},
 
     {path: 'contacto', component: ContactoComponent},
-    {path: 'embajadoras', component: EmbajadorasComponent},
+    //{path: 'embajadoras', component: EmbajadorasComponent},
+    {path: 'empresa', component:EmpresaComponent},
     {path: 'impacto-social', component: ImpactoComponent},
     {path: 'nosotros', component: NosotrosComponent},
     {path: 'politicas-envio', component: PoliticasEnvioComponent},

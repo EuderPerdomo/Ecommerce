@@ -5,6 +5,11 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 
+
+import {Chart,registerables} from 'chart.js'
+Chart.register(...registerables)
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +22,20 @@ export class GuestService {
   ) { 
     this.url = GLOBAL.url;
   }
+
+single(graphTitle:string,key:string,labels:any,data:any,context:string,charttype:any){
+  var chart=new Chart(context,{
+    type:charttype,
+    data:{
+      labels:labels,
+      datasets:[{
+        label:key,
+        data:data
+      }]
+    },
+    options:{}
+  })
+}
 
   obtener_ip_cliente():Observable<any>{
     return this._http.get('https://api.ipify.org/?format=json');
@@ -56,17 +75,32 @@ export class GuestService {
     return this._http.put(this.url + 'actualizar_perfil_cliente_guest/'+id,data,{headers:headers});
   }
 
+  
   get_Regiones():Observable<any>{
-    return this._http.get('./assets/regiones.json');
+    return this._http.get('./assets/zonas_col.json');
   }
   get_Distritos():Observable<any>{
-    return this._http.get('./assets/distritos.json');
+    return this._http.get('./assets/Municipios.json');
   }
+  get_Provincias():Observable<any>{
+    return this._http.get('./assets/departamentos.json');
+  }
+
   get_Procincias():Observable<any>{
-    return this._http.get('./assets/provincias.json');
+    return this._http.get('./assets/departamentos.json');
   }
+
   get_Zonas():Observable<any>{
     return this._http.get('./assets/zonas.json');
+  }
+
+
+  get_Colombia():Observable<any>{
+    return this._http.get('./assets/zonas_col.json');
+  }
+
+  get_Regiones_Col():Observable<any>{
+    return this._http.get('./assets/zonas_col.json');
   }
 
   registro_direccion_cliente(data:any,token:any):Observable<any>{
@@ -273,6 +307,12 @@ consulta_Pvgis(lat:any,lon:any,peakpower:any,atterysize:any,consumptionday:any,c
 consulta_hsp(lat:any,lon:any,angle:any):Observable<any>{
   let headers = new HttpHeaders().set('Content-Type','application/json');
  return this._http.get(this.url+'consulta_hsp/'+lat+'/'+lon+'/'+angle,{headers:headers})
+}
+
+//Consultar radiaicon diaria
+consultar_radiacion_diaria(lat:any,lon:any,angle:any):Observable<any>{
+  let headers = new HttpHeaders().set('Content-Type','application/json');
+ return this._http.get(this.url+'consultar_radiacion_diaria/'+lat+'/'+lon+'/'+angle,{headers:headers})
 }
 
 //Traer Paneles solares usados apra calculadora

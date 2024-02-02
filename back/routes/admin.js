@@ -74,5 +74,6 @@ api.put('/actualizar_bateria_calculadora_admin/:id',[auth.auth,path],AdminContro
 
 api.get('/consulta_Pvgis/:lat/:lon/:peakpower/:atterysize/:consumptionday/:cutoff',AdminController.consulta_Pvgis)
 api.get('/consulta_hsp/:lat/:lon/:angle',AdminController.consulta_hsp)
+api.get('/consultar_radiacion_diaria/:lat/:lon/:angle',AdminController.consultar_radiacion_diaria)
 
 module.exports = api;

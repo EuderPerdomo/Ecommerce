@@ -12,7 +12,7 @@ export class DireccionesComponent implements OnInit {
 
   public geo : any = {};
   public country = '';
-  public currency = 'PEN';
+  public currency = 'COP';
 
   public token = localStorage.getItem('token');
   public direccion : any = {
@@ -52,12 +52,14 @@ export class DireccionesComponent implements OnInit {
     this._guestService.get_Regiones().subscribe(
       response=>{
         this.regiones_arr = response;
+        console.log(this.regiones_arr)
       }
     );
 
-    this._guestService.get_Procincias().subscribe(
+    this._guestService.get_Provincias().subscribe(
       response=>{
         this.provincias_arr = response;
+        console.log('Provincias',this.provincias_arr)
       }
     );
 
@@ -67,8 +69,19 @@ export class DireccionesComponent implements OnInit {
       }
     );
 
+
+
+/** Inicia Zonas Colombia*/
+this._guestService.get_Colombia().subscribe(
+  response=>{
+    console.log('Colombia',response)
+  }
+);
+/**Fin zonas Colombia */
+
     this._guestService.get_Zonas().subscribe(
       response=>{
+        console.log('Respuesta get Zonas',response)
         let respuesta :Array<any> = response;
         this.zonas = respuesta.sort(function (a, b) {
           if (a.country > b.country) {
@@ -77,7 +90,6 @@ export class DireccionesComponent implements OnInit {
           if (a.country < b.country) {
             return -1;
           }
-          // a must be equal to b
           return 0;
         }); 
       }
@@ -89,8 +101,8 @@ export class DireccionesComponent implements OnInit {
   }
 
   registrar(registroForm:any){
-    if(registroForm.valid){
-      
+    if(registroForm.valid){   
+
       this.regiones_arr.forEach(element => {
         if(parseInt(element.id) == parseInt(this.direccion.region)){
           this.direccion.region = element.name;
@@ -98,8 +110,10 @@ export class DireccionesComponent implements OnInit {
       });
 
       this.provincias_arr.forEach(element => {
+        //console.log('arreglo de provincias',element.id,this.direccion.provincia)
         if(parseInt(element.id) == parseInt(this.direccion.provincia)){
           this.direccion.provincia = element.name;
+          console.log('Elemento provincias:', element)
         }
       });
 
@@ -111,7 +125,7 @@ export class DireccionesComponent implements OnInit {
 
       let data = {
         nombres: this.direccion.nombres,
-        apellidos: this.direccion.nombres,
+        apellidos: this.direccion.apellidos,
         dni: this.direccion.dni,
         zip: this.direccion.zip,
         direccion: this.direccion.direccion,
@@ -126,7 +140,7 @@ export class DireccionesComponent implements OnInit {
         cliente: localStorage.getItem('_id')
       }
 
-      console.log(data);
+      console.log('Dirección a Registrar: ',data);
       this._guestService.registro_direccion_cliente(data,this.token).subscribe(
         response=>{
           this.direccion = {
@@ -171,20 +185,20 @@ export class DireccionesComponent implements OnInit {
     this.direccion.zona = str_select_pais[1];
     this.direccion.pais = pais;
 
-    if(pais == 'Perú'){
+    if(pais == 'Colombia'){
       setTimeout(() => {
         $('#sl-region').prop('disabled', false);
       }, 50);
-      this._guestService.get_Regiones().subscribe(
+      this._guestService.get_Regiones_Col().subscribe(
         response=>{
-          console.log(response);
+          console.log('Regiones',response);
           response.forEach((element:any) => {
             this.regiones.push({
               id: element.id,
               name: element.name
             });
           });
-
+console.log('Las regiones de colombia',this.regiones)
         }
       );
     }else{
@@ -212,18 +226,18 @@ export class DireccionesComponent implements OnInit {
     }, 50);
     this.direccion.provincia = '';
     this.direccion.distrito = '';
-    this._guestService.get_Procincias().subscribe(
+    this._guestService.get_Provincias().subscribe(
       response=>{
+        console.log('Direccion region al obtener provincias',this.direccion.region)
         response.forEach((element:any) => {
-            if(element.department_id == this.direccion.region){
+          console.log('elemento buscado',element.id,element.name)
+            if(element.id_region == this.direccion.region){
               this.provincias.push(
                 element
               );
             }
         });
-        console.log(this.provincias);
-        
-        
+        console.log('Departamentos de esta región',this.provincias);
       }
     );
   }
@@ -236,14 +250,15 @@ export class DireccionesComponent implements OnInit {
     this.direccion.distrito= '';
     this._guestService.get_Distritos().subscribe(
       response=>{
-        response.forEach((element:any) => {
-          if(element.province_id == this.direccion.provincia){
+        console.log('direccion provincia==',this.direccion.provincia,'====Respuesta',response)
+        response.forEach((element:any) => {          
+          if(element.id_departamento== this.direccion.provincia){
             this.distritos.push(
               element
             );
           }
       });
-      console.log(this.distritos);
+      console.log('Municipios del Departameto',this.distritos);
         
       }
     );
@@ -253,6 +268,7 @@ export class DireccionesComponent implements OnInit {
     this._guestService.obtener_direccion_todos_cliente(localStorage.getItem('_id'),this.token).subscribe(
       response=>{
         this.direcciones = response.data;
+        console.log(this.direcciones)
         this.load_data = false;
       }
     );

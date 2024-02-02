@@ -244,7 +244,7 @@ export class AgregarProductosCalculadoraComponent implements OnInit {
               color: '#FFF',
               class: 'text-success',
               position: 'topRight',
-              message: 'Se agrego el Controlado para Calculos en la calculadora Solar'
+              message: 'Se agrego el Controlador para Calculos en la calculadora Solar'
           });
 
           this._router.navigate(['/dashboard_calculadora']);

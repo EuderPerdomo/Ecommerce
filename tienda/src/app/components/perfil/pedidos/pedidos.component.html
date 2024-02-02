@@ -56,7 +56,7 @@
                               </td>
                               <td>
                                   <span *ngIf="item.currency == 'USD'">${{item.total_pagar}}</span>
-                                  <span *ngIf="item.currency == 'PEN'">S/{{item.total_pagar}}</span>
+                                  <span *ngIf="item.currency == 'COP'">{{item.total_pagar | currency:'COP ':"$"}}</span>
                               </td>
                               <td>
                                 {{item.createdAt|date}}
@@ -95,7 +95,7 @@
                           <img src="assets/images/icono-no-orden.png" alt="">
                         </div>
                         <h3 class="text-muted">No has realizado ningun pedido.</h3>
-                        <p class="text-muted">Cuando realices un pedido futbolero, todos los detalles apareceran aquí.</p>
+                        <p class="text-muted">Cuando realices un pedido , todos los detalles apareceran aquí.</p>
                       </form>
                     </div>
                   </div>

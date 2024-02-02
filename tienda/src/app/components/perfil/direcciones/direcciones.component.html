@@ -39,17 +39,17 @@
                                 </div>
                                 <div class="col-sm-6 form-group">
                                     <label for="ac-fn">Documento de Identidad
-                                        <span *ngIf="currency != 'PEN'"> (Opcional)</span>
+                                        <span *ngIf="currency != 'COP'"> (Opcional)</span>
                                     </label>
-                                    <input *ngIf="currency == 'PEN'" type="text" required class="form-control form-control-lg" name="dni" [(ngModel)]="direccion.dni" placeholder="Documento de Identidad">
-                                    <input *ngIf="currency != 'PEN'" type="text" class="form-control form-control-lg" name="dni" [(ngModel)]="direccion.dni" placeholder="Documento de Identidad">
+                                    <input *ngIf="currency == 'COP'" type="text" required class="form-control form-control-lg" name="dni" [(ngModel)]="direccion.dni" placeholder="Documento de Identidad">
+                                    <input *ngIf="currency != 'COP'" type="text" class="form-control form-control-lg" name="dni" [(ngModel)]="direccion.dni" placeholder="Documento de Identidad">
                                 </div>
                                 <div class="col-sm-6 form-group">
                                     <label for="ac-fn">ZIP
-                                        <span *ngIf="currency == 'PEN'"> (Opcional)</span>
+                                        <span *ngIf="currency == 'COP'"> (Opcional)</span>
                                     </label>
-                                    <input *ngIf="currency != 'PEN'" type="text" required class="form-control form-control-lg" name="zip" [(ngModel)]="direccion.zip" placeholder="Código postal">
-                                    <input *ngIf="currency == 'PEN'" type="text" class="form-control form-control-lg" name="zip" [(ngModel)]="direccion.zip" placeholder="Código postal">
+                                    <input *ngIf="currency != 'COP'" type="text" required class="form-control form-control-lg" name="zip" [(ngModel)]="direccion.zip" placeholder="Código postal">
+                                    <input *ngIf="currency == 'COP'" type="text" class="form-control form-control-lg" name="zip" [(ngModel)]="direccion.zip" placeholder="Código postal">
                                 </div>
                                 <div class="col-sm-6 form-group">
                                     <label for="ac-fn">Telefono</label>
@@ -61,10 +61,10 @@
                                 </div>
                                 <div class="col-sm-12 form-group">
                                     <label for="ac-fn">Referencia
-                                        <span *ngIf="currency != 'PEN'"> (Opcional)</span>
+                                        <span *ngIf="currency != 'COP'"> (Opcional)</span>
                                     </label>
-                                    <textarea *ngIf="currency == 'PEN'" type="text" required class="form-control" placeholder="Referencia" name="referencia" [(ngModel)]="direccion.referencia" rows="2"></textarea>
-                                    <textarea *ngIf="currency != 'PEN'" type="text" class="form-control" placeholder="Referencia" name="referencia" [(ngModel)]="direccion.referencia" rows="2"></textarea>
+                                    <textarea *ngIf="currency == 'COP'" type="text" required class="form-control" placeholder="Ingrese aquí datos opcionales de referencia, #Casa, conjunto, etc..." name="referencia" [(ngModel)]="direccion.referencia" rows="3"></textarea>
+                                    <textarea *ngIf="currency != 'COP'" type="text" class="form-control" placeholder="Ingrese aquí datos adicionales que faciliten la ubicación de la dirección" name="referencia" [(ngModel)]="direccion.referencia" rows="3"></textarea>
                                 </div>
             
             
@@ -73,38 +73,40 @@
                                     <select class="form-control" name="str_pais" required [(ngModel)]="str_pais" (change)="select_pais()">
                                         <option value="" selected disabled>Seleccionar</option>
                                         <ng-container *ngFor="let item of zonas">
-                                            <ng-container  *ngIf="currency =='PEN'">
-                                                <option value="{{item.country}}_{{item.zona}}" *ngIf="item.country =='Perú'">{{item.country}}</option>
+                                            <ng-container  *ngIf="currency =='COP'">
+                                                <option value="{{item.country}}_{{item.zona}}" *ngIf="item.country =='Colombia'">{{item.country}}</option>
                                             </ng-container>
-                                            <ng-container  *ngIf="currency !='PEN'">
-                                                <option value="{{item.country}}_{{item.zona}}" *ngIf="item.country !='Perú'">{{item.country}}</option>
+                                            <ng-container  *ngIf="currency !='COP'">
+                                                <option value="{{item.country}}_{{item.zona}}" *ngIf="item.country !='Colombia'">{{item.country}}</option>
                                             </ng-container>
                                            
-                                        </ng-container>
-                                        
-                        
+                                        </ng-container>                                              
                                     </select>
                                 </div>
-                                <div class="col-sm-6 form-group" *ngIf="direccion.pais != 'Perú'">
+
+                                <div class="col-sm-6 form-group" *ngIf="direccion.pais != 'Colombia'">
                                     <label for="ac-fn">Región / Ciudad</label>
                                     <input type="text" required class="form-control form-control-lg" name="distrito" [(ngModel)]="direccion.distrito" placeholder="Ciudad">
                                 </div>
-                                <div class="col-sm-6 form-group" *ngIf="direccion.pais == 'Perú'">
+
+                                <div class="col-sm-6 form-group" *ngIf="direccion.pais == 'Colombia'">
                                     <label for="ac-fn">Región</label>
                                     <select id="sl-region"  name="region" [(ngModel)]="direccion.region" class="form-control" disabled (change)="select_region()">
                                         <option value="" selected disabled>Seleccionar</option>
                                         <option value="{{item.id}}" *ngFor="let item of regiones">{{item.name}}</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-6 form-group" *ngIf="direccion.pais == 'Perú'">
-                                    <label for="ac-fn">Provincia</label>
+
+                                <div class="col-sm-6 form-group" *ngIf="direccion.pais == 'Colombia'">
+                                    <label for="ac-fn">Departamento</label>
                                     <select id="sl-provincia" name="provincia" [(ngModel)]="direccion.provincia" class="form-control" disabled (change)="select_provincia()">
                                         <option value="" selected disabled>Seleccionar</option>
                                         <option value="{{item.id}}" *ngFor="let item of provincias">{{item.name}}</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-6 form-group" *ngIf="direccion.pais == 'Perú'">
-                                    <label for="ac-fn">Distrito</label>
+
+                                <div class="col-sm-6 form-group" *ngIf="direccion.pais == 'Colombia'">
+                                    <label for="ac-fn">Municipio</label>
                                     <select id="sl-distrito" name="distrito" [(ngModel)]="direccion.distrito" class="form-control" disabled>
                                         <option value="" selected disabled>Seleccionar</option>
                                         <option value="{{item.id}}" *ngFor="let item of distritos">{{item.name}}</option>
@@ -113,8 +115,7 @@
                                
                                 <div class="col-sm-12">
                                   <button type="submit" class="ps-btn ps-btn--fullwidth ps-btn--black">Guardar</button>
-                                </div>
-                                
+                                </div>                               
                               </div>
                             </div>
                           </div>
@@ -135,26 +136,26 @@
                                               <div class="card mb-3">
                                                   <div class="card-body">
                                                       <figure>
-                                                          <figcaption>{{item.destinatario}}</figcaption>
-                                                          <span class="d-block mb-3 font-size-sm text-muted">{{item.zip}}</span>
+                                                          <figcaption>Recibe: {{item.nombres}} {{item.apellidos}}</figcaption>
+                                                          <span class="d-block mb-3 font-size-sm text-muted">ZIP: {{item.zip}}</span>
                                                   
                                                           <div class="row">
-                                                              <div class="col" *ngIf="item.pais == 'Perú'">
+                                                              <div class="col" *ngIf="item.pais == 'Colombia'">
                                                                   <p>
-                                                                      {{item.direccion}}
+                                                                      Dirección: {{item.direccion}}
                                                                       <ng-container *ngIf="item.referencia">
                                                                           <br>
-                                                                          {{item.referencia}}
+                                                                          Referencias: {{item.referencia}}
                                                                       </ng-container>
                                                                       
                                                                   </p>
                                                                   <p>
-                                                                    {{item.pais}}, {{item.region}}
+                                                                    Pais:{{item.pais}}, Región: {{item.region}}
                                                                    <br>
-                                                                    <span>{{item.provincia}}, {{item.distrito}}</span>
+                                                                    <span>Departamento: {{item.provincia}}, Municipio: {{item.distrito}}</span>
                                                                   </p>
                                                               </div>
-                                                              <div class="col" *ngIf="item.pais != 'Perú'">
+                                                              <div class="col" *ngIf="item.pais != 'Colombia'">
                                                                   <p>
                                                                       {{item.direccion}}
                                                                   </p>

@@ -1,508 +1,414 @@
-<div class="contenedor">
+<app-nav></app-nav>
 
-  <!-- <button  class="btn-inicio btn-outline-success" >SILICIO</button> -->
+<!-- <div class="ps-page--default ps-page--contact">
+  <div class="ps-page__content">
 
-  <ng-container *ngIf="posicion==0">
+<div class="container">
+  <div class="row">
 
-    <div class="principal">
-
-      <div class="imagen justify-content-center" style="width:100%; height:100%">
-        <img src="./assets/images/mapa.jpg" alt="Mapa no disponible">
-      </div>
-
-
-      <!-- <button class="btn-anterior" (click)="nextPrev(-1)">Anterior</button> -->
-
+    <div class="col-lg-7">
     </div>
-    <div class="lateral">
 
-      <div class="header mt-md-5">
-        <div class="header-body">
-          <div class="row align-items-center">
-            <div class="col-md-12 text-center">
-              <h1 class="header-title">
-                1. Ubicación del Proyecto
-              </h1>
+    <div class="col-lg-5">
+
+      <div class="row">
+        <div class="col-lg-12">
+          <h1>Generación Solar Diaria</h1>
+          <button type="button" (click)="ConsultarRadiacionDiaria()">Consultar Radiacion Diaria</button>
+            <div class="ps-page--default ps-page--contact">
+                <div class="col-lg-12"><canvas id="myChart"></canvas></div>             
             </div>
-          </div>
-
         </div>
       </div>
 
       <div class="row">
-
-        <div class="col-md-12 text-center">
-          <h3 class="texto_resultado">Horas sol pico</h3>
-          <h1 class="resultado">{{horas_sol_pico}} HSP</h1>
+        <div class="col-lg-12">
+          <h1>Irradiacion media horaria mes</h1>
+          <div class="ps-page--default ps-page--contact">
+            <div class="col-lg-12"><canvas id="ChartMensual"></canvas></div>             
         </div>
-
-        <div class="col-md-6 text-center">
-          <h3>latitud</h3>
-          <h1 class="resultado">{{longitud}}</h1>
         </div>
-        <div class="col-md-6 text-center">
-          <h3>Longitud</h3>
-          <h1 class="resultado">{{latitud}}</h1>
-        </div>
-
-        <div class="col-md-12 text-center justify-content-center align-items-center">
-          <div class="form-group text-center">
-            <label for="nombre_cliente">Nombre del Proyecto</label>
-            <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente"
-              [(ngModel)]="nombre_cliente" value="{{proyecto_nombre}}" placeholder="Iluminacion Pandi">
-          </div>
-        </div>
-
-
-        <!--
-            
-              <div class="col-md-6">              
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Departamento</label>
-                <select class="form-control" id="departamento" name="departamento" aria-describedby="Departamento-help">
-                  <option [ngValue]="0">Seleccione un Departamento</option>
-                  <option [ngValue]="1">uno</option>
-                </select>
-                <small id="Departamento-help" class="form-text text-muted">Departamento en donde sera instalado el
-                  sistema
-                  solar</small>
-              </div>
-            </div> 
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label id="radiacion">Horas Sol Pico (HSP)</label>
-                <input type="number" class="form-control" id="lbl" name="lbl" aria-describedby="radiacionHelp"
-                  value="{{horas_sol_pico}}" disabled="true">
-                <small id="emailHelp" class="form-text text-muted">Hace referencia a las Horas sol pico (HSP) para cada
-                  lugar especifico.</small>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="nombre_cliente">Nombre del Proyecto</label>
-                <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente"
-                  [(ngModel)]="nombre_cliente" value="{{proyecto_nombre}}" placeholder="Iluminacion Pandi">
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                  value="tt@gmail.com">
-                <small id="emailHelp" class="form-text text-muted">Email cliente</small>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Latitud</label>
-                <input type="number" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                  value="4.582">
-                <small id="emailHelp" class="form-text text-muted" [(ngModel)]="latitud" name="latitud">latitud donde
-                  sera
-                  instalado el sistema</small>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Longitud</label>
-                <input type="number" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                  value="-74.220">
-                <small id="emailHelp" class="form-text text-muted" [(ngModel)]="longitud" name="longitud">Longitud donde
-                  sera instalado el sistema</small>
-              </div>
-            </div>
-
-         
-        
--->
       </div>
 
-      <button class="btn-siguiente" id="nextBtn" (click)="nextPrev(1)">Siguiente</button>
+      <div class="row">
+        <div class="col-lg-12">
+          <h1>Consumos</h1>
+          <div class="ps-page--default ps-page--contact">
+            <div class="col-lg-12"><canvas id="ChartConsumos"></canvas></div>             
+        </div>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="col-lg-12">
+          <h1>Consumos</h1>
+          <div class="ps-page--default ps-page--contact">
+            <div class="col-lg-12"><canvas id="nuevografico"></canvas></div>             
+        </div>
+        </div>
+      </div>
 
     </div>
-  </ng-container>
+  </div>
+</div>
+</div>
+</div> -->
 
 
-  <ng-container *ngIf="posicion==1">
 
-    <div class="principal">
 
-      <div class="container-fluid">
-        <div class="row justify-content-center">
+<div class="ps-page--default ps-page--contact">
+  <div class="ps-page__content">
+    <div class="container">
 
-          <!-- Inicio Formulario -->
+
+
+      <!--Inicio  -->
+      <div class="row">
+        <div class="col-9">
+          <div id="map"></div>
+        </div>
+        <div class="col-3">
+          <figure>
+            <figcaption>1. Ubicación del Proyecto</figcaption>
+          </figure>
+          <figure>
+            <aside>
+              <p><strong class="text-uppercase">Horas Sol Pico HSP</strong></p>
+              <p>{{horas_sol_pico}}</p>
+            </aside>
+            <aside>
+              <p><strong class="text-uppercase">Latitud</strong></p>
+              <p>{{latitud}}</p>
+            </aside>
+            <aside>
+              <p style="color: #000;"><strong class="text-uppercase">Longitud</strong></p>
+              <p style="color: #000;"><span class="__cf_email__">{{longitud}}</span></p>
+            </aside>
+            <aside>
+              <p style="color: #000;"><strong class="text-uppercase">Nombre del Proyecto</strong></p>
+              <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente"
+                [(ngModel)]="nombre_cliente" value="{{proyecto_nombre}}" placeholder="Iluminacion Pandi">
+            </aside>
+            <button class="btn-siguiente" id="nextBtn" (click)="changeOp(2)">Siguiente</button>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Fin -->
+
+
+      <!-- Inicio Opcion 2 -->
+
+      <div class="row">
+        <div class="col-9">
           <form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-header-title">
-                  Registro de Dispositivos
-                </h4>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="row">
-                    <div class="col-lg-3 form-group">
-                      <label for="">Nombre</label>
-                      <input type="text" class="form-control" placeholder="Nombre" required name="nombre_equipo"
-                        [(ngModel)]="nombre_equipo0">
-                    </div>
-                    <div class="col-lg-3 form-group">
-                      <label for="">Potencia (W)</label>
-                      <input type="number" class="form-control" placeholder="Potencia" required name="potencia0"
-                        [(ngModel)]="potencia0" (ngModelChange)="cambio(potencia0)">
-                    </div>
-                    <div class="col-lg-3 form-group">
-                      <label for="">Cantidad </label>
-                      <input type="number" class="form-control" placeholder="Cantidad" required name="cantidad0"
-                        [(ngModel)]="cantidad0" (ngModelChange)="cambio(cantidad0)">
-                    </div>
 
-                    <!-- <div class="col-lg-2 form-group">
-                      <label for="">Consumo Hora (W)</label>
-                      <input type="number" class="form-control" name="wtotal0" readonly value="{{w_totales}}"
-                        name="wtotal0" [(ngModel)]="wtotal0">
-                    </div> -->
+            <div class="card-header">
+              <h4 class="card-header-title">
+                Registro de Dispositivos
+              </h4>
+            </div>
 
-                    <div class="col-lg-3 form-group">
-                      <label for="">Uso diario (H)</label>
-                      <input type="number" class="form-control" placeholder="Cantidad" required name="horas_uso_dia0"
-                        [(ngModel)]="horas_uso_dia0" (ngModelChange)="cambio(horas_uso_dia0)">
-                    </div>
 
-                    <!-- <div class="col-lg-2 form-group">
-                      <label for="">Consumo Total Diario (W)</label>
-                      <input type="number" class="form-control" name="wtotal0" readonly value="{{promedio0}}"
-                        name="promedio0" [(ngModel)]="promedio0">
-                    </div> -->
-
-                  </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-3 form-group">
+                  <label for="">Nombre</label>
+                  <input type="text" class="form-control" placeholder="Nombre" required name="nombre_equipo"
+                    [(ngModel)]="nombre_equipo0">
+                </div>
+                <div class="col-lg-3 form-group">
+                  <label for="">Potencia (W)</label>
+                  <input type="number" class="form-control" placeholder="Potencia" required name="potencia0"
+                    [(ngModel)]="potencia0" (ngModelChange)="cambio(potencia0)">
+                </div>
+                <div class="col-lg-3 form-group">
+                  <label for="">Cantidad </label>
+                  <input type="number" class="form-control" placeholder="Cantidad" required name="cantidad0"
+                    [(ngModel)]="cantidad0" (ngModelChange)="cambio(cantidad0)">
+                </div>
+                <div class="col-lg-3 form-group">
+                  <label for="">Uso diario (H)</label>
+                  <input type="number" class="form-control" placeholder="Cantidad" required name="horas_uso_dia0"
+                    [(ngModel)]="horas_uso_dia0" (ngModelChange)="cambio(horas_uso_dia0)">
+                </div>
+                <div class="col-lg-3 form-group">
                 </div>
               </div>
-              <div class="card-footer">
-                <button *ngIf="!editando" class="btn btn-primary btn-shadow" type="submit"
-                  (click)="addCampo()">Agregar</button>
+              <button *ngIf="!editando" class="btn btn-primary btn-shadow" type="submit"
+                (click)="addCampo()">Agregar</button>
+
                 <button *ngIf="editando" class="btn btn-primary btn-shadow" type="submit"
-                  (click)="guardarEditarCampo()">Editar</button>
-                <button *ngIf="editando" class="btn btn-danger btn-shadow" type="submit"
-                  (click)="cancelarEditarCampo()">Cancelar</button>
-              </div>
+                (click)="guardarEditarCampo()">Guardar</button>
+
+                
+
             </div>
+
           </form>
-          <!-- Fin formulario -->
-          <div class="card mt-30 mb-30">
-            <div class="table-responsive">
-              <!-- <table class="table table-sm table-nowrap card-table" name="tabla" [(ngModel)]="tabla"> -->
-              <table class="table table-hover table-nowrap table-sm" name="tabla">
-                <thead>
-                  <tr>
-                    <!-- <th>Codigo</th> -->
-                    <th>Equipo</th>
-                    <th>Potencia</th>
-                    <th>Cantidad</th>
-                    <th>Consumo por horas</th>
-                    <th>Horas Uso Diario</th>
-                    <th>Consumo total Diario</th>
-                    <th>Opciones</th>
-                  </tr>
-                </thead>
-                <tbody class="font-size-base">
-                  <tr *ngFor="let item of valores; index as i">
 
-                    <!-- <td>
-                      {{item.codigo}}
-                    </td> -->
+          <div class="row justify-content-center">
 
-                    <td>
-                      {{item.nombre}}
-                    </td>
-                    <td>
-                      {{item.potencia}}
-                    <td>
-                      {{item.cantidad}}
-                    </td>
-                    <td>
-                      {{item.w_totales}}
-                    </td>
-                    <td>
-                      {{item.horas_dia}}
-                    </td>
-                    <td>
-                      {{item.consumo_diario}}
-                    </td>
-                    <td>
-                      <button class="btn btn-primary btn-shadow" (click)="editarFila(item)">Editar</button>
-                      <button class="btn btn-danger btn-shadow" (click)="borrar(item.codigo)">Eliminar</button>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr>
-                    <td colspan="5" class="text-center">
-                      <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden"></span>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <button class="btn-anterior" (click)="nextPrev(-1)">Anterior</button>
-
-    </div>
-    <div class="lateral">
-
-      <div class="header mt-md-5">
-        <div class="header-body">
-          <div class="row align-items-center">
-            <div class="col-md-12 text-center">
-              <h1 class="header-title">
-                2. Registro de Consumos
-              </h1>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="row">
-
-        <div class="col-md-12 text-center">
-          <h3>Consumo simultaneo</h3>
-          <h1 class="resultado">{{simultaneo}} W</h1>
-        </div>
-
-        <div class="col-md-12 text-center">
-          <h3>consumo total diario</h3>
-          <h1 class="resultado">{{total_dia}} W</h1>
-        </div>
-
-      </div>
-
-
-      <!-- 
-      <h4>
-        Registro de Dispositivos
-      </h4>
-
-      <div class="card-footer">
-        <h3 class="card-header-title">
-          Consumo simultaneo: {{simultaneo}} W
-        </h3>
-        <h3 class="card-header-title">
-          consumo total diario. {{total_dia}} W
-        </h3>
-      </div> -->
-
-      <button class=" btn-siguiente" id="nextBtn" (click)="nextPrev(1)">Siguiente</button>
-    </div>
-
-  </ng-container>
-
-
-  <ng-container *ngIf="posicion==2">
-    <div class="principal">
-
-
-
-
-
-
-      <button class="btn-anterior" (click)="nextPrev(-1)">Anterior</button>
-    </div>
-    <div class="lateral">
-
-      <div class="header mt-md-5">
-        <div class="header-body">
-          <div class="row align-items-center">
-            <div class="col-md-12 text-center">
-              <h1 class="header-title">
-                3. Selección de Controlador y Tension del Sistema
-              </h1>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-
-
-          <!-- Inicio Formulario -->
-          <form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-header-title">
-                  Seleccion de Controlador y Tension del Sistema
-                </h4>
-              </div>
-              <div class="card-body">
-                <div class="row">
-
-
-                  <div class="col-lg-6 form-group">
-                    <label for="">Tension</label>
-                    <label>{{tension}}</label>
-                    <select class="form-control custom-select" id="select-tension" required name="tension"
-                      [(ngModel)]="tension">
-                      <option value="0" selected disabled>Seleccionar</option>
-                      <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
-                      <option value="12">12V</option>
-                      <option value="24">24V</option>
-                      <option value="36">36V</option>
-                      <option value="48">48V</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-6 form-group">
-                    <label for="">Tipo Controlador</label>
-                    <select class="form-control custom-select" id="select-tipo" required name="tipo_controlador"
-                      [(ngModel)]="tipo_controlador">
-                      <option value="0" selected disabled>Seleccionar</option>
-                      <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
-                      <option value="pwm">PWM</option>
-                      <option value="mppt">MPPT</option>
-
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer">
-                <button *ngIf="!editando" class="btn btn-primary btn-shadow" type="submit"
-                  (click)="addCampo()">Agregar</button>
-                <button *ngIf="editando" class="btn btn-primary btn-shadow" type="submit"
-                  (click)="guardarEditarCampo()">Editar</button>
-                <button *ngIf="editando" class="btn btn-danger btn-shadow" type="submit"
-                  (click)="cancelarEditarCampo()">Cancelar</button>
+            <!-- Inicio Formulario -->
+            <!-- Fin formulario -->
+            <div class="card mt-30 mb-30">
+              <div class="table-responsive">
+                <table class="table table-hover table-nowrap table-sm" name="tabla">
+                  <thead>
+                    <tr>
+                      <th>Equipo</th>
+                      <th>Potencia</th>
+                      <th>Cantidad</th>
+                      <th>Consumo por horas</th>
+                      <th>Horas Uso Diario</th>
+                      <th>Consumo total Diario</th>
+                      <th>Opciones</th>
+                    </tr>
+                  </thead>
+                  <tbody class="font-size-base">
+                    <tr *ngFor="let item of valores; index as i">
+                      <td>
+                        {{item.nombre}}
+                      </td>
+                      <td>
+                        {{item.potencia}}
+                      <td>
+                        {{item.cantidad}}
+                      </td>
+                      <td>
+                        {{item.w_totales}}
+                      </td>
+                      <td>
+                        {{item.horas_dia}}
+                      </td>
+                      <td>
+                        {{item.consumo_diario}}
+                      </td>
+                      <td>
+                        <button class="btn btn-primary btn-shadow" (click)="editarFila(item)">Editar</button>
+                        <button class="btn btn-danger btn-shadow" (click)="borrar(item.codigo)">Eliminar</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-          </form>
-          <!-- Fin formulario -->
-        </div>
-      </div>
 
-      <button class="btn-siguiente" (click)="nextPrev(1)">Siguiente</button>
-    </div>
-  </ng-container>
-
-  <!-- Paneles Solares -->
-  <ng-container *ngIf="posicion==3">
-    <div class="principal">
-      <h1>Caracteristicas</h1>
-      <div class="caracteristicas_panel">
-
-        <div class="portada_panel">
-          <img [src]="portada_panel" class="img">
-        </div>
-
-        <div>
-          <h1>Ficha Tecnica</h1>
-
-          <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 col-12 " [innerHTML]="descripcion_panel">      
-          </div>
-        </div>
-
-      </div>
-      <button class="btn-anterior" (click)="nextPrev(-1)">Anterior</button>
-    </div>
-    <div class="lateral">
-
-      <div class="header mt-md-5">
-        <div class="header-body">
-          <div class="row align-items-center">
-            <div class="col-md-12 text-center">
-              <h1 class="header-title">
-                4. Selección de Paneles Solares
-              </h1>
-            </div>
           </div>
 
-        </div>
-      </div>
+          <button class="btn-anterior" (click)="changeOp(1)">Anterior</button>
 
-      <div class="row">
-
-        <div class="col-md-12 text-center">
-          <label for="">Nuestros Paneles Solares</label>
-          <select class="form-control custom-select" id="select-tension" required name="panel"
-            [(ngModel)]="panel" (change)="test_buscar_imagen(panel)">
-            <option value="0" selected disabled> Seleccionar</option>
-            <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
-            <option value="{{item._id}}" *ngFor="let item of paneles_bd">{{item.producto.titulo}}</option>
-          </select>
         </div>
 
-        <div class="col-md-12 text-center">
-          <h3>Paneles requeridos</h3>
-          <h1 class="resultado"> {{numero_paneles}} Unidades</h1>
-        </div>
-        <div class="col-md-12 text-center">
-          <h3>Potencia arreglo de paneles</h3>
-          <h1 class="resultado"> {{peakpower}} W</h1>
-        </div>
-
-      </div>
-
-
-      <button class="btn-siguiente" (click)="nextPrev(1)">Siguiente</button>
-    </div>
-  </ng-container>
-  <!-- Baterias -->
-  <ng-container *ngIf="posicion==4">
-    <div class="principal">
-
-      <h1>Caracteristicas</h1>
-      <div class="caracteristicas_panel">
-
-        <div class="portada_panel">
-          <img [src]="portada_bateria" class="img">
-        </div>
-
-        <div>
-          <h1>Ficha Tecnica</h1>
-
-          <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 col-12 " [innerHTML]="descripcion_bateria">      
-          </div>
-        </div>
-
-      </div>
-
-      <button class="btn-anterior" (click)="nextPrev(-1)">Anterior</button>
-    </div>
-    <div class="lateral">
-
-
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <!-- Inicio Formulario -->
-          <form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
-            <div class="card">
-
-              <div class="header mt-md-5">
-                <div class="header-body">
-                  <div class="row align-items-center">
-                    <div class="col-md-12 text-center">
-                      <h1 class="header-title">
-                        5. Selección de Baterías
-                      </h1>
-                    </div>
-                  </div>
-        
+        <div class="col-3">
+          <div class="header mt-md-5">
+            <div class="header-body">
+              <div class="row align-items-center">
+                <div class="col-md-12 text-center">
+                  <h1 class="header-title">
+                    2. Registro de Consumos
+                  </h1>
                 </div>
               </div>
 
+            </div>
+          </div>
 
+          <div class="row">
+
+            <div class="col-md-12 text-center">
+              <h3>Consumo simultaneo</h3>
+              <h1 class="resultado">{{simultaneo}} W</h1>
+            </div>
+
+            <div class="col-md-12 text-center">
+              <h3>consumo total diario</h3>
+              <h1 class="resultado">{{total_dia}} W</h1>
+            </div>
+
+          </div>
+          <button class="btn-siguiente" id="nextBtn" (click)="changeOp(3)">Siguiente</button>
+        </div>
+        <div class="col-lg-12"><canvas id="PerfilConsumos"></canvas></div>  
+      </div>
+
+      <!-- Fin Opcion 2 -->
+
+      <!-- Inicio opcion 3 Controladores-->
+      <div class="row">
+        <div class="col-9">
+          <button class="btn-anterior" (click)="changeOp(2)">Anterior</button>
+        </div>
+        <div class="col-3">
+
+          <div class="header mt-md-5">
+            <div class="header-body">
+              <div class="row align-items-center">
+                <div class="col-md-12 text-center">
+                  <h1 class="header-title">
+                    3. Selección de Controlador y Tension del Sistema
+                  </h1>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Inicio Formulario -->
+            <form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
+              <div class="row">
+                <div class="col-lg-6 form-group">
+                  <label for="">Tension</label>
+                  <label>{{tension}}</label>
+
+                  <select class="form-control custom-select" id="controladorseleccionado" required name="amperaje"
+                    [(ngModel)]="amperaje" (change)="buscar_imagen_bateria(amperaje)">
+                    <option value="0" selected disabled>Seleccionar</option>
+                    <option value="{{item._id}}" *ngFor="let item of controladores_bd; let indice=index">
+                      {{item.producto.titulo}}</option>
+                  </select>
+
+                  <select class="form-control custom-select" id="select-tension" required name="tension"
+                    [(ngModel)]="tension">
+                    <option value="0" selected disabled>Seleccionar</option>
+                    <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+                    <option value="12">12V</option>
+                    <option value="24">24V</option>
+                    <option value="36">36V</option>
+                    <option value="48">48V</option>
+                  </select>
+                </div>
+                <div class="col-lg-6 form-group">
+                  <label for="">Tipo Controlador</label>
+                  <select class="form-control custom-select" id="select-tipo" required name="tipo_controlador"
+                    [(ngModel)]="tipo_controlador">
+                    <option value="0" selected disabled>Seleccionar</option>
+                    <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+                    <option value="pwm">PWM</option>
+                    <option value="mppt">MPPT</option>
+
+                  </select>
+                </div>
+              </div>
+
+            </form>
+            <!-- Fin formulario -->
+
+          </div>
+          <button class="btn-siguiente" id="nextBtn" (click)="changeOp(4)">Siguiente</button>
+        </div>
+      </div>
+      <!-- Fin Opcion 3 -->
+
+      <!-- Inicio Opcion 4 Paneles -->
+      <div class="row">
+        <div class="col-9">
+
+          <div class="caracteristicas_panel">
+            <div class="row">
+              <div class="col-4">
+                <div class="portada_panel">
+                  <img [src]="portada_panel" class="img">
+                </div>
+              </div>
+              <div class="col-8">
+                <div>
+                  <h1>Ficha Tecnica</h1>
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ficha_tecnica"
+                    [innerHTML]="descripcion_panel">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-anterior" (click)="changeOp(3)">Anterior</button>
+        </div>
+        <div class="col-3">
+
+          <div class="header mt-md-5">
+            <div class="header-body">
+              <div class="row align-items-center">
+                <div class="col-md-12 text-center">
+                  <h1 class="header-title">
+                    4. Selección de Paneles Solares
+                  </h1>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-12 text-center">
+              <label for="">Nuestros Paneles Solares</label>
+              <select class="form-control custom-select" id="select-tension" required name="panel" [(ngModel)]="panel"
+                (change)="test_buscar_imagen(panel)">
+                <option value="0" selected disabled> Seleccionar</option>
+                <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+                <option value="{{item._id}}" *ngFor="let item of paneles_bd">{{item.producto.titulo}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-12 text-center">
+              <h3>Paneles requeridos</h3>
+              <h1 class="resultado"> {{numero_paneles}} Unidades</h1>
+            </div>
+            <div class="col-md-12 text-center">
+              <h3>Potencia arreglo de paneles</h3>
+              <h1 class="resultado"> {{peakpower}} W</h1>
+            </div>
+
+          </div>
+
+          <button class="btn-siguiente" id="nextBtn" (click)="changeOp(5)">Siguiente</button>
+        </div>
+      </div>
+      <!-- Fin opcion 4 -->
+
+      <!-- Inicio Opcion 5 Baterias-->
+      <div class="row">
+        <div class="col-9">
+          <h1>Caracteristicas</h1>
+          <div class="caracteristicas_panel">
+
+            <div class="portada_panel">
+              <img [src]="portada_bateria" class="img">
+            </div>
+
+            <div>
+              <h1>Ficha Tecnica</h1>
+
+              <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 col-12 " [innerHTML]="descripcion_bateria">
+              </div>
+            </div>
+
+          </div>
+
+          <button class="btn-anterior" (click)="changeOp(4)">Anterior</button>
+        </div>
+        <div class="col-3">
+
+          <div class="header mt-md-5">
+            <div class="header-body">
+              <div class="row align-items-center">
+                <div class="col-md-12 text-center">
+                  <h1 class="header-title">
+                    5. Selección de Baterías
+                  </h1>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+
+            <!-- Inicio Formulario Baterias-->
+            <form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
               <div class="row">
                 <div class="col-md-6 text-center">
                   <h3>Bateria</h3>
@@ -513,34 +419,12 @@
                     <option value="{{item._id}}" *ngFor="let item of baterias_bd; let indice=index">
                       {{item.producto.titulo}}</option>
                   </select>
-
-                  <!-- 
-Original Bateria
-                     <select class="form-control custom-select" id="select-amperaje" required name="amperaje"
-                    [(ngModel)]="amperaje" (change)="buscar_imagen_bateria(panel)">
-                    <option value="0" selected disabled>Seleccionar</option>
-                    <option value="{{item.amperaje}}" *ngFor="let item of baterias_bd; let indice=index">
-                      {{item.producto.titulo}}</option>
-                  </select>
-                   -->
-
-
-                  <!-- 
-
-<select class="form-control custom-select" id="select-tension" required name="panel"
-                      [(ngModel)]="panel" (change)="test_buscar_imagen(panel)">
-                      <option value="0" selected disabled> Seleccionar</option>                   
-                      <option value="{{item._id}}" *ngFor="let item of paneles_bd">{{item.producto.titulo}}</option>
-                    </select>
-
-                   -->
-
                 </div>
 
                 <div class="col-md-6 text-center">
                   <h3>Profundidad de descarga</h3>
-                  <select class="form-control custom-select" id="select-profundidad" required
-                    [(ngModel)]="profundidad" name="profundidad">
+                  <select class="form-control custom-select" id="select-profundidad" required [(ngModel)]="profundidad"
+                    name="profundidad">
                     <option value="0" selected disabled>Seleccionar</option>
                     <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
                     <option value="1">10% Menor vida Util</option>
@@ -558,20 +442,20 @@ Original Bateria
 
                 <div class="col-md-12 text-center">
                   <h3>Días de Autonomia</h3>
-                    <select class="form-control custom-select" id="select-dias" required name="dias" [(ngModel)]="dias">
-                      <option value="0" selected disabled>Seleccionar</option>
-                      <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
-                      <option value="1">1 Día Baja cantidad de Baterias</option>
-                      <option value="2">2 Días</option>
-                      <option value="3">3 Días</option>
-                      <option value="4">4 Días</option>
-                      <option value="5">5 Días</option>
-                      <option value="6">6 Días</option>
-                      <option value="7">7 Días</option>
-                      <option value="8">8 Días</option>
-                      <option value="9">9 Días</option>
-                      <option value="10">10 Días Alta Cantidad de Baterias</option>
-                    </select>
+                  <select class="form-control custom-select" id="select-dias" required name="dias" [(ngModel)]="dias">
+                    <option value="0" selected disabled>Seleccionar</option>
+                    <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+                    <option value="1">1 Día Baja cantidad de Baterias</option>
+                    <option value="2">2 Días</option>
+                    <option value="3">3 Días</option>
+                    <option value="4">4 Días</option>
+                    <option value="5">5 Días</option>
+                    <option value="6">6 Días</option>
+                    <option value="7">7 Días</option>
+                    <option value="8">8 Días</option>
+                    <option value="9">9 Días</option>
+                    <option value="10">10 Días Alta Cantidad de Baterias</option>
+                  </select>
                 </div>
 
                 <div class="col-md-12 text-center">
@@ -587,172 +471,260 @@ Original Bateria
                   <h3>Baterias en paralelo</h3>
                   <h1 class="resultado">{{baterias_paralelo}} Unidades</h1>
                 </div>
-                
+
 
               </div>
-<!--
-              <div class="card-body">
-                <div class="row">
+            </form>
+            <!-- Fin formulario -->
 
+          </div>
 
-                  <div class="col-lg-4 form-group">
-                    <label for="">Amperaje</label>
-                    <select class="form-control custom-select" id="select-amperaje" required name="amperaje"
-                      [(ngModel)]="amperaje">
-                      <option value="0" selected disabled>Seleccionar</option>
-                      <option value="{{item.amperaje}}" *ngFor="let item of baterias_bd; let indice=index">
-                        {{item.producto.titulo}}</option>
-                    </select>
-                  </div>
+          <button class="btn-siguiente" id="nextBtn" (click)="changeOp(6)">Siguiente</button>
+        </div>
+      </div>
+      <!-- Fin Opcion 5 -->
 
-                  <div class="col-lg-4 form-group">
-                    <label for="">Profundidad de descarga</label>
-                    <select class="form-control custom-select" id="select-profundidad" required
-                      [(ngModel)]="profundidad" name="profundidad">
-                      <option value="0" selected disabled>Seleccionar</option>
-                      <option value="1">10% Menor vida Util</option>
-                      <option value="20">20%</option>
-                      <option value="30">30%</option>
-                      <option value="40">40% Recomendada</option>
-                      <option value="50">50% </option>
-                      <option value="60">60%</option>
-                      <option value="70">70%</option>
-                      <option value="80">80%</option>
-                      <option value="90">90%</option>
-                      <option value="100">100%</option>
-                    </select>
-                  </div>
+      <!-- Inicio Opcion 6  Resultados-->
 
-                  <div class="col-lg-4 form-group">
-                    <label for="">Días de Autonomia</label>
-                    <select class="form-control custom-select" id="select-dias" required name="dias" [(ngModel)]="dias">
-                      <option value="0" selected disabled>Seleccionar</option>
-                      <option value="1">1 Día Baja cantidad de Baterias</option>
-                      <option value="2">2 Días</option>
-                      <option value="3">3 Días</option>
-                      <option value="4">4 Días</option>
-                      <option value="5">5 Días</option>
-                      <option value="6">6 Días</option>
-                      <option value="7">7 Días</option>
-                      <option value="8">8 Días</option>
-                      <option value="9">9 Días</option>
-                      <option value="10">10 Días Alta Cantidad de Baterias</option>
-                    </select>
-                  </div>
+      <div class="row" style="border:1px solid #000;">
+        <div class="col-lg-7" style="border:1px solid #000;">
+          <div class="row" style="border:1px solid #000; background-image: url('/assets/img/Systema.png'); 
+          min-height: 360px; background-repeat: no-repeat; background-size: cover;">
+
+            <div class="col-lg-6">
+
+              <div class="row">
+                <div class="row" style="min-height: 180px;">
+                  <h1>Cambiar Panel</h1>
+                  <select class="form-control custom-select" 
+                    [(ngModel)]="amperaje" (change)="buscar_imagen_bateria(amperaje)">
+                    <option value="0" selected disabled>Seleccionar</option>
+                    <option value="{{item._id}}" *ngFor="let item of controladores_bd; let indice=index">
+                      {{item.producto.titulo}}</option>
+                  </select>
                 </div>
               </div>
-            -->
-            </div>
-          </form>
-          <!-- Fin formulario -->
-        </div>
-      </div>
-
-      <button class="btn-siguiente" (click)="nextPrev(1)">Siguiente</button>
-    </div>
-  </ng-container>
-
-  <ng-container *ngIf="posicion==5">
-    <div class="principal">
-
-      <div class="container-fluid">
-        <!-- Inicia tabla muestra resultados -->
-        <div class="card mt-30 mb-30">
-          <div class="card-header">
-            <h4 class="card-header-title">
-              Resultados Obtenidos
-            </h4>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-4">
-                <ng-container *ngIf="calc_pvgis_onload==true">
-                  <h3 class="card-header-title">
-                    latitud: {{calculo_pvgis.data.inputs.location.latitude}}
-                  </h3>
-                  <h3 class="card-header-title">
-                    longitud: {{calculo_pvgis.data.inputs.location.longitude}}
-                  </h3>
-                  <h3 class="card-header-title">
-                    Potencia de paneles : {{calculo_pvgis.data.inputs.pv_module.peak_power}} Wh calculado {{peakpower}}
-                  </h3>
-                  <h3 class="card-header-title">
-                    Capacidad de las baterias: {{calculo_pvgis.data.inputs.battery.capacity}} Wh calculado
-                    {{batterysize}}
-                  </h3>
-                  <h3 class="card-header-title">
-                    Limite de descarga: {{calculo_pvgis.data.inputs.battery.discharge_cutoff_limit}} %
-                  </h3>
-                  <h3 class="card-header-title">
-                    Consumo Diario: {{calculo_pvgis.data.inputs.consumption.daily}} Wh
-                  </h3>
-
-                  <h3 class="card-header-title">
-                    Paneles Requeridos: {{numero_paneles}}
-                  </h3>
-
-                  <h3 class="card-header-title">
-                    Baterias Requeridos: {{baterias}}
-                  </h3>
-
-                  <h3 class="card-header-title">
-                    Tension controlador: {{tension}}
-                    Tipo controlador: {{tipo_controlador}}
-                    panel:{{panel}}
-                    bateria amperaje:{{amperaje}}
-                    bateria_ descarga:{{profundidad}}
-                    dias_autonomia:{{dias}}
-                  </h3>
-                </ng-container>
+  
+              <div class="row" style="min-height: 180px;">
+                <div class="row">
+                  <h1>Cambiar Inversor</h1>
+                  <select class="form-control custom-select" 
+                    [(ngModel)]="amperaje" (change)="buscar_imagen_bateria(amperaje)">
+                    <option value="0" selected disabled>Seleccionar</option>
+                    <option value="{{item._id}}" *ngFor="let item of controladores_bd; let indice=index">
+                      {{item.producto.titulo}}</option>
+                  </select>
+                </div>
               </div>
 
-              <div class="col-md-6">
+            </div>
+            <div class="col-lg-6">
 
-                <button type="button" (click)="EnviarDatosApi()">Enviar Datos Api</button>
-                <!-- <div class="row" *ngIF="single.length>=0"> -->
-                <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
-                  [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
-                  [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
-                  (select)="onSelect($event)">
-                </ngx-charts-bar-vertical>
+              <div class="row" style="min-height: 180px;">
+                <h1>Cambiar Controlador</h1>
+                <select class="form-control custom-select" 
+                  [(ngModel)]="amperaje" (change)="buscar_imagen_bateria(amperaje)">
+                  <option value="0" selected disabled>Seleccionar</option>
+                  <option value="{{item._id}}" *ngFor="let item of controladores_bd; let indice=index">
+                    {{item.producto.titulo}}</option>
+                </select>
+              </div>
+  
+              <div class="row" style="min-height: 180px;">
+                <div class="row">
+                  <h1>Cambiar Baterias</h1>
+                  <select class="form-control custom-select" 
+                    [(ngModel)]="amperaje" (change)="buscar_imagen_bateria(amperaje)">
+                    <option value="0" selected disabled>Seleccionar</option>
+                    <option value="{{item._id}}" *ngFor="let item of controladores_bd; let indice=index">
+                      {{item.producto.titulo}}</option>
+                  </select>
+                </div>
               </div>
             </div>
+            
+            <!-- <div class="col-lg-12"><canvas id="nuevografico"></canvas></div> -->
+            <div class="col-lg-12"><canvas id="nuevografico"></canvas></div>
+            <div class="col-lg-12"><canvas id="segundo"></canvas></div>
+            <div class="col-lg-12"><canvas id="mesmes"></canvas></div>
+            <button type="button" (click)="addData()">Actualizar Grafico</button>
+
           </div>
-          <div class="card-footer">
-            <!-- Title -->
-            <h3 class="card-header-title">
-              Consumo simultaneo: {{simultaneo}} W
-            </h3>
-            <h3 class="card-header-title">
-              consumo total diario. {{total_dia}} W
-            </h3>
-            <button type="button" (click)="EnviarDatosApi()">Enviar Datos Api</button>
-            <!-- <button type="button" (click)="hsp()">Calcular HSP</button> -->
-            <button type="button" (click)="calcularBaterias(12,100)">Calcular Baterias</button>
+          <div class="row">
+            <table class="table-small">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Potencia</th>
+                  <th scope="col">Hora Encendido</th>
+                  <th scope="col">Hora Apagado</th>
+                  <th>Total Uso Diario</th>
+                  <th>Prender/Apagar</th>
+                  <th>Intervalo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of predefinidos,index as i">
+                  <td>{{item.nombre}}</td>
+                  <td>{{item.potencia}}</td>
+                  <td>{{item.inicio_uso}}</td>
+                  <td>{{item.fin_uso}}</td>
+                  <td>{{item.fin_uso-item.inicio_uso}}</td>
+                  <td>
+          
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id='"customSwitch1"+{{i}}'>
+                      <label class="custom-control-label" for='"customSwitch1"+{{i}}'>On/Off</label>
+                        
+                    </div>
+          
+                  </td>
+                  <td>
+          
+                    <div class="ps-sliderr" id="{{item.nombre}}" data-default-min="1" data-default-max="24" data-max="24"
+                        data-step="1"></div><!-- id={{i}} -->
+                        <p class="ps-slider__meta">Intervalo Uso:
+                          <span class="ps-slider__value {{item.inicio_uso}}"></span>-
+                          <span class="ps-slider__value {{item.fin_uso}}"></span>
+                        </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
+        <div class="col-lg-5" style="border:1px solid #000;">
+          <div class="row">
+           
+          </div>
+          <div class="row">
+            <div class="col-lg-12"><canvas id="ChartMensual"></canvas></div>  
+          </div>
+          <div class="row">
+            <div class="col-lg-12"><canvas id="myChart"></canvas></div> 
+          </div>
+        </div>
+        </div>
 
-        <!-- Finaliza tabla muestra resultados -->
+
+
+
+
+        <div class="row">
+          <div class="col-9">
+
+            <div class="container-fluid">
+              <!-- Inicia tabla muestra resultados -->
+              <div class="card mt-30 mb-30">
+                <div class="card-header">
+                  <h4 class="card-header-title">
+                    Resultados Obtenidos
+                  </h4>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <ng-container *ngIf="calc_pvgis_onload==true">
+                        <h3 class="card-header-title">
+                          latitud: {{calculo_pvgis.data.inputs.location.latitude}}
+                        </h3>
+                        <h3 class="card-header-title">
+                          longitud: {{calculo_pvgis.data.inputs.location.longitude}}
+                        </h3>
+                        <h3 class="card-header-title">
+                          Potencia de paneles : {{calculo_pvgis.data.inputs.pv_module.peak_power}} Wh calculado
+                          {{peakpower}}
+                        </h3>
+                        <h3 class="card-header-title">
+                          Capacidad de las baterias: {{calculo_pvgis.data.inputs.battery.capacity}} Wh calculado
+                          {{batterysize}}
+                        </h3>
+                        <h3 class="card-header-title">
+                          Limite de descarga: {{calculo_pvgis.data.inputs.battery.discharge_cutoff_limit}} %
+                        </h3>
+                        <h3 class="card-header-title">
+                          Consumo Diario: {{calculo_pvgis.data.inputs.consumption.daily}} Wh
+                        </h3>
+
+                        <h3 class="card-header-title">
+                          Paneles Requeridos: {{numero_paneles}}
+                        </h3>
+
+                        <h3 class="card-header-title">
+                          Baterias Requeridos: {{baterias}}
+                        </h3>
+
+                        <h3 class="card-header-title">
+                          Tension controlador: {{tension}}
+                          Tipo controlador: {{tipo_controlador}}
+                          panel:{{panel}}
+                          bateria amperaje:{{amperaje}}
+                          bateria_ descarga:{{profundidad}}
+                          dias_autonomia:{{dias}}
+                        </h3>
+                      </ng-container>
+                    </div>
+
+                    <div class="col-md-6">
+
+                      <button type="button" (click)="EnviarDatosApi()">Enviar Datos Api</button>
+                      <!-- <div class="row" *ngIF="single.length>=0"> -->
+                      <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single"
+                        [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
+                        [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+                        [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+                      </ngx-charts-bar-vertical>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <!-- Title -->
+                  <h3 class="card-header-title">
+                    Consumo simultaneo: {{simultaneo}} W
+                  </h3>
+                  <h3 class="card-header-title">
+                    consumo total diario. {{total_dia}} W
+                  </h3>
+
+                  <button type="button" (click)="EnviarDatosApi()">Enviar Datos Api</button>
+                  <!-- <button type="button" (click)="hsp()">Calcular HSP</button> -->
+                  <button type="button" (click)="calcularBaterias(12,100)">Calcular Baterias</button>
+                </div>
+              </div>
+
+              <!-- Finaliza tabla muestra resultados -->
+            </div>
+            <button class="btn-anterior" (click)="changeOp(5)">Anterior</button>
+          </div>
+          <div class="col-3">
+            <button class="btn-siguiente">Solicitar Cotización</button>
+            <!-- <button class="btn-siguiente" id="nextBtn" (click)="changeOp(4)">Siguiente</button> -->
+          </div>
+        </div>
+        <!-- Fin Opcion 6 -->
+
+        <div class="ps-tab" [ngClass]="{'active': op == 1}">
+        </div>
+        <div class="ps-tab" [ngClass]="{'active': op == 2}">
+        </div>
+
+        <div class="ps-tab" [ngClass]="{'active': op == 3}">
+        </div>
+
+        <div class="ps-tab" [ngClass]="{'active': op == 4}">
+
+        </div>
+
+        <div class="ps-tab" [ngClass]="{'active': op == 5}">
+        </div>
+
+        <div class="ps-tab" [ngClass]="{'active': op == 6}">
+        </div>
+
       </div>
-
-
-
-      <button class="btn-anterior" (click)="nextPrev(-1)">Anterior</button>
     </div>
-    <div class="lateral">
-      <button class="btn-siguiente">Solicitar Cotización</button>
-      <!-- <button class="btn-siguiente" (click)="nextPrev(1)">Siguiente</button> -->
-    </div>
-  </ng-container>
 
-  <div class="pie">
-    <div style="text-align:center;margin-top:40px;">
-      <span class="step"><img src="https://img.freepik.com/vector-gratis/hermosa-casa_24877-50819.jpg" alt=""></span>
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
-    </div>
   </div>
 
-</div>
+
+  <app-footer></app-footer>

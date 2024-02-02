@@ -1142,6 +1142,7 @@ consulta_Pvgis=function(req,res){
     consumptionday=req.params.consumptionday
     cutoff=req.params.cutoff
 
+//Sistemas Fotovoltaicos aislados de la red
     const ruta='https://re.jrc.ec.europa.eu/api/SHScalc?lat='+lat+'&lon='+lon+'&peakpower='+peakpower+'&batterysize='+batterysize+'&consumptionday='+consumptionday+'&cutoff='+cutoff+'&outputformat=json'
 const promesa=new Promise((resolve,reject)=>{
 
@@ -1172,6 +1173,7 @@ consulta_hsp=function(req,res){
     lat=req.params.lat
     lon=req.params.lon
     angle=req.params.angle
+//Consulta la radiacion Mensual
 //https://re.jrc.ec.europa.eu/api/MRcalc?lat=45&lon=8&horirrad=1&outputformat=json&startyear=2016
     const ruta='https://re.jrc.ec.europa.eu/api/MRcalc?lat='+lat+'&lon='+lon+'&selectrad=1'+'&angle='+angle+'&outputformat=json&startyear=2015'
     const promesa=new Promise((resolve,reject)=>{
@@ -1193,6 +1195,37 @@ consulta_hsp=function(req,res){
     .catch(error=>{
         res.status(500).send({message:'Error al realizar la consulta de HSP'})
     })
+}
+
+
+consultar_radiacion_diaria=function(req,res){
+//Consulta la radiacion Diaria
+
+    lat=req.params.lat
+    lon=req.params.lon
+    angle=req.params.angle
+            //https://re.jrc.ec.europa.eu/api/DRcalc?lat=4.582&lon=-74.22&month=0&global=1&localtime=1&showtemperatures=1
+    const ruta='https://re.jrc.ec.europa.eu/api/DRcalc?lat='+lat+'&lon='+lon+'&month=0&global=1&localtime=1&showtemperatures=1&outputformat=json'
+    const promesa=new Promise((resolve,reject)=>{
+        https.get(ruta, res => {
+            let data = ""
+            res.on("data", d => {
+              data += d
+            })
+            res.on("end", () => {
+                console.log(data)
+             resolve(data)
+            })
+          })
+        })
+    
+    promesa.then(respuesta=>{
+       res.status(200).send({data:JSON.parse(respuesta)})
+    })
+    .catch(error=>{
+        res.status(500).send({message:'Error al realizar la consulta de radiación diaria'})
+    })
+
 }
 
 /**Finaliza Calculadora Solar */
@@ -1252,4 +1285,5 @@ module.exports = {
 
     consulta_Pvgis,
     consulta_hsp,
+    consultar_radiacion_diaria,
 }

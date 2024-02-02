@@ -1,0 +1,26 @@
+ [
+ {
+    "id": 1,
+    "name": "Llanos/Orinoquía"
+  },
+   {
+    "id": 2,
+    "name": "Región Caribe"
+  },
+   {
+    "id": 3,
+    "name": "Región Centro Oriental/"
+  },
+   {
+    "id": 4,
+    "name": "Region Centro Sur/Amazónica"
+  },
+   {
+    "id": 5,
+    "name": "Eje Cafetero/Andina"
+  },
+   {
+    "id": 6,
+    "name": "Región Pacífico"
+  }
+]
